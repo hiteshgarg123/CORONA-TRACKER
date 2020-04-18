@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'datasource.dart';
+import './data/datasource.dart';
 import './widgets/worldwidewidget.dart';
 import './widgets/infoWidget.dart';
 import './widgets/chartWidget.dart';
