@@ -1,16 +1,40 @@
-# COVID-19 TRACKER App
+# COVID-19 TRACKER App 🦠
 
 A Flutter project to provide Real-time statistics of Novel Corona virus.
 
-## Getting Started
+## Getting Started 🚀
 
-This project is a starting point for a Flutter application.
+- Clone the repo
+- Install the dependicies
+- Run it `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+## Features.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Shows Worldwide statistics as well as Country-wise statistics.
+- Dedicated pages for India's statistics.
+- Statewise statistics of India.
+- Added beautiful PieCharts for more data visualisation.
+- Myth Busters section.
+- FAQs Section.
+- You can directly donate to PMNRF by opening from App.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## To be implemented.
+
+- Search Functionality.
+- Dark theme mode.
+- Top banner cutting in low ppi devices.
+- Fix margins(of chart) in low ppi devices
+
+## Preview 📸
+
+|                                           |                                           |                                           |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| <img src="Screenshots/1.png" width="400"> | <img src="Screenshots/2.png" width="400"> | <img src="Screenshots/3.png" width="400"> |
+
+|                                           |                                           |                                           |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| <img src="Screenshots/4.png" width="400"> | <img src="Screenshots/5.png" width="400"> | <img src="Screenshots/6.png" width="400"> |
+
+## Contact me 📧
+
+#### Email : hiteshgarg285@gmail.com
