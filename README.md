@@ -1,4 +1,4 @@
-# COVID-19 TRACKER App 🦠
+# CORONA TRACKER App 🦠
 
 A Flutter project to provide Real-time statistics of Novel Corona virus.
 
