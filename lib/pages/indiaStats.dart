@@ -180,19 +180,23 @@ class _IndiaStatsState extends State<IndiaStats> {
                       right: 10.0,
                       bottom: 10.0,
                     ),
-                    child: PieChartWidget(
-                      total: unofficialData['data']['total']['confirmed']
-                          .toDouble(),
-                      active:
-                          unofficialData['data']['total']['active'].toDouble(),
-                      recovered: unofficialData['data']['total']['recovered']
-                          .toDouble(),
-                      deaths:
-                          unofficialData['data']['total']['deaths'].toDouble(),
-                      totalColor: Colors.red[400],
-                      activeColor: Colors.blue[400],
-                      recoveredColor: Colors.green[300],
-                      deathsColor: Colors.grey[400],
+                    child: Container(
+                      padding:
+                          const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
+                      child: PieChartWidget(
+                        total: unofficialData['data']['total']['confirmed']
+                            .toDouble(),
+                        active: unofficialData['data']['total']['active']
+                            .toDouble(),
+                        recovered: unofficialData['data']['total']['recovered']
+                            .toDouble(),
+                        deaths: unofficialData['data']['total']['deaths']
+                            .toDouble(),
+                        totalColor: Colors.red[400],
+                        activeColor: Colors.blue[400],
+                        recoveredColor: Colors.green[300],
+                        deathsColor: Colors.grey[400],
+                      ),
                     ),
                   ),
                   SizedBox(

@@ -44,17 +44,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AppBar appbar = AppBar(
+      title: Text('COVID-19 TRACKER'),
+    );
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('COVID-19 TRACKER'),
-      ),
+      appBar: appbar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: height * 0.10,
+              margin: EdgeInsets.only(bottom: 5.0),
+              height: (height -
+                      (appbar.preferredSize.height +
+                          MediaQuery.of(context).padding.top)) *
+                  0.12,
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
               color: Colors.orange[100],
@@ -81,6 +86,9 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  SizedBox(
+                    width: 10.0,
                   ),
                   Row(
                     children: <Widget>[

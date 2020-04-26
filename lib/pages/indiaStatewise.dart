@@ -100,7 +100,9 @@ class IndiaStatewise extends StatelessWidget {
                         Container(
                           height: 150,
                           width: 150,
-                          margin: EdgeInsets.all(5.0),
+                          //margin: EdgeInsets.all(5.0),
+                          padding: EdgeInsets.all(5.0),
+                          margin: EdgeInsets.only(right: 10.0),
                           child: PieChartWidget(
                             total: unofficialData['data']['statewise'][index]
                                     ['confirmed']
