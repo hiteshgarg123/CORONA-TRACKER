@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'gridBox.dart';
+
 class WorldWideWidget extends StatelessWidget {
   final worldData;
 
@@ -51,57 +53,10 @@ class WorldWideWidget extends StatelessWidget {
             count: worldData["todayCases"].toString(),
           ),
           GridBox(
-            title: 'AFFECTED COUNTRIES',
+            title: ' AFFECTED\nCOUNTRIES',
             boxColor: Colors.deepOrange[300].withOpacity(0.8),
             textColor: Colors.deepOrange[900],
             count: worldData["affectedCountries"].toString(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class GridBox extends StatelessWidget {
-  final Color boxColor;
-  final Color textColor;
-  final String title;
-  final String count;
-
-  const GridBox(
-      {Key key, this.boxColor, this.textColor, this.title, this.count})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      margin: EdgeInsets.all(4),
-      color: boxColor,
-      height: 90,
-      width: width / 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            count,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
-            ),
           ),
         ],
       ),

@@ -78,7 +78,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 3.0),
+                                margin: const EdgeInsets.only(top: 3.0),
                                 child: Image.network(
                                   "${_worldWideData[index]["countryInfo"]["flag"]}",
                                   height: 60.0,

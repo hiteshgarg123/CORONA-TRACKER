@@ -20,6 +20,10 @@ class InfoWidget extends StatelessWidget {
               );
             },
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: primaryBlack,
+              ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
                 horizontal: 10.0,
@@ -28,7 +32,6 @@ class InfoWidget extends StatelessWidget {
                 vertical: 5.0,
                 horizontal: 10.0,
               ),
-              color: primaryBlack,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -53,6 +56,10 @@ class InfoWidget extends StatelessWidget {
               launch('https://pmnrf.gov.in/en/online-donation');
             },
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: primaryBlack,
+              ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
                 horizontal: 10.0,
@@ -61,7 +68,6 @@ class InfoWidget extends StatelessWidget {
                 vertical: 5.0,
                 horizontal: 10.0,
               ),
-              color: primaryBlack,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -100,6 +106,10 @@ class InfoWidget extends StatelessWidget {
                   'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters');
             },
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: primaryBlack,
+              ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
                 horizontal: 10.0,
@@ -108,7 +118,6 @@ class InfoWidget extends StatelessWidget {
                 vertical: 5.0,
                 horizontal: 10.0,
               ),
-              color: primaryBlack,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

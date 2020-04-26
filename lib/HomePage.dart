@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 import './data/datasource.dart';
 import './widgets/worldwidewidget.dart';
 import './widgets/infoWidget.dart';
-import './widgets/chartWidget.dart';
 import './widgets/mostAffectedCountriesWidget.dart';
+import './widgets/pieChart.dart';
 import './pages/countryWiseStats.dart';
+import './pages/indiaStats.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -77,37 +78,71 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'Worldwide',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return CountryWiseStats();
-                          },
+                  Row(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return CountryWiseStats();
+                              },
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(7.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: primaryBlack,
+                          ),
+                          child: Text(
+                            'Regional',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(7.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: primaryBlack,
                       ),
-                      child: Text(
-                        'Regional',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: 8.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return IndiaStats();
+                              },
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(7.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: primaryBlack,
+                          ),
+                          child: Text(
+                            'India\'s Stats ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -159,8 +194,20 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   )
-                : ChartWidget(
-                    worldWideData: worldData,
+                : PieChartWidget(
+                    total:
+                        worldData == null ? 0 : worldData['cases'].toDouble(),
+                    active:
+                        worldData == null ? 0 : worldData['active'].toDouble(),
+                    recovered: worldData == null
+                        ? 0
+                        : worldData['recovered'].toDouble(),
+                    deaths:
+                        worldData == null ? 0 : worldData['deaths'].toDouble(),
+                    totalColor: Colors.red[400],
+                    activeColor: Colors.blue,
+                    recoveredColor: Colors.green[400],
+                    deathsColor: Colors.grey[400],
                   ),
             SizedBox(
               height: 10.0,
