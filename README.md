@@ -16,12 +16,12 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 - Added beautiful PieCharts for more data visualisation.
 - Myth Busters section.
 - FAQs Section.
+- Search Functionality (in countrywise stats and India's statewise stats).
 - You can directly donate to PMNRF by opening from App.
 
 ## To be implemented.
 
-- Search Functionality.
-- Dark theme mode.
+- Dark mode.
 - Top banner cutting in low ppi devices.
 - Fix margins(of chart) in low ppi devices
 
