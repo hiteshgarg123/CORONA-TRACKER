@@ -11,6 +11,21 @@ class IndiaStatewise extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              unofficialData == null
+                  ? null
+                  : showSearch(
+                      context: context,
+                      delegate: Search(
+                        unofficialData,
+                      ),
+                    );
+            },
+          ),
+        ],
         title: Text(
           'Statewise Stats',
         ),
@@ -63,7 +78,7 @@ class IndiaStatewise extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'ACTIVE : ${unofficialData['data']['statewise'][index]['confirmed']}',
+                                'CONFIRMED : ${unofficialData['data']['statewise'][index]['confirmed']}',
                                 style: TextStyle(
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.bold,
@@ -132,6 +147,149 @@ class IndiaStatewise extends StatelessWidget {
                     : unofficialData['data']['statewise'].length,
               ),
       ),
+    );
+  }
+}
+
+class Search extends SearchDelegate {
+  final Map unofficialData;
+
+  Search(this.unofficialData);
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty
+        ? unofficialData['data']['statewise']
+        : unofficialData['data']['statewise']
+            .where(
+              (element) => element['state']
+                  .toString()
+                  .toLowerCase()
+                  .startsWith(query.toLowerCase()),
+            )
+            .toList();
+
+    return ListView.builder(
+      itemCount: unofficialData == null ? 0 : suggestionList.length,
+      itemBuilder: (context, index) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          margin: EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 6.0,
+          ),
+          elevation: 4.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.fromLTRB(
+                  20,
+                  15,
+                  15,
+                  15,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 170,
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      child: Text(
+                        '${suggestionList[index]['state']}',
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'CONFIRMED : ${suggestionList[index]['confirmed']}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
+                    Text(
+                      'ACTIVE : ${suggestionList[index]['active']}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text(
+                      'RECOVERED : ${suggestionList[index]['recovered']}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                    Text(
+                      'DEATHS : ${suggestionList[index]['deaths']}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 150,
+                width: 150,
+                //margin: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0),
+                margin: EdgeInsets.only(right: 10.0),
+                child: PieChartWidget(
+                  total: suggestionList[index]['confirmed'].toDouble(),
+                  active: suggestionList[index]['active'].toDouble(),
+                  recovered: suggestionList[index]['recovered'].toDouble(),
+                  deaths: suggestionList[index]['deaths'].toDouble(),
+                  totalColor: Colors.red[400],
+                  activeColor: Colors.blue[400],
+                  recoveredColor: Colors.green[300],
+                  deathsColor: Colors.grey[400],
+                  showLegends: false,
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
