@@ -8,6 +8,7 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/hiteshgarg123/CORONA-TRACKER/)
 [![GitHub stars](https://img.shields.io/github/stars/hiteshgarg123/CORONA-TRACKER?style=social)](https://github.com/hiteshgarg123/CORONA-TRACKER/)
 [![GitHub followers](https://img.shields.io/github/followers/hiteshgarg123.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/hiteshgarg123?tab=followers)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 ## Getting Started 🚀
 
