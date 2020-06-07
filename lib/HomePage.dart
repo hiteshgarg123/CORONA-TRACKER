@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
-      title: Text('COVID-19 TRACKER'),
+      title: const Text('COVID-19 TRACKER'),
     );
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(bottom: 5.0),
+                    margin: const EdgeInsets.only(bottom: 5.0),
                     height: (height -
                             (appbar.preferredSize.height +
                                 MediaQuery.of(context).padding.top)) *

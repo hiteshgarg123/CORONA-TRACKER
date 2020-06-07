@@ -27,6 +27,8 @@ dependencies:
   shared_preferences: ^0.5.6+3
   url_launcher: ^5.4.2
   pie_chart: ^3.1.1
+  flutter_spinkit: "^4.1.2"
+  liquid_pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

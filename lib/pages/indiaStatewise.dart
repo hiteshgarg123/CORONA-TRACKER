@@ -115,9 +115,8 @@ class IndiaStatewise extends StatelessWidget {
                         Container(
                           height: 150,
                           width: 150,
-                          //margin: EdgeInsets.all(5.0),
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.only(right: 10.0),
+                          padding: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.only(right: 10.0),
                           child: PieChartWidget(
                             total: unofficialData['data']['statewise'][index]
                                     ['confirmed']
@@ -203,7 +202,7 @@ class Search extends SearchDelegate {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 10.0,
             vertical: 6.0,
           ),
@@ -271,9 +270,8 @@ class Search extends SearchDelegate {
               Container(
                 height: 150,
                 width: 150,
-                //margin: EdgeInsets.all(5.0),
-                padding: EdgeInsets.all(5.0),
-                margin: EdgeInsets.only(right: 10.0),
+                padding: const EdgeInsets.all(5.0),
+                margin: const EdgeInsets.only(right: 10.0),
                 child: PieChartWidget(
                   total: suggestionList[index]['confirmed'].toDouble(),
                   active: suggestionList[index]['active'].toDouble(),
