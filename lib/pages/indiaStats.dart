@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../data/datasource.dart';
 import '../widgets/infoWidget.dart';
@@ -50,7 +51,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Fetching Data , Please wait',
                         style: TextStyle(
                           fontSize: 22.0,
@@ -60,7 +61,10 @@ class _IndiaStatsState extends State<IndiaStats> {
                       SizedBox(
                         height: 25.0,
                       ),
-                      CircularProgressIndicator(),
+                      SpinKitCircle(
+                        color: primaryBlack,
+                        size: 50.0,
+                      ),
                     ],
                   ),
                 ),
@@ -75,7 +79,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'Overall Stats...',
                           style: TextStyle(
                             fontSize: 26,
@@ -101,7 +105,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                               borderRadius: BorderRadius.circular(15.0),
                               color: primaryBlack,
                             ),
-                            child: Text(
+                            child: const Text(
                               'Statewise',
                               style: TextStyle(
                                 color: Colors.white,
@@ -118,7 +122,6 @@ class _IndiaStatsState extends State<IndiaStats> {
                     margin: EdgeInsets.symmetric(
                       horizontal: 5.0,
                     ),
-                    //height: height * 0.3,
                     child: GridView(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+
+import '../data/datasource.dart';
 
 class CountryWiseStats extends StatefulWidget {
   @override
@@ -65,7 +68,10 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
                   SizedBox(
                     height: 25.0,
                   ),
-                  CircularProgressIndicator(),
+                  SpinKitCircle(
+                    color: primaryBlack,
+                    size: 50.0,
+                  ),
                 ],
               ),
             )
