@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               'Worldwide',
                               style: TextStyle(
                                 fontSize: 25,
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.circular(15.0),
                                       color: primaryBlack,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Regional',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.circular(15.0),
                                       color: primaryBlack,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'India\'s Stats ',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 10.0),
-                      child: Text(
+                      child: const Text(
                         'Most Affected Countries',
                         style: TextStyle(
                           fontSize: 24,
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 10.0),
-                      child: Text(
+                      child: const Text(
                         'Statistics...',
                         style: TextStyle(
                           fontSize: 24,
@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                       height: 10.0,
                     ),
                     Center(
-                      child: Text(
+                      child: const Text(
                         'WE STAND TOGETHER TO FIGHT WITH THIS',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
