@@ -1,4 +1,6 @@
+import 'package:covid_19_tracker/blocs/homepage_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'HomePage.dart';
 import './data/datasource.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Circular',
         primaryColor: primaryBlack,
       ),
-      home: HomePage(),
+      home: HomePage.create(context),
     );
   }
 }

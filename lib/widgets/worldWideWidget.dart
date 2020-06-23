@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'gridBox.dart';
 
 class WorldWideWidget extends StatelessWidget {
-  final worldData;
+  final Map worldData;
 
   const WorldWideWidget({Key key, @required this.worldData}) : super(key: key);
 

@@ -1,77 +1,109 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import './blocs/homepage_bloc.dart';
 import './data/datasource.dart';
+import './pages/countryWiseStats.dart';
+import './pages/indiaStats.dart';
 import './widgets/worldwidewidget.dart';
 import './widgets/infoWidget.dart';
 import './widgets/mostAffectedCountriesWidget.dart';
 import './widgets/pieChart.dart';
-import './pages/countryWiseStats.dart';
-import './pages/indiaStats.dart';
 
 class HomePage extends StatefulWidget {
+  static Widget create(BuildContext context) {
+    return Provider<HomePageBloc>(
+      create: (_) => HomePageBloc(),
+      child: HomePage(),
+    );
+  }
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  Map worldData;
-  List countryData;
-  static const snackBarDuration = Duration(seconds: 3);
-
-  final snackBar = SnackBar(
-    content: Text('Press back again to exit'),
-    duration: snackBarDuration,
-  );
-
-  DateTime backButtonPressedTime;
-
-  Future<void> getWorldWideData() async {
-    http.Response data = await http.get('https://corona.lmao.ninja/v2/all');
-    setState(() {
-      worldData = json.decode(data.body);
-    });
+  Future<void> loadDataOnRefresh(HomePageBloc bloc) async {
+    await bloc.loadDataOnRefresh();
   }
 
-  Future<void> getCountriesData() async {
-    http.Response data =
-        await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
-    setState(() {
-      countryData = json.decode(data.body);
-    });
+  Widget _buildProgressIndicator() {
+    return Container(
+      height: 100.0,
+      child: SpinKitFadingCircle(
+        color: primaryBlack,
+      ),
+    );
   }
 
-  Future<void> loadDataOnRefresh() async {
-    await getWorldWideData();
-    await getCountriesData();
-  }
-
-  @override
   void initState() {
-    getWorldWideData();
-    getCountriesData();
     super.initState();
+    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    bloc.getCountriesData();
+    bloc.getWorldWideData();
   }
 
-  Future<bool> onWillPop(BuildContext context) async {
-    DateTime currentTime = DateTime.now();
-
-    bool backButtonNotPressedTwice = backButtonPressedTime == null ||
-        currentTime.difference(backButtonPressedTime) > snackBarDuration;
-
-    if (backButtonNotPressedTwice) {
-      backButtonPressedTime = currentTime;
-      Scaffold.of(context).showSnackBar(snackBar);
-      return false;
+  Widget _buildWorldWidePannel(
+    HomePageBloc bloc,
+    bool isLoading,
+  ) {
+    if (isLoading) {
+      return Padding(
+        padding: const EdgeInsets.all(50.0),
+        child: _buildProgressIndicator(),
+      );
     }
-    return true;
+    return WorldWideWidget(
+      worldData: bloc.worldData,
+    );
+  }
+
+  Widget _buildMostAffectedCountriesPannel(
+    bool isLoading,
+    HomePageBloc bloc,
+  ) {
+    return isLoading == true
+        ? _buildProgressIndicator()
+        : MostAffectedWidget(
+            countryData: bloc.countryData,
+          );
+  }
+
+  Widget _buildPieChartPannel(bool isLoading, HomePageBloc bloc) {
+    return isLoading == true
+        ? _buildProgressIndicator()
+        : Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                15.0,
+              ),
+            ),
+            margin: const EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+              bottom: 10.0,
+            ),
+            color: Colors.amber[300],
+            elevation: 4.0,
+            child: PieChartWidget(
+              total: bloc.worldData['cases'].toDouble(),
+              active: bloc.worldData['active'].toDouble(),
+              recovered: bloc.worldData['recovered'].toDouble(),
+              deaths: bloc.worldData['deaths'].toDouble(),
+              totalColor: Colors.red[400],
+              activeColor: Colors.blue,
+              recoveredColor: Colors.green[400],
+              deathsColor: Colors.grey[400],
+            ),
+          );
   }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of<HomePageBloc>(context, listen: false);
     AppBar appbar = AppBar(
       title: const Text('COVID-19 TRACKER'),
     );
@@ -80,14 +112,14 @@ class _HomePageState extends State<HomePage> {
       appBar: appbar,
       body: LiquidPullToRefresh(
         showChildOpacityTransition: false,
-        onRefresh: loadDataOnRefresh,
+        onRefresh: () => loadDataOnRefresh(bloc),
         height: 60.0,
         animSpeedFactor: 5.0,
         color: primaryBlack,
         child: Builder(
           builder: (BuildContext context) {
             return WillPopScope(
-              onWillPop: () => onWillPop(context),
+              onWillPop: () => bloc.onWillPop(context),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,14 +227,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    worldData == null
-                        ? Padding(
-                            padding: const EdgeInsets.all(50.0),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                        : WorldWideWidget(worldData: worldData),
+                    StreamBuilder<bool>(
+                      stream: bloc.worldDataLoadingStream,
+                      initialData: true,
+                      builder: (context, snapshot) {
+                        return _buildWorldWidePannel(
+                          bloc,
+                          snapshot.data,
+                        );
+                      },
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 10.0),
@@ -214,16 +248,21 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    countryData == null
-                        ? Container(
-                            height: 100.0,
-                          )
-                        : MostAffectedWidget(
-                            countryData: countryData,
-                          ),
+                    StreamBuilder<bool>(
+                      stream: bloc.countriesDataLoadingStream,
+                      initialData: true,
+                      builder: (context, snapshot) {
+                        return _buildMostAffectedCountriesPannel(
+                          snapshot.data,
+                          bloc,
+                        );
+                      },
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
+                        horizontal: 10.0,
+                        vertical: 10.0,
+                      ),
                       child: const Text(
                         'Statistics...',
                         style: TextStyle(
@@ -232,35 +271,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    countryData == null
-                        ? Container(
-                            height: 100.0,
-                            child: Center(
-                              child: Container(
-                                height: 5.0,
-                                width: 100.0,
-                                child: LinearProgressIndicator(),
-                              ),
-                            ),
-                          )
-                        : PieChartWidget(
-                            total: worldData == null
-                                ? 0
-                                : worldData['cases'].toDouble(),
-                            active: worldData == null
-                                ? 0
-                                : worldData['active'].toDouble(),
-                            recovered: worldData == null
-                                ? 0
-                                : worldData['recovered'].toDouble(),
-                            deaths: worldData == null
-                                ? 0
-                                : worldData['deaths'].toDouble(),
-                            totalColor: Colors.red[400],
-                            activeColor: Colors.blue,
-                            recoveredColor: Colors.green[400],
-                            deathsColor: Colors.grey[400],
-                          ),
+                    StreamBuilder<bool>(
+                      stream: bloc.pieChartLoadingStream,
+                      initialData: true,
+                      builder: (context, snapshot) {
+                        return _buildPieChartPannel(
+                          snapshot.data,
+                          bloc,
+                        );
+                      },
+                    ),
                     SizedBox(
                       height: 10.0,
                     ),

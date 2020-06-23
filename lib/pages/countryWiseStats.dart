@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 
+import '../widgets/countryCard.dart';
 import '../data/datasource.dart';
 
 class CountryWiseStats extends StatefulWidget {
@@ -76,101 +77,14 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
               ),
             )
           : ListView.builder(
+              itemCount: worldWideData == null ? 0 : worldWideData.length,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 4.0,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 10.0,
-                    ),
-                    height: height * 0.17,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                '${worldWideData[index]["country"]}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(top: 3.0),
-                                child: Image.network(
-                                  "${worldWideData[index]["countryInfo"]["flag"]}",
-                                  height: 60.0,
-                                  width: 75.0,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'CONFIRMED : ${worldWideData[index]["cases"]}'
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Text(
-                                  '[+${worldWideData[index]["todayCases"]}]'
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Text(
-                                  'ACTIVE : ${worldWideData[index]["active"]}'
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                                Text(
-                                  'RECOVERED : ${worldWideData[index]["recovered"]}'
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                Text(
-                                  'DEATHS : ${worldWideData[index]["deaths"]} [+${worldWideData[index]["todayDeaths"]}]'
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[800],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return CountryCard(
+                  worldWideData: worldWideData,
+                  height: height,
+                  index: index,
                 );
               },
-              itemCount: worldWideData == null ? 0 : worldWideData.length,
             ),
     );
   }
@@ -225,97 +139,10 @@ class Search extends SearchDelegate {
     return ListView.builder(
       itemCount: countryData == null ? 0 : suggestionList.length,
       itemBuilder: (context, index) {
-        return Card(
-          elevation: 4.0,
-          child: Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            height: height * 0.17,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        '${suggestionList[index]["country"]}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 3.0),
-                        child: Image.network(
-                          "${suggestionList[index]["countryInfo"]["flag"]}",
-                          height: 60.0,
-                          width: 75.0,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'CONFIRMED : ${suggestionList[index]["cases"]}'
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
-                        ),
-                        Text(
-                          '[+${suggestionList[index]["todayCases"]}]'
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
-                        ),
-                        Text(
-                          'ACTIVE : ${suggestionList[index]["active"]}'
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        Text(
-                          'RECOVERED : ${suggestionList[index]["recovered"]}'
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                        ),
-                        Text(
-                          'DEATHS : ${suggestionList[index]["deaths"]} [+${countryData[index]["todayDeaths"]}]'
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        return CountryCard(
+          worldWideData: countryData,
+          height: height,
+          index: index,
         );
       },
     );
