@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import '../blocs/homepage_bloc.dart';
+import '../blocs/common_bloc.dart';
 import '../data/datasource.dart';
 import '../pages/indiaStatewise.dart';
 import '../widgets/custom_progress_indicator.dart';
@@ -13,8 +13,8 @@ import '../widgets/gridBox.dart';
 
 class IndiaStats extends StatefulWidget {
   static Widget create(BuildContext context) {
-    return Provider<HomePageBloc>(
-      create: (_) => HomePageBloc(),
+    return Provider<CommonBloc>(
+      create: (_) => CommonBloc(),
       child: IndiaStats(),
     );
   }
@@ -27,13 +27,13 @@ class _IndiaStatsState extends State<IndiaStats> {
   @override
   void initState() {
     super.initState();
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     bloc.getIndiaData();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -59,7 +59,7 @@ class _IndiaStatsState extends State<IndiaStats> {
     );
   }
 
-  Widget _buildContent(HomePageBloc bloc, bool isLoading) {
+  Widget _buildContent(CommonBloc bloc, bool isLoading) {
     return isLoading == true
         ? CustomProgressIndicator()
         : SingleChildScrollView(

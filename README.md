@@ -18,6 +18,7 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Features.
 
+- Based on BLoC Pattern.
 - Shows Worldwide statistics as well as Country-wise statistics.
 - Dedicated pages for India's statistics.
 - Statewise statistics of India.
@@ -37,11 +38,11 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 |                                           |                                           |                                           |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| <img src="Screenshots/1.png" width="400"> | <img src="Screenshots/2.png" width="400"> | <img src="Screenshots/3.png" width="400"> |
+| <img src="screenshots/1.png" width="400"> | <img src="screenshots/2.png" width="400"> | <img src="screenshots/3.png" width="400"> |
 
 |                                           |                                           |                                           |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| <img src="Screenshots/4.png" width="400"> | <img src="Screenshots/5.png" width="400"> | <img src="Screenshots/6.png" width="400"> |
+| <img src="screenshots/4.png" width="400"> | <img src="screenshots/5.png" width="400"> | <img src="screenshots/6.png" width="400"> |
 
 ## Contact me 📧
 

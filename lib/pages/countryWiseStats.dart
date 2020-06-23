@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../blocs/homepage_bloc.dart';
+import '../blocs/common_bloc.dart';
 import '../widgets/countryCard.dart';
 import '../widgets/custom_progress_indicator.dart';
 
 class CountryWiseStats extends StatefulWidget {
   static Widget create(BuildContext context) {
-    return Provider<HomePageBloc>(
-      create: (_) => HomePageBloc(),
+    return Provider<CommonBloc>(
+      create: (_) => CommonBloc(),
       child: CountryWiseStats(),
     );
   }
@@ -22,7 +22,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   List worldWideData;
 
   Widget _buildContent(
-    HomePageBloc bloc,
+    CommonBloc bloc,
     bool isLoading,
     double height,
   ) {
@@ -44,13 +44,13 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   @override
   void initState() {
     super.initState();
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     bloc.getCountriesData();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import './blocs/homepage_bloc.dart';
+import './blocs/common_bloc.dart';
 import './data/datasource.dart';
 import './pages/countryWiseStats.dart';
 import './pages/indiaStats.dart';
@@ -15,8 +15,8 @@ import './widgets/pieChart.dart';
 
 class HomePage extends StatefulWidget {
   static Widget create(BuildContext context) {
-    return Provider<HomePageBloc>(
-      create: (_) => HomePageBloc(),
+    return Provider<CommonBloc>(
+      create: (_) => CommonBloc(),
       child: HomePage(),
     );
   }
@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> loadDataOnRefresh(HomePageBloc bloc) async {
+  Future<void> loadDataOnRefresh(CommonBloc bloc) async {
     await bloc.loadDataOnRefresh();
   }
 
@@ -41,13 +41,13 @@ class _HomePageState extends State<HomePage> {
 
   void initState() {
     super.initState();
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     bloc.getCountriesData();
     bloc.getWorldWideData();
   }
 
   Widget _buildWorldWidePannel(
-    HomePageBloc bloc,
+    CommonBloc bloc,
     bool isLoading,
   ) {
     if (isLoading) {
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildMostAffectedCountriesPannel(
     bool isLoading,
-    HomePageBloc bloc,
+    CommonBloc bloc,
   ) {
     return isLoading == true
         ? _buildProgressIndicator()
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           );
   }
 
-  Widget _buildPieChartPannel(bool isLoading, HomePageBloc bloc) {
+  Widget _buildPieChartPannel(bool isLoading, CommonBloc bloc) {
     return isLoading == true
         ? _buildProgressIndicator()
         : Card(
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    final bloc = Provider.of<CommonBloc>(context, listen: false);
     AppBar appbar = AppBar(
       title: const Text('COVID-19 TRACKER'),
     );
