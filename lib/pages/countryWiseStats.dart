@@ -38,15 +38,15 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              worldWideData == null
-                  ? null
-                  : showSearch(
-                      context: context,
-                      delegate: Search(
-                        worldWideData,
-                        height,
-                      ),
-                    );
+              if (worldWideData != null) {
+                showSearch(
+                  context: context,
+                  delegate: Search(
+                    worldWideData,
+                    height,
+                  ),
+                );
+              }
             },
           ),
         ],

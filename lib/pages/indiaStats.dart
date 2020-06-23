@@ -17,23 +17,23 @@ class IndiaStats extends StatefulWidget {
 }
 
 class _IndiaStatsState extends State<IndiaStats> {
-  Map unofficialData;
+  Map indiaData;
 
-  getUnofficialData() async {
+  getindiaData() async {
     http.Response data = await http.get(
         'https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise');
     setState(() {
-      unofficialData = json.decode(data.body);
+      indiaData = json.decode(data.body);
     });
   }
 
   Future<void> loadDataOnRefresh() async {
-    return await getUnofficialData();
+    return await getindiaData();
   }
 
   @override
   void initState() {
-    getUnofficialData();
+    getindiaData();
     super.initState();
   }
 
@@ -53,7 +53,7 @@ class _IndiaStatsState extends State<IndiaStats> {
         animSpeedFactor: 5.0,
         color: primaryBlack,
         child: SingleChildScrollView(
-          child: unofficialData == null
+          child: indiaData == null
               ? Container(
                   height: MediaQuery.of(context).size.height -
                       (appbar.preferredSize.height +
@@ -104,7 +104,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                                 MaterialPageRoute(
                                   builder: (context) {
                                     return IndiaStatewise(
-                                      unofficialData: unofficialData,
+                                      indiaData: indiaData,
                                     );
                                   },
                                 ),
@@ -143,28 +143,28 @@ class _IndiaStatsState extends State<IndiaStats> {
                         children: <Widget>[
                           GridBox(
                             title: 'TOTAL CASES',
-                            count: unofficialData['data']['total']['confirmed']
+                            count: indiaData['data']['total']['confirmed']
                                 .toString(),
                             boxColor: Colors.red[300].withOpacity(0.80),
                             textColor: Colors.red[900],
                           ),
                           GridBox(
                             title: 'ACTIVE',
-                            count: unofficialData['data']['total']['active']
-                                .toString(),
+                            count:
+                                indiaData['data']['total']['active'].toString(),
                             boxColor: Colors.blue[300],
                             textColor: Colors.blue[900],
                           ),
                           GridBox(
                             title: 'DEATHS',
-                            count: unofficialData['data']['total']['deaths']
-                                .toString(),
+                            count:
+                                indiaData['data']['total']['deaths'].toString(),
                             boxColor: Colors.grey,
                             textColor: Colors.grey[900],
                           ),
                           GridBox(
                             title: 'RECOVERED',
-                            count: unofficialData['data']['total']['recovered']
+                            count: indiaData['data']['total']['recovered']
                                 .toString(),
                             boxColor: Colors.green[400],
                             textColor: Colors.green[900],
@@ -198,15 +198,14 @@ class _IndiaStatsState extends State<IndiaStats> {
                         padding:
                             const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
                         child: PieChartWidget(
-                          total: unofficialData['data']['total']['confirmed']
+                          total: indiaData['data']['total']['confirmed']
                               .toDouble(),
-                          active: unofficialData['data']['total']['active']
+                          active:
+                              indiaData['data']['total']['active'].toDouble(),
+                          recovered: indiaData['data']['total']['recovered']
                               .toDouble(),
-                          recovered: unofficialData['data']['total']
-                                  ['recovered']
-                              .toDouble(),
-                          deaths: unofficialData['data']['total']['deaths']
-                              .toDouble(),
+                          deaths:
+                              indiaData['data']['total']['deaths'].toDouble(),
                           totalColor: Colors.red[400],
                           activeColor: Colors.blue[400],
                           recoveredColor: Colors.green[300],
