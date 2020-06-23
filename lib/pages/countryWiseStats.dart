@@ -1,13 +1,19 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:http/http.dart' as http;
 
+import 'package:provider/provider.dart';
+
+import '../blocs/homepage_bloc.dart';
 import '../widgets/countryCard.dart';
-import '../data/datasource.dart';
+import '../widgets/custom_progress_indicator.dart';
 
 class CountryWiseStats extends StatefulWidget {
+  static Widget create(BuildContext context) {
+    return Provider<HomePageBloc>(
+      create: (_) => HomePageBloc(),
+      child: CountryWiseStats(),
+    );
+  }
+
   @override
   _CountryWiseStatsState createState() => _CountryWiseStatsState();
 }
@@ -15,22 +21,36 @@ class CountryWiseStats extends StatefulWidget {
 class _CountryWiseStatsState extends State<CountryWiseStats> {
   List worldWideData;
 
-  getWorldWideData() async {
-    http.Response data =
-        await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
-    setState(() {
-      worldWideData = json.decode(data.body);
-    });
+  Widget _buildContent(
+    HomePageBloc bloc,
+    bool isLoading,
+    double height,
+  ) {
+    if (isLoading) {
+      return CustomProgressIndicator();
+    }
+    return ListView.builder(
+      itemCount: isLoading == true ? 0 : bloc.worldData,
+      itemBuilder: (context, index) {
+        return CountryCard(
+          worldWideData: bloc.countryData,
+          height: height,
+          index: index,
+        );
+      },
+    );
   }
 
   @override
   void initState() {
-    getWorldWideData();
     super.initState();
+    final bloc = Provider.of<HomePageBloc>(context, listen: false);
+    bloc.getCountriesData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of<HomePageBloc>(context, listen: false);
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -38,11 +58,11 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              if (worldWideData != null) {
+              if (bloc.countryData != null) {
                 showSearch(
                   context: context,
                   delegate: Search(
-                    worldWideData,
+                    bloc.countryData,
                     height,
                   ),
                 );
@@ -54,38 +74,17 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
           'COUNTRY-WISE STATS',
         ),
       ),
-      body: worldWideData == null
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Fetching Details , Please wait',
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  SpinKitCircle(
-                    color: primaryBlack,
-                    size: 50.0,
-                  ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              itemCount: worldWideData == null ? 0 : worldWideData.length,
-              itemBuilder: (context, index) {
-                return CountryCard(
-                  worldWideData: worldWideData,
-                  height: height,
-                  index: index,
-                );
-              },
-            ),
+      body: StreamBuilder<bool>(
+        stream: bloc.countriesDataLoadingStream,
+        initialData: true,
+        builder: (context, snapshot) {
+          return _buildContent(
+            bloc,
+            snapshot.data,
+            height,
+          );
+        },
+      ),
     );
   }
 }
@@ -140,7 +139,7 @@ class Search extends SearchDelegate {
       itemCount: countryData == null ? 0 : suggestionList.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          worldWideData: countryData,
+          worldWideData: suggestionList,
           height: height,
           index: index,
         );

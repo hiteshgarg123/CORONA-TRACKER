@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class StateCard extends StatelessWidget {
   const StateCard({Key key, this.indiaData, this.index}) : super(key: key);
-  final Map indiaData;
+  final List indiaData;
   final int index;
 
   @override
@@ -35,7 +35,7 @@ class StateCard extends StatelessWidget {
                   width: 170,
                   margin: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    '${indiaData['data']['statewise'][index]['state']}',
+                    '${indiaData[index]['state']}',
                     style: TextStyle(
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'CONFIRMED : ${indiaData['data']['statewise'][index]['confirmed']}',
+                  'CONFIRMED : ${indiaData[index]['confirmed']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'ACTIVE : ${indiaData['data']['statewise'][index]['active']}',
+                  'ACTIVE : ${indiaData[index]['active']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'RECOVERED : ${indiaData['data']['statewise'][index]['recovered']}',
+                  'RECOVERED : ${indiaData[index]['recovered']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'DEATHS : ${indiaData['data']['statewise'][index]['deaths']}',
+                  'DEATHS : ${indiaData[index]['deaths']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -83,14 +83,10 @@ class StateCard extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             margin: const EdgeInsets.only(right: 10.0),
             child: PieChartWidget(
-              total:
-                  indiaData['data']['statewise'][index]['confirmed'].toDouble(),
-              active:
-                  indiaData['data']['statewise'][index]['active'].toDouble(),
-              recovered:
-                  indiaData['data']['statewise'][index]['recovered'].toDouble(),
-              deaths:
-                  indiaData['data']['statewise'][index]['deaths'].toDouble(),
+              total: indiaData[index]['confirmed'].toDouble(),
+              active: indiaData[index]['active'].toDouble(),
+              recovered: indiaData[index]['recovered'].toDouble(),
+              deaths: indiaData[index]['deaths'].toDouble(),
               totalColor: Colors.red[400],
               activeColor: Colors.blue[400],
               recoveredColor: Colors.green[300],

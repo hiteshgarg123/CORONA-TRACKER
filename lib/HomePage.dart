@@ -170,7 +170,9 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return CountryWiseStats();
+                                          return CountryWiseStats.create(
+                                            context,
+                                          );
                                         },
                                       ),
                                     );
@@ -200,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return IndiaStats();
+                                          return IndiaStats.create(context);
                                         },
                                       ),
                                     );
@@ -272,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     StreamBuilder<bool>(
-                      stream: bloc.pieChartLoadingStream,
+                      stream: bloc.worldDataLoadingStream,
                       initialData: true,
                       builder: (context, snapshot) {
                         return _buildPieChartPannel(

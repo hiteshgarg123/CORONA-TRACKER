@@ -1,5 +1,5 @@
-import 'package:covid_19_tracker/widgets/india_state_card.dart';
 import 'package:flutter/material.dart';
+import 'package:covid_19_tracker/widgets/india_state_card.dart';
 
 class IndiaStatewise extends StatelessWidget {
   final Map indiaData;
@@ -30,27 +30,17 @@ class IndiaStatewise extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: indiaData == null
-            ? Center(
-                child: Container(
-                  height: 5.0,
-                  width: 120.0,
-                  child: LinearProgressIndicator(),
-                ),
-              )
-            : ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return StateCard(
-                    index: index,
-                    indiaData: indiaData,
-                  );
-                },
-                itemCount: indiaData == null
-                    ? 0
-                    : indiaData['data']['statewise'].length,
-              ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return StateCard(
+              index: index,
+              indiaData: indiaData['data']['statewise'],
+            );
+          },
+          itemCount: indiaData['data']['statewise'].length,
+        ),
       ),
     );
   }
@@ -106,7 +96,7 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return StateCard(
           index: index,
-          indiaData: indiaData,
+          indiaData: suggestionList,
         );
       },
     );
