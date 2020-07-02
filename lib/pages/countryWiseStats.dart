@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../blocs/common_bloc.dart';
 import '../widgets/countryCard.dart';
-import '../widgets/custom_progress_indicator.dart';
+import '../widgets/customProgressIndicator.dart';
 
 class CountryWiseStats extends StatefulWidget {
   static Widget create(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import '../blocs/common_bloc.dart';
 import '../data/datasource.dart';
 import '../pages/indiaStatewise.dart';
-import '../widgets/custom_progress_indicator.dart';
+import '../widgets/customProgressIndicator.dart';
 import '../widgets/infoWidget.dart';
 import '../widgets/pieChart.dart';
 import '../widgets/gridBox.dart';
