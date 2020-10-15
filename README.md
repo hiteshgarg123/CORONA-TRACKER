@@ -12,11 +12,11 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Getting Started 🚀
 
-- Clone the repo
-- Install the dependicies
+- Clone the repo `git clone https://github.com/hiteshgarg123/CORONA-TRACKER`
+- Install the dependicies `flutter pub get`
 - Run it `flutter run`
 
-## Features.
+## Features 💡
 
 - Based on BLoC Pattern.
 - Shows Worldwide statistics as well as Country-wise statistics.
@@ -28,8 +28,9 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 - Search Functionality (in countrywise stats and India's statewise stats).
 - You can directly donate to PMNRF by opening from App.
 
-## To be implemented.
+## To be implemented 📝
 
+- Data Caching Service
 - Dark mode.
 - Top banner cutting in low ppi devices.
 - Fix margins(of chart) in low ppi devices
