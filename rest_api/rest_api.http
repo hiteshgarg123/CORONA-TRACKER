@@ -1,0 +1,14 @@
+#Used to get an access token with given authorization key
+GET {{worldDataUri}}
+Accept: application/json
+###
+
+GET {{countriesDataUri}}
+Accept: application/json
+###
+
+GET {{indiaDataUri}}
+Accept: application/json
+###
+
+
