@@ -1,6 +1,6 @@
+import 'package:covid_19_tracker/pages/homePage.dart';
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
 import './data/datasource.dart';
 
 void main() => runApp(MyApp());
