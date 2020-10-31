@@ -7,9 +7,9 @@ import '../blocs/common_bloc.dart';
 import '../data/datasource.dart';
 import '../pages/indiaStatewise.dart';
 import '../widgets/customProgressIndicator.dart';
+import '../widgets/gridBox.dart';
 import '../widgets/infoWidget.dart';
 import '../widgets/pieChart.dart';
-import '../widgets/gridBox.dart';
 
 class IndiaStats extends StatefulWidget {
   static Widget create(BuildContext context) {
@@ -62,7 +62,8 @@ class _IndiaStatsState extends State<IndiaStats> {
   Widget _buildContent(CommonBloc bloc, bool isLoading) {
     return isLoading == true
         ? CustomProgressIndicator()
-        : SingleChildScrollView(
+        : Container(
+            height: MediaQuery.of(context).size.height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,12 +205,15 @@ class _IndiaStatsState extends State<IndiaStats> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Center(
-                  child: const Text(
-                    'WE STAND TOGETHER TO FIGHT WITH THIS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    child: const Text(
+                      'WE STAND TOGETHER TO FIGHT WITH THIS',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
