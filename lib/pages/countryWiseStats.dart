@@ -1,10 +1,8 @@
+import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/widgets/countryCard.dart';
+import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
-import '../blocs/common_bloc.dart';
-import '../widgets/countryCard.dart';
-import '../widgets/customProgressIndicator.dart';
 
 class CountryWiseStats extends StatefulWidget {
   static Widget create(BuildContext context) {
@@ -70,7 +68,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
             },
           ),
         ],
-        title: Text(
+        title: const Text(
           'COUNTRY-WISE STATS',
         ),
       ),

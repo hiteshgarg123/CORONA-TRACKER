@@ -1,17 +1,15 @@
+import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/pages/countryWiseStats.dart';
+import 'package:covid_19_tracker/pages/indiaStats.dart';
+import 'package:covid_19_tracker/widgets/infoWidget.dart';
+import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
+import 'package:covid_19_tracker/widgets/pieChart.dart';
+import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-
-import '../blocs/common_bloc.dart';
-import '../data/datasource.dart';
-import 'countryWiseStats.dart';
-import 'indiaStats.dart';
-import '../widgets/infoWidget.dart';
-import '../widgets/mostAffectedCountriesWidget.dart';
-import '../widgets/pieChart.dart';
-import '../widgets/worldwidewidget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static Widget create(BuildContext context) {

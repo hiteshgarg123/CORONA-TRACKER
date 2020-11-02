@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomProgressIndicator extends StatelessWidget {

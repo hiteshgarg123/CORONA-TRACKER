@@ -1,6 +1,5 @@
+import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:flutter/material.dart';
-
-import 'gridBox.dart';
 
 class WorldWideWidget extends StatelessWidget {
   final Map worldData;

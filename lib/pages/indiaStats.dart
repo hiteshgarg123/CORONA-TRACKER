@@ -1,15 +1,13 @@
+import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/pages/indiaStatewise.dart';
+import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
+import 'package:covid_19_tracker/widgets/gridBox.dart';
+import 'package:covid_19_tracker/widgets/infoWidget.dart';
+import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-
-import '../blocs/common_bloc.dart';
-import '../data/datasource.dart';
-import '../pages/indiaStatewise.dart';
-import '../widgets/customProgressIndicator.dart';
-import '../widgets/gridBox.dart';
-import '../widgets/infoWidget.dart';
-import '../widgets/pieChart.dart';
+import 'package:provider/provider.dart';
 
 class IndiaStats extends StatefulWidget {
   static Widget create(BuildContext context) {

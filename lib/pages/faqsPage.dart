@@ -1,6 +1,5 @@
+import 'package:covid_19_tracker/data/datasource.dart';
 import 'package:flutter/material.dart';
-
-import '../data/datasource.dart';
 
 class FAQsPage extends StatelessWidget {
   @override

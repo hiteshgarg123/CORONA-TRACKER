@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/widgets/india_state_card.dart';
+import 'package:flutter/material.dart';
 
 class IndiaStatewise extends StatelessWidget {
   final Map indiaData;

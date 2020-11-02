@@ -1,8 +1,7 @@
+import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/pages/faqsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../data/datasource.dart';
-import '../pages/faqsPage.dart';
 
 class InfoWidget extends StatelessWidget {
   @override
