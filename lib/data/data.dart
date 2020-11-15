@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 Color primaryBlack = Color(0xff202c3b);
 
-class DataSource {
-  static String quote =
+class StaticData {
+  static const String quote =
       "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.";
 
-  static List questionAnswers = [
+  static const List commonQuestions = [
     {
       "question": "What is a coronavirus?",
       "answer":
