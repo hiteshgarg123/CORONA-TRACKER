@@ -1,4 +1,4 @@
-import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/data/data.dart';
 import 'package:flutter/material.dart';
 
 class FAQsPage extends StatelessWidget {
@@ -12,7 +12,7 @@ class FAQsPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return ExpansionTile(
             title: Text(
-              DataSource.questionAnswers[index]['question'],
+              StaticData.commonQuestions[index]['question'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -20,12 +20,12 @@ class FAQsPage extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(DataSource.questionAnswers[index]['answer']),
+                child: Text(StaticData.commonQuestions[index]['answer']),
               ),
             ],
           );
         },
-        itemCount: DataSource.questionAnswers.length,
+        itemCount: StaticData.commonQuestions.length,
       ),
     );
   }

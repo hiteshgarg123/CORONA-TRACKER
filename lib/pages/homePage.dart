@@ -1,5 +1,6 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/data/data.dart';
+import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
@@ -131,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       color: Colors.orange[100],
                       child: Text(
-                        DataSource.quote,
+                        StaticData.quote,
                         style: TextStyle(
                           color: Colors.orange[800],
                           fontWeight: FontWeight.bold,

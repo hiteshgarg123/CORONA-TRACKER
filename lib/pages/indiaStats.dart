@@ -1,5 +1,5 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/datasource.dart';
+import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
