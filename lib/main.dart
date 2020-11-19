@@ -1,6 +1,6 @@
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/countriesData.dart';
+import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/pages/homePage.dart';
@@ -12,10 +12,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(WorldDataAdapter());
-  Hive.registerAdapter(CountriesDataAdapter());
+  Hive.registerAdapter(CountryDataAdapter());
   Hive.registerAdapter(IndiaDataAdapter());
   await Hive.openBox<WorldData>(HiveBoxes.worldData);
-  await Hive.openBox<CountriesData>(HiveBoxes.countriesData);
+  await Hive.openBox(HiveBoxes.countriesData);
   await Hive.openBox<IndiaData>(HiveBoxes.indiaData);
   runApp(MyApp());
 }
@@ -28,23 +28,31 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
-    Hive.box<WorldData>(HiveBoxes.worldData).compact();
-    Hive.box<CountriesData>(HiveBoxes.countriesData).compact();
-    Hive.box<IndiaData>(HiveBoxes.indiaData).compact();
     Hive.close();
+    deleteBoxesFromDisk();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> deleteBoxesFromDisk() async {
+    await Hive.deleteFromDisk()
+        .whenComplete(() => print('Deletion successfull'));
   }
 
   @override
   Widget build(BuildContext context) {
     //TODO! REMOVE AFTER TEST
 
-    Box worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+    Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
     print('No. of Items in ${HiveBoxes.worldData} is ${worldDataBox.length}');
-    Box countriesDataBox = Hive.box<CountriesData>(HiveBoxes.countriesData);
+    Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
     print(
         'No. of Items in ${HiveBoxes.countriesData} is ${countriesDataBox.length}');
-    Box indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+    Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
     print('No. of Items in ${HiveBoxes.indiaData} is ${indiaDataBox.length}');
 
     return MaterialApp(

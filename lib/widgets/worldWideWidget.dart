@@ -1,10 +1,14 @@
+import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:flutter/material.dart';
 
 class WorldWideWidget extends StatelessWidget {
-  final Map worldData;
+  final WorldData worldData;
 
-  const WorldWideWidget({Key key, @required this.worldData}) : super(key: key);
+  const WorldWideWidget({
+    Key key,
+    @required this.worldData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,40 +26,38 @@ class WorldWideWidget extends StatelessWidget {
         ),
         children: <Widget>[
           GridBox(
-            title: 'CONFIRMED',
-            boxColor: Colors.red[200].withOpacity(0.70),
-            textColor: Colors.red[900],
-            count: worldData["cases"].toString(),
-          ),
+              title: 'CONFIRMED',
+              boxColor: Colors.red[200].withOpacity(0.70),
+              textColor: Colors.red[900],
+              count: worldData.cases),
           GridBox(
-            title: 'ACTIVE',
-            boxColor: Colors.blue[100],
-            textColor: Colors.blue[900],
-            count: worldData["active"].toString(),
-          ),
+              title: 'ACTIVE',
+              boxColor: Colors.blue[100],
+              textColor: Colors.blue[900],
+              count: worldData.active),
           GridBox(
             title: 'RECOVERED',
             boxColor: Colors.green[200],
             textColor: Colors.lightGreen[900],
-            count: worldData["recovered"].toString(),
+            count: worldData.recovered,
           ),
           GridBox(
             title: 'DEATHS',
             boxColor: Colors.grey[400],
             textColor: Colors.grey[900],
-            count: worldData["deaths"].toString(),
+            count: worldData.deaths,
           ),
           GridBox(
             title: 'CASES TODAY',
             boxColor: Colors.purple[300].withOpacity(0.8),
             textColor: Colors.purple[900],
-            count: worldData["todayCases"].toString(),
+            count: worldData.todayCases,
           ),
           GridBox(
             title: ' AFFECTED\nCOUNTRIES',
             boxColor: Colors.deepOrange[300].withOpacity(0.8),
             textColor: Colors.deepOrange[900],
-            count: worldData["affectedCountries"].toString(),
+            count: worldData.affetctedCountries,
           ),
         ],
       ),

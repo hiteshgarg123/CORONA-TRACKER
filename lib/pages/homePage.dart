@@ -1,6 +1,8 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
-import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
+import 'package:covid_19_tracker/data/hive_boxes.dart';
+import 'package:covid_19_tracker/models/countryData.dart';
+import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
@@ -9,6 +11,7 @@ import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +28,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  WorldData worldCachedData;
+  List countriesCachedData;
+  Box<WorldData> worldDataBox;
+  Box countryDataBox;
+
   Future<void> loadDataOnRefresh(CommonBloc bloc) async {
     await bloc.getCombinedData();
   }
@@ -40,22 +48,34 @@ class _HomePageState extends State<HomePage> {
 
   void initState() {
     super.initState();
+    getCachedData();
     final bloc = Provider.of<CommonBloc>(context, listen: false);
     bloc.getCombinedData();
+  }
+
+  void getCachedData() {
+    worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+    worldCachedData = worldDataBox.isEmpty ? null : worldDataBox.values.last;
+    print('Most Recent WorldData: ${worldCachedData.toString()}');
+
+    countryDataBox = Hive.box(HiveBoxes.countriesData);
+    countriesCachedData =
+        countryDataBox.isEmpty ? null : countryDataBox.values.last;
+    print('Most Recent CountriesData: ${countriesCachedData.toString()}');
   }
 
   Widget _buildWorldWidePannel(
     CommonBloc bloc,
     bool isLoading,
   ) {
-    if (isLoading) {
+    if (isLoading && worldDataBox.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(50.0),
         child: _buildProgressIndicator(),
       );
     }
     return WorldWideWidget(
-      worldData: bloc.worldData,
+      worldData: isLoading ? worldCachedData : bloc.worldData,
     );
   }
 
@@ -63,11 +83,15 @@ class _HomePageState extends State<HomePage> {
     bool isLoading,
     CommonBloc bloc,
   ) {
-    return isLoading == true
-        ? _buildProgressIndicator()
-        : MostAffectedWidget(
-            countryData: bloc.countryData,
-          );
+    if (isLoading && countryDataBox.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(50.0),
+        child: _buildProgressIndicator(),
+      );
+    }
+    return MostAffectedWidget(
+      countryData: isLoading ? countriesCachedData : bloc.countriesData,
+    );
   }
 
   Widget _buildPieChartPannel(bool isLoading, CommonBloc bloc) {
@@ -87,10 +111,10 @@ class _HomePageState extends State<HomePage> {
             color: Colors.amber[300],
             elevation: 4.0,
             child: PieChartWidget(
-              total: bloc.worldData['cases'].toDouble(),
-              active: bloc.worldData['active'].toDouble(),
-              recovered: bloc.worldData['recovered'].toDouble(),
-              deaths: bloc.worldData['deaths'].toDouble(),
+              total: double.tryParse(bloc.worldData.cases),
+              active: double.tryParse(bloc.worldData.active),
+              recovered: double.tryParse(bloc.worldData.recovered),
+              deaths: double.tryParse(bloc.worldData.deaths),
               totalColor: Colors.red[400],
               activeColor: Colors.blue,
               recoveredColor: Colors.green[400],
