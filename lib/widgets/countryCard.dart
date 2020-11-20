@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
-  final List worldWideData;
+  final List countryData;
   final double height;
   final int index;
 
   const CountryCard({
     Key key,
-    @required this.worldWideData,
+    @required this.countryData,
     @required this.height,
     @required this.index,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class CountryCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    '${worldWideData[index]["country"]}',
+                    '${countryData[index].country}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -39,7 +39,7 @@ class CountryCard extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 3.0),
                     child: Image.network(
-                      "${worldWideData[index]["countryInfo"]["flag"]}",
+                      "${countryData[index].countryFlagUrl}",
                       height: 60.0,
                       width: 75.0,
                     ),
@@ -54,7 +54,7 @@ class CountryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'CONFIRMED : ${worldWideData[index]["cases"]}'.toString(),
+                      'CONFIRMED : ${countryData[index].cases}',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '[+${worldWideData[index]["todayCases"]}]'.toString(),
+                      '[+${countryData[index].todayCases}]',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'ACTIVE : ${worldWideData[index]["active"]}'.toString(),
+                      'ACTIVE : ${countryData[index].active}',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -78,8 +78,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'RECOVERED : ${worldWideData[index]["recovered"]}'
-                          .toString(),
+                      'RECOVERED : ${countryData[index].recovered}',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -87,7 +86,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'DEATHS : ${worldWideData[index]["deaths"]} [+${worldWideData[index]["todayDeaths"]}]'
+                      'DEATHS : ${countryData[index].deaths} [+${countryData[index].todayDeaths}]'
                           .toString(),
                       style: TextStyle(
                         fontSize: 16.0,

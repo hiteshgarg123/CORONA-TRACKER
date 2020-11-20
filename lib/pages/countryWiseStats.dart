@@ -1,7 +1,9 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/widgets/countryCard.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class CountryWiseStats extends StatefulWidget {
@@ -17,21 +19,24 @@ class CountryWiseStats extends StatefulWidget {
 }
 
 class _CountryWiseStatsState extends State<CountryWiseStats> {
-  List worldWideData;
+  List countriesData;
+  List countriesCachedData;
+  Box countryDataBox;
 
   Widget _buildContent(
     CommonBloc bloc,
     bool isLoading,
     double height,
   ) {
-    if (isLoading) {
+    if (countryDataBox.isEmpty && isLoading) {
       return CustomProgressIndicator();
     }
+    countriesData = isLoading ? countriesCachedData : bloc.countriesData;
     return ListView.builder(
-      itemCount: isLoading == true ? 0 : bloc.worldData,
+      itemCount: countriesData.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          worldWideData: bloc.countryData,
+          countryData: countriesData,
           height: height,
           index: index,
         );
@@ -42,8 +47,16 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   @override
   void initState() {
     super.initState();
+    getCachedData();
     final bloc = Provider.of<CommonBloc>(context, listen: false);
     bloc.getCountriesData();
+  }
+
+  Future<void> getCachedData() async {
+    countryDataBox = Hive.box(HiveBoxes.countriesData);
+    countriesCachedData = countryDataBox?.values?.last;
+
+    print('Most Recent CountriesData: ${countriesCachedData.toString()}');
   }
 
   @override
@@ -54,13 +67,13 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
-              if (bloc.countryData != null) {
+              if (countriesData != null) {
                 showSearch(
                   context: context,
                   delegate: Search(
-                    bloc.countryData,
+                    countriesData,
                     height,
                   ),
                 );
@@ -126,7 +139,7 @@ class Search extends SearchDelegate {
         ? countryData
         : countryData
             .where(
-              (element) => element['country']
+              (element) => element.country
                   .toString()
                   .toLowerCase()
                   .startsWith(query.toLowerCase()),
@@ -137,7 +150,7 @@ class Search extends SearchDelegate {
       itemCount: countryData == null ? 0 : suggestionList.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          worldWideData: suggestionList,
+          countryData: suggestionList,
           height: height,
           index: index,
         );
