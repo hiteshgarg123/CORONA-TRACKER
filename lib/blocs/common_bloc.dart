@@ -1,5 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:covid_19_tracker/data/hive_boxes.dart';
+import 'package:covid_19_tracker/models/countryData.dart';
+import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/worldData.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -10,12 +15,12 @@ class CommonBloc {
   final _indiaDataLoadingController = StreamController<bool>();
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
-  Map worldData;
-  List countryData;
-  Map indiaData;
+  WorldData worldData;
+  List<CountryData> countriesData;
+  IndiaData indiaData;
 
   final snackBar = const SnackBar(
-    content: Text('Press back again to exit'),
+    content: const Text('Press back again to exit'),
     duration: snackBarDuration,
   );
   DateTime backButtonPressedTime;
@@ -28,13 +33,13 @@ class CommonBloc {
   Stream<bool> get dataLoadingStream => _combinedDataLoadingController.stream;
 
   void setCountriesDataLoading(bool isLoading) =>
-      _countriesDataLoadingController.add(isLoading);
+      _countriesDataLoadingController.sink.add(isLoading);
   void setWorldDataLoading(bool isLoading) =>
-      _worldDataLoadingController.add(isLoading);
+      _worldDataLoadingController.sink.add(isLoading);
   void setIndiaDataLoading(bool isLoading) =>
-      _indiaDataLoadingController.add(isLoading);
+      _indiaDataLoadingController.sink.add(isLoading);
   void setDataLoading(bool isLoading) =>
-      _combinedDataLoadingController.add(isLoading);
+      _combinedDataLoadingController.sink.add(isLoading);
 
   void dispose() {
     _worldDataLoadingController.close();
@@ -58,22 +63,38 @@ class CommonBloc {
   }
 
   Future<void> getWorldWideData() async {
-    final data = await http.get('https://corona.lmao.ninja/v2/all');
-    worldData = json.decode(data.body);
+    final response = await http.get('https://corona.lmao.ninja/v2/all');
+    final _worldData = json.decode(response.body);
+    worldData = WorldData.fromJSON(_worldData);
+
+    Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+    await worldDataBox.clear();
+    await worldDataBox.add(worldData);
     setWorldDataLoading(false);
   }
 
   Future<void> getCountriesData() async {
-    http.Response data =
+    http.Response response =
         await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
-    countryData = json.decode(data.body);
+    countriesData = (json.decode(response.body) as List)
+        .map<CountryData>((_countryData) => CountryData.fromJSON(_countryData))
+        .toList();
+
+    Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
+    await countriesDataBox.clear();
+    await countriesDataBox.add(countriesData);
     setCountriesDataLoading(false);
   }
 
   Future<void> getIndiaData() async {
-    final data = await http.get(
+    final response = await http.get(
         'https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise');
-    indiaData = json.decode(data.body);
+    final _indiaData = json.decode(response.body);
+    indiaData = IndiaData.fromJSON(_indiaData);
+
+    Box indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+    await indiaDataBox.clear();
+    await indiaDataBox.add(indiaData);
     setIndiaDataLoading(false);
   }
 
