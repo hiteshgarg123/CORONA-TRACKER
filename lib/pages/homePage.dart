@@ -1,7 +1,7 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/countryData.dart';
+import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
@@ -30,8 +30,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   WorldData worldCachedData;
   List countriesCachedData;
+  IndiaData indiaCachedData;
   Box<WorldData> worldDataBox;
   Box countryDataBox;
+  Box<IndiaData> indiaDataBox;
 
   Future<void> loadDataOnRefresh(CommonBloc bloc) async {
     await bloc.getCombinedData();
@@ -95,32 +97,44 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildPieChartPannel(bool isLoading, CommonBloc bloc) {
-    return isLoading == true
-        ? _buildProgressIndicator()
-        : Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                15.0,
-              ),
-            ),
-            margin: const EdgeInsets.only(
-              left: 10.0,
-              right: 10.0,
-              bottom: 10.0,
-            ),
-            color: Colors.amber[300],
-            elevation: 4.0,
-            child: PieChartWidget(
-              total: double.tryParse(bloc.worldData.cases),
-              active: double.tryParse(bloc.worldData.active),
-              recovered: double.tryParse(bloc.worldData.recovered),
-              deaths: double.tryParse(bloc.worldData.deaths),
-              totalColor: Colors.red[400],
-              activeColor: Colors.blue,
-              recoveredColor: Colors.green[400],
-              deathsColor: Colors.grey[400],
-            ),
-          );
+    if (isLoading && worldDataBox.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(50.0),
+        child: _buildProgressIndicator(),
+      );
+    }
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          15.0,
+        ),
+      ),
+      margin: const EdgeInsets.only(
+        left: 10.0,
+        right: 10.0,
+        bottom: 10.0,
+      ),
+      color: Colors.amber[300],
+      elevation: 4.0,
+      child: PieChartWidget(
+        total: double.tryParse(
+          isLoading ? worldCachedData.cases : bloc.worldData.cases,
+        ),
+        active: double.tryParse(
+          isLoading ? worldCachedData.active : bloc.worldData.active,
+        ),
+        recovered: double.tryParse(
+          isLoading ? worldCachedData.recovered : bloc.worldData.recovered,
+        ),
+        deaths: double.tryParse(
+          isLoading ? worldCachedData.deaths : bloc.worldData.deaths,
+        ),
+        totalColor: Colors.red[400],
+        activeColor: Colors.blue,
+        recoveredColor: Colors.green[400],
+        deathsColor: Colors.grey[400],
+      ),
+    );
   }
 
   @override

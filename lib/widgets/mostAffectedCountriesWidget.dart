@@ -1,8 +1,7 @@
-import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:flutter/material.dart';
 
 class MostAffectedWidget extends StatelessWidget {
-  final List<dynamic> countryData;
+  final List countryData;
 
   const MostAffectedWidget({
     Key key,
@@ -38,10 +37,14 @@ class MostAffectedWidget extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'No. of cases: ${countryData[index].cases}  ,  Deaths: ${countryData[index].deaths}',
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'No. of cases: ${countryData[index].cases}  ,  Deaths: ${countryData[index].deaths}',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
