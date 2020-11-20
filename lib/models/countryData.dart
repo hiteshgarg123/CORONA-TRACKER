@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'countryData.g.dart';
 
-//TODO! Regenerate the Hive Generated file ( Fields Changed ) , Level : Severe-Crash
-
 @HiveType(typeId: 2)
 class CountryData {
   @HiveField(0)
@@ -14,12 +12,24 @@ class CountryData {
   String countryFlagUrl;
   @HiveField(3)
   String country;
+  @HiveField(4)
+  String todayCases;
+  @HiveField(5)
+  String active;
+  @HiveField(6)
+  String recovered;
+  @HiveField(7)
+  String todayDeaths;
 
   CountryData({
     @required this.cases,
     @required this.deaths,
     @required this.countryFlagUrl,
     @required this.country,
+    @required this.todayCases,
+    @required this.active,
+    @required this.recovered,
+    @required this.todayDeaths,
   });
 
   factory CountryData.fromJSON(Map<String, dynamic> countriesData) {
@@ -28,6 +38,10 @@ class CountryData {
       deaths: countriesData['deaths'].toString(),
       countryFlagUrl: countriesData['countryInfo']['flag'],
       country: countriesData['country'],
+      todayCases: countriesData['todayCases'].toString(),
+      active: countriesData['active'].toString(),
+      recovered: countriesData['recovered'].toString(),
+      todayDeaths: countriesData['todayDeaths'].toString(),
     );
   }
 
