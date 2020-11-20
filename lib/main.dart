@@ -27,34 +27,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void dispose() {
-    Hive.close();
-    deleteBoxesFromDisk();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<void> deleteBoxesFromDisk() async {
-    await Hive.deleteFromDisk()
-        .whenComplete(() => print('Deletion successfull'));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    //TODO! REMOVE AFTER TEST
-
-    Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
-    print('No. of Items in ${HiveBoxes.worldData} is ${worldDataBox.length}');
-    Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
-    print(
-        'No. of Items in ${HiveBoxes.countriesData} is ${countriesDataBox.length}');
-    Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
-    print('No. of Items in ${HiveBoxes.indiaData} is ${indiaDataBox.length}');
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'COVID-19 Tracker',
@@ -64,5 +37,11 @@ class _MyAppState extends State<MyApp> {
       ),
       home: HomePage.create(context),
     );
+  }
+
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
   }
 }
