@@ -55,8 +55,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   Future<void> getCachedData() async {
     countryDataBox = Hive.box(HiveBoxes.countriesData);
     countriesCachedData = countryDataBox?.values?.last;
-
-    print('Most Recent CountriesData: ${countriesCachedData.toString()}');
   }
 
   @override

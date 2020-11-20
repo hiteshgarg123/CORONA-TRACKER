@@ -39,7 +39,7 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   void getCachedData() {
     indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
-    indiaCachedData = indiaDataBox.isEmpty ? null : indiaDataBox.values.last;
+    indiaCachedData = indiaDataBox?.values?.last;
   }
 
   @override
@@ -106,7 +106,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                       MaterialPageRoute(
                         builder: (context) {
                           return IndiaStatewise(
-                            indiaData: bloc.indiaData,
+                            indiaData: indiaData,
                           );
                         },
                       ),

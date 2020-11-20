@@ -57,13 +57,9 @@ class _HomePageState extends State<HomePage> {
 
   void getCachedData() {
     worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
-    worldCachedData = worldDataBox.isEmpty ? null : worldDataBox.values.last;
-    print('Most Recent WorldData: ${worldCachedData.toString()}');
-
+    worldCachedData = worldDataBox?.values?.last;
     countryDataBox = Hive.box(HiveBoxes.countriesData);
-    countriesCachedData =
-        countryDataBox.isEmpty ? null : countryDataBox.values.last;
-    print('Most Recent CountriesData: ${countriesCachedData.toString()}');
+    countriesCachedData = countryDataBox?.values?.last;
   }
 
   Widget _buildWorldWidePannel(
