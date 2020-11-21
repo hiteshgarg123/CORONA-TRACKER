@@ -18,22 +18,50 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Features 💡
 
-- Based on BLoC Pattern.
-- Shows Worldwide statistics as well as Country-wise statistics.
-- Dedicated pages for India's statistics.
-- Statewise statistics of India.
-- Added beautiful PieCharts for more data visualisation.
-- Myth Busters section.
+- Based on BLoC Architecture.
+- Shows Worldwide as well as Country-wise stats.
+- Dedicated pages for India's stats.
+- Statewise stats of India.
+- Added beautiful PieCharts for data visualisation.
+- Myth Buster section.
 - FAQs Section.
 - Search Functionality (in countrywise stats and India's statewise stats).
 - You can directly donate to PMNRF by opening from App.
 
+## Recent Update
+
+- Complete Data Caching with Hive Database.
+
 ## To be implemented 📝
 
-- Data Caching Service
-- Dark mode.
-- Top banner cutting in low ppi devices.
-- Fix margins(of chart) in low ppi devices
+- [x] Complete Data Caching Service
+- [ ] Dark mode.
+- [ ] Top banner cutting in low ppi devices.
+- [ ] Fix margins(of chart) in low ppi devices.
+
+## Dependencies ✨
+
+<details><summary>CLICK ME TO EXPAND</summary>
+<p>
+#### yes, even hidden code blocks!
+
+```dart
+flutter_spinkit: ^4.1.2
+hive: ^1.4.4+1
+hive_flutter: ^0.3.1
+http: ^0.12.0+4
+liquid_pull_to_refresh: ^2.0.0
+pie_chart: ^3.1.1
+provider: ^4.1.3
+shared_preferences: ^0.5.6+3
+url_launcher: ^5.4.2
+build_runner: ^1.10.4
+hive_generator: ^0.8.2
+flutter_launcher_icons: "^0.7.3"
+```
+
+</p>
+</details>
 
 ## Preview 📸
 
