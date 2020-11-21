@@ -43,7 +43,6 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 <details><summary>CLICK ME TO EXPAND</summary>
 <p>
-#### yes, even hidden code blocks!
 
 ```dart
 flutter_spinkit: ^4.1.2
