@@ -92,7 +92,7 @@ class CommonBloc {
     final _indiaData = json.decode(response.body);
     indiaData = IndiaData.fromJSON(_indiaData);
 
-    Box indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+    Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
     await indiaDataBox.clear();
     await indiaDataBox.add(indiaData);
     setIndiaDataLoading(false);

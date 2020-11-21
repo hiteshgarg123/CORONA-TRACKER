@@ -1,7 +1,6 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
@@ -30,10 +29,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   WorldData worldCachedData;
   List countriesCachedData;
-  IndiaData indiaCachedData;
   Box<WorldData> worldDataBox;
   Box countryDataBox;
-  Box<IndiaData> indiaDataBox;
 
   Future<void> loadDataOnRefresh(CommonBloc bloc) async {
     await bloc.getCombinedData();
@@ -57,9 +54,10 @@ class _HomePageState extends State<HomePage> {
 
   void getCachedData() {
     worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
-    worldCachedData = worldDataBox?.values?.last;
+    worldCachedData = worldDataBox.isNotEmpty ? worldDataBox.values.last : null;
     countryDataBox = Hive.box(HiveBoxes.countriesData);
-    countriesCachedData = countryDataBox?.values?.last;
+    countriesCachedData =
+        countryDataBox.isNotEmpty ? countryDataBox.values.last : null;
   }
 
   Widget _buildWorldWidePannel(
