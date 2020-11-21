@@ -2,8 +2,12 @@ import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
 
 class StateCard extends StatelessWidget {
-  const StateCard({Key key, this.indiaData, this.index}) : super(key: key);
-  final List indiaData;
+  const StateCard({
+    Key key,
+    this.indiaStatewiseData,
+    this.index,
+  }) : super(key: key);
+  final List indiaStatewiseData;
   final int index;
 
   @override
@@ -18,7 +22,7 @@ class StateCard extends StatelessWidget {
       ),
       elevation: 4.0,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Container(
             padding: const EdgeInsets.fromLTRB(
@@ -35,7 +39,7 @@ class StateCard extends StatelessWidget {
                   width: 170,
                   margin: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    '${indiaData[index]['state']}',
+                    '${indiaStatewiseData[index]['state']}',
                     style: TextStyle(
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
@@ -43,7 +47,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'CONFIRMED : ${indiaData[index]['confirmed']}',
+                  'CONFIRMED : ${indiaStatewiseData[index]['confirmed']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -51,7 +55,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'ACTIVE : ${indiaData[index]['active']}',
+                  'ACTIVE : ${indiaStatewiseData[index]['active']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -59,7 +63,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'RECOVERED : ${indiaData[index]['recovered']}',
+                  'RECOVERED : ${indiaStatewiseData[index]['recovered']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -67,7 +71,7 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'DEATHS : ${indiaData[index]['deaths']}',
+                  'DEATHS : ${indiaStatewiseData[index]['deaths']}',
                   style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
@@ -77,21 +81,21 @@ class StateCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 150,
-            width: 150,
-            padding: const EdgeInsets.all(5.0),
-            margin: const EdgeInsets.only(right: 10.0),
-            child: PieChartWidget(
-              total: indiaData[index]['confirmed'].toDouble(),
-              active: indiaData[index]['active'].toDouble(),
-              recovered: indiaData[index]['recovered'].toDouble(),
-              deaths: indiaData[index]['deaths'].toDouble(),
-              totalColor: Colors.red[400],
-              activeColor: Colors.blue[400],
-              recoveredColor: Colors.green[300],
-              deathsColor: Colors.grey[400],
-              showLegends: false,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(5.0),
+              margin: const EdgeInsets.only(right: 10.0),
+              child: PieChartWidget(
+                total: indiaStatewiseData[index]['confirmed'].toDouble(),
+                active: indiaStatewiseData[index]['active'].toDouble(),
+                recovered: indiaStatewiseData[index]['recovered'].toDouble(),
+                deaths: indiaStatewiseData[index]['deaths'].toDouble(),
+                totalColor: Colors.red[400],
+                activeColor: Colors.blue[400],
+                recoveredColor: Colors.green[300],
+                deathsColor: Colors.grey[400],
+                showLegends: false,
+              ),
             ),
           )
         ],

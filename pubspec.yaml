@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -22,6 +22,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   day_night_switch: ^0.0.2+1
   flutter_spinkit: ^4.1.2
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
   http: ^0.12.0+4
   liquid_pull_to_refresh: ^2.0.0
   pie_chart: ^3.1.1
@@ -32,6 +34,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^1.10.4
+  hive_generator: ^0.8.2
   flutter_launcher_icons: "^0.7.3"
 
 flutter_icons:

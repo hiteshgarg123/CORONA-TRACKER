@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class MostAffectedWidget extends StatelessWidget {
   final List countryData;
 
-  const MostAffectedWidget({Key key, @required this.countryData})
-      : super(key: key);
+  const MostAffectedWidget({
+    Key key,
+    @required this.countryData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class MostAffectedWidget extends StatelessWidget {
                   height: 20,
                   width: 40,
                   child: Image.network(
-                    countryData[index]['countryInfo']['flag'],
+                    countryData[index].countryFlagUrl,
                     height: 25,
                   ),
                 ),
@@ -29,16 +31,20 @@ class MostAffectedWidget extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  countryData[index]['country'],
+                  countryData[index].country,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'No. of cases: ${countryData[index]['cases'].toString()}  ,  Deaths: ${countryData[index]['deaths'].toString()}',
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'No. of cases: ${countryData[index].cases}  ,  Deaths: ${countryData[index].deaths}',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
