@@ -25,12 +25,20 @@ class _IndiaStatsState extends State<IndiaStats> {
   Box<IndiaData> indiaDataBox;
   IndiaData indiaCachedData;
   IndiaData indiaData;
+  CommonBloc bloc;
 
   @override
   void initState() {
     super.initState();
+    bloc = Provider.of<CommonBloc>(context, listen: false);
     getCachedData();
     updateData();
+  }
+
+  @override
+  void dispose() {
+    bloc.disposeIndiaDataStream();
+    super.dispose();
   }
 
   void getCachedData() {
@@ -51,7 +59,6 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   Future<void> updateData() async {
     try {
-      final bloc = Provider.of<CommonBloc>(context, listen: false);
       await bloc.getIndiaData();
     } on SocketException catch (_) {
       showAlertDialog(
@@ -79,7 +86,6 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(

@@ -42,11 +42,14 @@ class CommonBloc {
   void setDataLoading(bool isLoading) =>
       _combinedDataLoadingController.sink.add(isLoading);
 
-  void dispose() {
+  void disposeWorldandCountryDataStreams() {
     _worldDataLoadingController.close();
     _countriesDataLoadingController.close();
-    _indiaDataLoadingController.close();
     _combinedDataLoadingController.close();
+  }
+
+  void disposeIndiaDataStream() {
+    _indiaDataLoadingController.close();
   }
 
   Future<bool> onWillPop(BuildContext context) async {
@@ -71,7 +74,9 @@ class CommonBloc {
       Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
       await worldDataBox.clear();
       await worldDataBox.add(worldData);
-      setWorldDataLoading(false);
+      if (!_worldDataLoadingController.isClosed) {
+        setWorldDataLoading(false);
+      }
     } else {
       throw response;
     }
@@ -88,7 +93,9 @@ class CommonBloc {
       Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
       await countriesDataBox.clear();
       await countriesDataBox.add(countriesData);
-      setCountriesDataLoading(false);
+      if (!_countriesDataLoadingController.isClosed) {
+        setCountriesDataLoading(false);
+      }
     } else {
       throw response;
     }
@@ -103,7 +110,9 @@ class CommonBloc {
       Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
       await indiaDataBox.clear();
       await indiaDataBox.add(indiaData);
-      setIndiaDataLoading(false);
+      if (!_indiaDataLoadingController.isClosed) {
+        setIndiaDataLoading(false);
+      }
     } else {
       throw response;
     }

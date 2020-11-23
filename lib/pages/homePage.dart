@@ -28,11 +28,18 @@ class _HomePageState extends State<HomePage> {
   List countriesCachedData;
   Box<WorldData> worldDataBox;
   Box countryDataBox;
+  final bloc = CommonBloc();
 
   void initState() {
     super.initState();
     getCachedData();
     updateData();
+  }
+
+  @override
+  void dispose() {
+    bloc.disposeWorldandCountryDataStreams();
+    super.dispose();
   }
 
   void getCachedData() {
