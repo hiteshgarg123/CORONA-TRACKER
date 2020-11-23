@@ -27,8 +27,17 @@ Future<void> showAlertDialog({
   return await showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text(titleText),
-      content: Text(contentText),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      title: Text(
+        titleText,
+      ),
+      content: SingleChildScrollView(
+        child: Text(
+          contentText,
+        ),
+      ),
       actions: [
         FlatButton(
           child: Text(defaultActionButtonText),
