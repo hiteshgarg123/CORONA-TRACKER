@@ -28,10 +28,11 @@ class _HomePageState extends State<HomePage> {
   List countriesCachedData;
   Box<WorldData> worldDataBox;
   Box countryDataBox;
-  final bloc = CommonBloc();
+  CommonBloc bloc;
 
   void initState() {
     super.initState();
+    bloc = Provider.of<CommonBloc>(context, listen: false);
     getCachedData();
     updateData();
   }
@@ -63,7 +64,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> updateData() async {
     try {
-      final bloc = Provider.of<CommonBloc>(context, listen: false);
       await bloc.getCombinedData();
     } on SocketException catch (_) {
       showAlertDialog(
@@ -99,7 +99,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildWorldWidePannel(
-    CommonBloc bloc,
     bool isLoading,
   ) {
     if (isLoading && worldDataBox.isEmpty) {
@@ -115,7 +114,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildMostAffectedCountriesPannel(
     bool isLoading,
-    CommonBloc bloc,
   ) {
     if (isLoading && countryDataBox.isEmpty) {
       return Padding(
@@ -128,7 +126,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildPieChartPannel(bool isLoading, CommonBloc bloc) {
+  Widget _buildPieChartPannel(bool isLoading) {
     if (isLoading && worldDataBox.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(50.0),
@@ -171,7 +169,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
     AppBar appbar = AppBar(
       title: const Text('COVID-19 TRACKER'),
     );
@@ -299,7 +296,6 @@ class _HomePageState extends State<HomePage> {
                       initialData: true,
                       builder: (context, snapshot) {
                         return _buildWorldWidePannel(
-                          bloc,
                           snapshot.data,
                         );
                       },
@@ -321,7 +317,6 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, snapshot) {
                         return _buildMostAffectedCountriesPannel(
                           snapshot.data,
-                          bloc,
                         );
                       },
                     ),
@@ -344,7 +339,6 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, snapshot) {
                         return _buildPieChartPannel(
                           snapshot.data,
-                          bloc,
                         );
                       },
                     ),

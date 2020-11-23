@@ -19,9 +19,11 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   List countriesData;
   List countriesCachedData;
   Box countryDataBox;
+  CommonBloc bloc;
 
   @override
   void initState() {
+    bloc = Provider.of<CommonBloc>(context, listen: false);
     super.initState();
     getCachedData();
     updateData();
@@ -45,7 +47,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 
   Future<void> updateData() async {
     try {
-      final bloc = Provider.of<CommonBloc>(context, listen: false);
       await bloc.getCountriesData();
     } on SocketException catch (_) {
       showAlertDialog(
@@ -72,7 +73,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   }
 
   Widget _buildContent(
-    CommonBloc bloc,
     bool isLoading,
     double height,
   ) {
@@ -94,7 +94,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -123,7 +122,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
         initialData: true,
         builder: (context, snapshot) {
           return _buildContent(
-            bloc,
             snapshot.data,
             height,
           );
