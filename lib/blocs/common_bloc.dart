@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/models/indiaData.dart';
@@ -11,8 +12,8 @@ import 'package:flutter/material.dart';
 
 class CommonBloc {
   final _worldDataLoadingController = StreamController<bool>.broadcast();
-  final _countriesDataLoadingController = StreamController<bool>();
-  final _indiaDataLoadingController = StreamController<bool>();
+  final _countriesDataLoadingController = StreamController<bool>.broadcast();
+  final _indiaDataLoadingController = StreamController<bool>.broadcast();
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
   WorldData worldData;
@@ -64,38 +65,48 @@ class CommonBloc {
 
   Future<void> getWorldWideData() async {
     final response = await http.get('https://corona.lmao.ninja/v2/all');
-    final _worldData = json.decode(response.body);
-    worldData = WorldData.fromJSON(_worldData);
-
-    Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
-    await worldDataBox.clear();
-    await worldDataBox.add(worldData);
-    setWorldDataLoading(false);
+    if (response.statusCode == HttpStatus.ok) {
+      final _worldData = json.decode(response.body);
+      worldData = WorldData.fromJSON(_worldData);
+      Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+      await worldDataBox.clear();
+      await worldDataBox.add(worldData);
+      setWorldDataLoading(false);
+    } else {
+      throw response;
+    }
   }
 
   Future<void> getCountriesData() async {
     http.Response response =
         await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
-    countriesData = (json.decode(response.body) as List)
-        .map<CountryData>((_countryData) => CountryData.fromJSON(_countryData))
-        .toList();
-
-    Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
-    await countriesDataBox.clear();
-    await countriesDataBox.add(countriesData);
-    setCountriesDataLoading(false);
+    if (response.statusCode == HttpStatus.ok) {
+      countriesData = (json.decode(response.body) as List)
+          .map<CountryData>(
+              (_countryData) => CountryData.fromJSON(_countryData))
+          .toList();
+      Box countriesDataBox = Hive.box(HiveBoxes.countriesData);
+      await countriesDataBox.clear();
+      await countriesDataBox.add(countriesData);
+      setCountriesDataLoading(false);
+    } else {
+      throw response;
+    }
   }
 
   Future<void> getIndiaData() async {
     final response = await http.get(
         'https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise');
-    final _indiaData = json.decode(response.body);
-    indiaData = IndiaData.fromJSON(_indiaData);
-
-    Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
-    await indiaDataBox.clear();
-    await indiaDataBox.add(indiaData);
-    setIndiaDataLoading(false);
+    if (response.statusCode == HttpStatus.ok) {
+      final _indiaData = json.decode(response.body);
+      indiaData = IndiaData.fromJSON(_indiaData);
+      Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+      await indiaDataBox.clear();
+      await indiaDataBox.add(indiaData);
+      setIndiaDataLoading(false);
+    } else {
+      throw response;
+    }
   }
 
   Future<void> getCombinedData() async {
