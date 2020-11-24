@@ -85,7 +85,7 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 
 ### Created & Maintained By
 
-[Pawan Kumar](https://github.com/hiteshgarg123) ([@imthepk](https://www.twitter.com/hiteshgarg285)) ([Instagram](https://www.instagram.com/hiteshgarg2855))
+[Hitesh Garg](https://github.com/hiteshgarg123) ([@imthepk](https://www.twitter.com/hiteshgarg285)) ([Instagram](https://www.instagram.com/hiteshgarg2855))
 
 ## Getting Started
 
