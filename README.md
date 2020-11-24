@@ -35,6 +35,8 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 ## To be implemented 📝
 
 - [x] Complete Data Caching Service
+- [ ] Date and Numbers formatting.
+- [ ] Last Refreshed/Updated.
 - [ ] Dark mode.
 - [ ] Top banner cutting in low ppi devices.
 - [ ] Fix margins(of chart) in low ppi devices.
@@ -72,6 +74,21 @@ flutter_launcher_icons: "^0.7.3"
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | <img src="screenshots/4.png" width="400"> | <img src="screenshots/5.png" width="400"> | <img src="screenshots/6.png" width="400"> |
 
-## Contact me 📧
+# Pull Requests
 
-#### Email : hiteshgarg285@gmail.com
+I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+
+1.  Match the document style as closely as possible.
+2.  Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
+3.  Pull requests _must_ be made against `master` branch for this particular repository.
+4.  Have fun!
+
+### Created & Maintained By
+
+[Pawan Kumar](https://github.com/hiteshgarg123) ([@imthepk](https://www.twitter.com/hiteshgarg285)) ([Instagram](https://www.instagram.com/hiteshgarg2855))
+
+## Getting Started
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
