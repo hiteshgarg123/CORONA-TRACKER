@@ -1,19 +1,16 @@
+import 'dart:io';
+
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/widgets/countryCard.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
+import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class CountryWiseStats extends StatefulWidget {
-  static Widget create(BuildContext context) {
-    return Provider<CommonBloc>(
-      create: (_) => CommonBloc(),
-      child: CountryWiseStats(),
-    );
-  }
-
   @override
   _CountryWiseStatsState createState() => _CountryWiseStatsState();
 }
@@ -22,9 +19,60 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   List countriesData;
   List countriesCachedData;
   Box countryDataBox;
+  CommonBloc bloc;
+
+  @override
+  void initState() {
+    bloc = Provider.of<CommonBloc>(context, listen: false);
+    super.initState();
+    getCachedData();
+    updateData();
+  }
+
+  Future<void> getCachedData() async {
+    try {
+      countryDataBox = Hive.box(HiveBoxes.countriesData);
+      countriesCachedData =
+          countryDataBox.isNotEmpty ? countryDataBox.values.last : null;
+    } catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Error Reading Data',
+        contentText:
+            'Can\'t read data from storage, Contact support or try again later',
+        defaultActionButtonText: 'Ok',
+      );
+    }
+  }
+
+  Future<void> updateData() async {
+    try {
+      await bloc.getCountriesData();
+    } on SocketException catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Connection error',
+        contentText: 'Could not retrieve latest data, Please try again later.',
+        defaultActionButtonText: 'Ok',
+      );
+    } on Response catch (response) {
+      showAlertDialog(
+        context: context,
+        titleText: response.statusCode.toString(),
+        contentText: 'Error Retrieving Data',
+        defaultActionButtonText: 'Ok',
+      );
+    } catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Unknown Error',
+        contentText: 'Please try again later.',
+        defaultActionButtonText: 'Ok',
+      );
+    }
+  }
 
   Widget _buildContent(
-    CommonBloc bloc,
     bool isLoading,
     double height,
   ) {
@@ -45,21 +93,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getCachedData();
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
-    bloc.getCountriesData();
-  }
-
-  Future<void> getCachedData() async {
-    countryDataBox = Hive.box(HiveBoxes.countriesData);
-    countriesCachedData = countryDataBox?.values?.last;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -88,7 +122,6 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
         initialData: true,
         builder: (context, snapshot) {
           return _buildContent(
-            bloc,
             snapshot.data,
             height,
           );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
@@ -7,19 +9,14 @@ import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
+import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
 class IndiaStats extends StatefulWidget {
-  static Widget create(BuildContext context) {
-    return Provider<CommonBloc>(
-      create: (_) => CommonBloc(),
-      child: IndiaStats(),
-    );
-  }
-
   @override
   _IndiaStatsState createState() => _IndiaStatsState();
 }
@@ -28,31 +25,75 @@ class _IndiaStatsState extends State<IndiaStats> {
   Box<IndiaData> indiaDataBox;
   IndiaData indiaCachedData;
   IndiaData indiaData;
+  CommonBloc bloc;
 
   @override
   void initState() {
     super.initState();
+    bloc = Provider.of<CommonBloc>(context, listen: false);
     getCachedData();
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
-    bloc.getIndiaData();
+    updateData();
+  }
+
+  @override
+  void dispose() {
+    bloc.disposeIndiaDataStream();
+    super.dispose();
   }
 
   void getCachedData() {
-    indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
-    indiaCachedData = indiaDataBox.isNotEmpty ? indiaDataBox.values.last : null;
+    try {
+      indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+      indiaCachedData =
+          indiaDataBox.isNotEmpty ? indiaDataBox.values.last : null;
+    } catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Error Reading Data',
+        contentText:
+            'Can\'t read data from storage, Contact support or try again later',
+        defaultActionButtonText: 'Ok',
+      );
+    }
+  }
+
+  Future<void> updateData() async {
+    try {
+      await bloc.getIndiaData();
+    } on SocketException catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Connection error',
+        contentText: 'Could not retrieve latest data, Please try again later.',
+        defaultActionButtonText: 'Ok',
+      );
+    } on Response catch (response) {
+      showAlertDialog(
+        context: context,
+        titleText: response.statusCode.toString(),
+        contentText: 'Error Retrieving Data',
+        defaultActionButtonText: 'Ok',
+      );
+    } catch (_) {
+      showAlertDialog(
+        context: context,
+        titleText: 'Unknown Error',
+        contentText: 'Please try again later.',
+        defaultActionButtonText: 'Ok',
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<CommonBloc>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text('India\'s Stats'),
       ),
       body: LiquidPullToRefresh(
+        onRefresh: () => updateData(),
         showChildOpacityTransition: false,
-        onRefresh: bloc.loadIndiaDataOnRefresh,
         height: 60.0,
         animSpeedFactor: 5.0,
         color: primaryBlack,
