@@ -28,13 +28,15 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 - Search Functionality (in countrywise stats and India's statewise stats).
 - You can directly donate to PMNRF by opening from App.
 
-## Recent Update
+## Recent Changes
 
 - Complete Data Caching with Hive Database.
+- Error Handling
 
 ## To be implemented 📝
 
 - [x] Complete Data Caching Service
+- [x] Error Handling.
 - [ ] Date and Numbers formatting.
 - [ ] Last Refreshed/Updated.
 - [ ] Dark mode.
