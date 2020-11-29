@@ -41,6 +41,11 @@ class AppTheme {
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
+        //For search delegate's textfield search text
+        headline6: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -83,6 +88,11 @@ class AppTheme {
           fontSize: 15.0,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
+        ),
+        //For search delegate's textfield search text
+        headline6: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
         ),
       ),
     );
