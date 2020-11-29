@@ -4,8 +4,11 @@ import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
+import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
+import 'package:covid_19_tracker/utils/app_theme.dart';
+import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
@@ -29,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   Box<WorldData> worldDataBox;
   Box countryDataBox;
   CommonBloc bloc;
+  var _darkModeEnabled = false;
 
   void initState() {
     super.initState();
@@ -167,20 +171,44 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<void> onThemeChange(ThemeNotifier themeNotifier) async {
+    _darkModeEnabled = !_darkModeEnabled;
+    themeNotifier.setTheme(
+        _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme());
+    await DarkThemePreference().setDarkTheme(_darkModeEnabled);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
+    _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
     AppBar appbar = AppBar(
       title: const Text('COVID-19 TRACKER'),
+      elevation: 2.0,
+      actions: [
+        AnimatedSwitcher(
+          duration: const Duration(seconds: 3),
+          child: IconButton(
+            icon: _darkModeEnabled
+                ? Icon(Icons.wb_sunny_outlined)
+                : Icon(Icons.nights_stay_outlined),
+            tooltip: 'Change Theme',
+            onPressed: () => onThemeChange(themeNotifier),
+          ),
+        ),
+      ],
     );
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: appbar,
       body: LiquidPullToRefresh(
         showChildOpacityTransition: false,
         onRefresh: () => updateData(),
         height: 60.0,
         animSpeedFactor: 5.0,
-        color: primaryBlack,
+        // backgroundColor: ,
+        color: Theme.of(context).highlightColor,
         child: Builder(
           builder: (BuildContext context) {
             return WillPopScope(
@@ -194,12 +222,16 @@ class _HomePageState extends State<HomePage> {
                       height: (height -
                               (appbar.preferredSize.height +
                                   MediaQuery.of(context).padding.top)) *
-                          0.12,
+                          0.1,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 2.0,
+                      ),
                       color: Colors.orange[100],
                       child: Text(
                         StaticData.quote,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                           color: Colors.orange[800],
                           fontWeight: FontWeight.bold,
@@ -217,12 +249,9 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const Text(
+                            Text(
                               'Worldwide',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.headline1,
                             ),
                             SizedBox(
                               width: 10.0,
@@ -244,17 +273,15 @@ class _HomePageState extends State<HomePage> {
                                     child: Container(
                                       padding: const EdgeInsets.all(7.0),
                                       decoration: BoxDecoration(
+                                        color: Theme.of(context).buttonColor,
                                         borderRadius:
                                             BorderRadius.circular(15.0),
-                                        color: primaryBlack,
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         'Regional',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline2,
                                       ),
                                     ),
                                   ),
@@ -272,15 +299,13 @@ class _HomePageState extends State<HomePage> {
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(15.0),
-                                        color: primaryBlack,
+                                        color: Theme.of(context).buttonColor,
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         'India\'s Stats ',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline2,
                                       ),
                                     ),
                                   ),
@@ -302,13 +327,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
-                      child: const Text(
+                        horizontal: 10.0,
+                        vertical: 10.0,
+                      ),
+                      child: Text(
                         'Most Affected Countries',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     StreamBuilder<bool>(
@@ -325,12 +349,9 @@ class _HomePageState extends State<HomePage> {
                         horizontal: 10.0,
                         vertical: 10.0,
                       ),
-                      child: const Text(
+                      child: Text(
                         'Statistics...',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     StreamBuilder<bool>(
@@ -342,24 +363,24 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     InfoWidget(),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
-                    Center(
-                      child: const Text(
-                        'WE STAND TOGETHER TO FIGHT WITH THIS',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 10.0,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'WE STAND TOGETHER TO FIGHT WITH THIS',
+                          style: Theme.of(context).textTheme.headline3,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
                     ),
                   ],
                 ),

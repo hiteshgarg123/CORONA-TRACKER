@@ -87,7 +87,7 @@ class _IndiaStatsState extends State<IndiaStats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text('India\'s Stats'),
       ),
@@ -157,15 +157,11 @@ class _IndiaStatsState extends State<IndiaStats> {
                     padding: const EdgeInsets.all(7.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
-                      color: primaryBlack,
+                      color: Theme.of(context).buttonColor,
                     ),
-                    child: const Text(
+                    child: Text(
                       'Statewise',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headline2,
                     ),
                   ),
                 ),
