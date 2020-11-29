@@ -16,6 +16,9 @@ class CountryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       elevation: 4.0,
       child: Container(
         margin: const EdgeInsets.symmetric(
@@ -92,7 +95,7 @@ class CountryCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey[400],
+                        color: Colors.grey,
                       ),
                     ),
                   ],
