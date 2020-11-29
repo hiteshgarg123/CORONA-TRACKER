@@ -15,6 +15,7 @@ class CountryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).cardColor,
       elevation: 4.0,
       child: Container(
         margin: const EdgeInsets.symmetric(
@@ -91,7 +92,7 @@ class CountryCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
+                        color: Colors.grey[400],
                       ),
                     ),
                   ],

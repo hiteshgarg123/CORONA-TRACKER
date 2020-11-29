@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/pages/faqsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +20,7 @@ class InfoWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: primaryBlack,
+                color: Theme.of(context).accentColor,
               ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
@@ -39,7 +38,7 @@ class InfoWidget extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 20,
                     ),
                   ),
                   Icon(
@@ -57,7 +56,7 @@ class InfoWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: primaryBlack,
+                color: Theme.of(context).accentColor,
               ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
@@ -107,7 +106,7 @@ class InfoWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: primaryBlack,
+                color: Theme.of(context).accentColor,
               ),
               padding: EdgeInsets.symmetric(
                 vertical: 12.0,
