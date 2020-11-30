@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
@@ -26,17 +27,30 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   WorldData worldCachedData;
   List countriesCachedData;
   Box<WorldData> worldDataBox;
   Box countryDataBox;
   CommonBloc bloc;
   var _darkModeEnabled = false;
+  AnimationController _animationController;
+  Animation<double> animation;
+  var circularAnimation = false;
 
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+    _animationController.forward();
     getCachedData();
     updateData();
   }
@@ -44,6 +58,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     bloc.disposeWorldandCountryDataStreams();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -173,8 +188,16 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> onThemeChange(ThemeNotifier themeNotifier) async {
     _darkModeEnabled = !_darkModeEnabled;
+    circularAnimation = true;
     themeNotifier.setTheme(
         _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme());
+    if (_animationController.status == AnimationStatus.forward ||
+        _animationController.status == AnimationStatus.completed) {
+      _animationController.reset();
+      _animationController.forward();
+    } else {
+      _animationController.forward();
+    }
     await DarkThemePreference().setDarkTheme(_darkModeEnabled);
   }
 
@@ -186,19 +209,28 @@ class _HomePageState extends State<HomePage> {
       title: const Text('COVID-19 TRACKER'),
       elevation: 2.0,
       actions: [
-        AnimatedSwitcher(
-          duration: const Duration(seconds: 3),
-          child: IconButton(
-            icon: _darkModeEnabled
-                ? Icon(Icons.wb_sunny_outlined)
-                : Icon(Icons.nights_stay_outlined),
-            tooltip: 'Change Theme',
-            onPressed: () => onThemeChange(themeNotifier),
-          ),
+        IconButton(
+          icon: _darkModeEnabled
+              ? Icon(Icons.wb_sunny_outlined)
+              : Icon(Icons.nights_stay_outlined),
+          onPressed: () => onThemeChange(themeNotifier),
         ),
       ],
     );
-    final height = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size;
+    return circularAnimation
+        ? CircularRevealAnimation(
+            centerOffset: Offset(
+              size.width,
+              size.height / 15,
+            ),
+            animation: animation,
+            child: _buildContent(context, appbar, size),
+          )
+        : _buildContent(context, appbar, size);
+  }
+
+  Scaffold _buildContent(BuildContext context, AppBar appbar, Size size) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appbar,
@@ -219,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(bottom: 5.0),
-                      height: (height -
+                      height: (size.height -
                               (appbar.preferredSize.height +
                                   MediaQuery.of(context).padding.top)) *
                           0.1,
