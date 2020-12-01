@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
@@ -28,70 +29,87 @@ class CountryCard extends StatelessWidget {
         height: height * 0.17,
         child: Row(
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    '${countryData[index].country}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(left: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    AutoSizeText(
+                      '${countryData[index].country}',
+                      maxLines: 2,
+                      minFontSize: 12.0,
+                      maxFontSize: 17.0,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 3.0),
-                    child: Image.network(
-                      "${countryData[index].countryFlagUrl}",
-                      height: 60.0,
-                      width: 75.0,
-                    ),
-                  )
-                ],
+                    Container(
+                      margin: const EdgeInsets.only(top: 3.0),
+                      child: Image.network(
+                        "${countryData[index].countryFlagUrl}",
+                        height: 60.0,
+                        width: 75.0,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
+              flex: 3,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
+                    AutoSizeText(
                       'CONFIRMED : ${countryData[index].cases}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       '[+${countryData[index].todayCases}]',
+                      maxLines: 1,
+                      minFontSize: 12.0,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       'ACTIVE : ${countryData[index].active}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       'RECOVERED : ${countryData[index].recovered}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       'DEATHS : ${countryData[index].deaths} [+${countryData[index].todayDeaths}]'
                           .toString(),
+                      maxLines: 1,
+                      minFontSize: 12.0,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,

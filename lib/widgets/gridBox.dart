@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class GridBox extends StatelessWidget {
@@ -6,14 +7,17 @@ class GridBox extends StatelessWidget {
   final String title;
   final String count;
 
-  const GridBox(
-      {Key key, this.boxColor, this.textColor, this.title, this.count})
-      : super(key: key);
+  const GridBox({
+    Key key,
+    @required this.boxColor,
+    @required this.textColor,
+    @required this.title,
+    @required this.count,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-
     return Container(
       margin: EdgeInsets.all(4),
       color: boxColor,
@@ -22,8 +26,10 @@ class GridBox extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          AutoSizeText(
             title,
+            maxLines: 1,
+            minFontSize: 16.0,
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,

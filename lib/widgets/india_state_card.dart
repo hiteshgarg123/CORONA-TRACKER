@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
 
@@ -43,40 +44,51 @@ class StateCard extends StatelessWidget {
                   Container(
                     width: 170,
                     margin: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
+                    child: AutoSizeText(
                       '${indiaStatewiseData[index]['state']}',
+                      minFontSize: 15,
+                      maxFontSize: 22.0,
+                      maxLines: 1,
                       style: TextStyle(
                         fontSize: 22.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     'CONFIRMED : ${indiaStatewiseData[index]['confirmed']}',
+                    maxLines: 1,
+                    minFontSize: 12.0,
                     style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     'ACTIVE : ${indiaStatewiseData[index]['active']}',
+                    maxLines: 1,
+                    minFontSize: 12.0,
                     style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     'RECOVERED : ${indiaStatewiseData[index]['recovered']}',
+                    maxLines: 1,
+                    minFontSize: 12.0,
                     style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     'DEATHS : ${indiaStatewiseData[index]['deaths']}',
+                    maxLines: 1,
+                    minFontSize: 12.0,
                     style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.bold,
