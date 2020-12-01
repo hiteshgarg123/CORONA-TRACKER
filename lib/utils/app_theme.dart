@@ -62,7 +62,7 @@ class AppTheme {
       disabledColor: Colors.grey,
       textSelectionColor: Colors.white,
       cardColor: Color(0xFF151515),
-      canvasColor: Colors.black,
+      canvasColor: Color(0xff0E1D36),
       brightness: Brightness.dark,
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
