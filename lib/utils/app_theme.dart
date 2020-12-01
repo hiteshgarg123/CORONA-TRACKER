@@ -2,25 +2,99 @@ import 'package:covid_19_tracker/data/data.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final darkTheme = ThemeData(
-    primarySwatch: Colors.grey,
-    primaryColor: primaryBlack,
-    brightness: Brightness.dark,
-    backgroundColor: const Color(0xFF212121),
-    accentColor: Colors.white,
-    accentIconTheme: IconThemeData(color: Colors.black),
-    dividerColor: Colors.black12,
-    fontFamily: 'Circular',
-  );
+  static ThemeData lightTheme() {
+    return ThemeData(
+      primaryColor: primaryBlack,
+      accentColor: primaryBlack,
+      fontFamily: 'Circular',
+      backgroundColor: Color(0xffF1F5FB),
+      indicatorColor: Color(0xffCBDCF8),
+      buttonColor: primaryBlack,
+      highlightColor: Color(0xffFCE192),
+      disabledColor: Colors.grey,
+      textSelectionColor: Colors.black,
+      cardColor: Colors.white,
+      canvasColor: Colors.grey[50],
+      brightness: Brightness.light,
+      textTheme: TextTheme(
+        //Used in Main Headings like "WorldWide", "Statistics" etc.
+        headline1: TextStyle(
+          fontSize: 25,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in some Bigger texts like "We stand together to fight with this".
+        headline2: TextStyle(
+          fontSize: 20,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in Custom Buttons like "Regional" , "India's Stats".
+        headline3: TextStyle(
+          fontSize: 16,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in Legend of PieChart Widget.
+        headline4: TextStyle(
+          fontSize: 15.0,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
+        //For search delegate's textfield search text
+        headline6: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
 
-  static final lightTheme = ThemeData(
-    primarySwatch: Colors.grey,
-    primaryColor: primaryBlack,
-    brightness: Brightness.light,
-    backgroundColor: const Color(0xFFE5E5E5),
-    accentColor: Colors.black,
-    accentIconTheme: IconThemeData(color: Colors.white),
-    dividerColor: Colors.white54,
-    fontFamily: 'Circular',
-  );
+  static ThemeData darkTheme() {
+    return ThemeData(
+      primaryColor: primaryBlack,
+      accentColor: Color(0xff4285F4),
+      backgroundColor: Color(0xff0E1D36),
+      fontFamily: 'Circular',
+      indicatorColor: Color(0xff0E1D36),
+      buttonColor: Colors.orange[100],
+      highlightColor: Color(0xff372901),
+      disabledColor: Colors.grey,
+      textSelectionColor: Colors.white,
+      cardColor: Color(0xFF151515),
+      canvasColor: Color(0xff0E1D36),
+      brightness: Brightness.dark,
+      textTheme: TextTheme(
+        //Used in Main Headings like "WorldWide", "Statistics" etc.
+        headline1: TextStyle(
+          fontSize: 25,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in some Bigger texts like "We stand together to fight with this".
+        headline2: TextStyle(
+          fontSize: 20,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in Custom Buttons like "Regional" , "India's Stats".
+        headline3: TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        //Used in Legend of PieChart Widget.
+        headline4: TextStyle(
+          fontSize: 15.0,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
+        //For search delegate's textfield search text
+        headline6: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
 }

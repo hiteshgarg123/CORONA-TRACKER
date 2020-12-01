@@ -96,7 +96,9 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        elevation: 2.0,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
@@ -187,5 +189,23 @@ class Search extends SearchDelegate {
         );
       },
     );
+  }
+
+  @override
+  String get searchFieldLabel => 'Enter a Country...';
+
+  @override
+  TextStyle get searchFieldStyle => TextStyle(color: Colors.white);
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final theme = ThemeData(
+      scaffoldBackgroundColor: Theme.of(context).backgroundColor,
+      primaryColor: Theme.of(context).primaryColor,
+      textTheme: Theme.of(context).textTheme,
+      backgroundColor: Theme.of(context).backgroundColor,
+      canvasColor: Theme.of(context).canvasColor,
+    );
+    return theme;
   }
 }

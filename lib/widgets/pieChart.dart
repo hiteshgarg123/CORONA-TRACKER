@@ -42,10 +42,7 @@ class PieChartWidget extends StatelessWidget {
         activeColor,
         deathsColor,
       ],
-      legendStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 15.0,
-      ),
+      legendStyle: Theme.of(context).textTheme.headline4,
       showLegends: showLegends,
       legendPosition: LegendPosition.right,
     );

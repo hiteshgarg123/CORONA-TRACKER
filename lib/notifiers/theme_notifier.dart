@@ -5,9 +5,9 @@ class ThemeNotifier extends ChangeNotifier {
 
   ThemeNotifier(this._themeData);
 
-  getTheme() => _themeData;
+  ThemeData getTheme() => _themeData;
 
-  setTheme(ThemeData themeData) {
+  setTheme(ThemeData themeData) async {
     _themeData = themeData;
     notifyListeners();
   }

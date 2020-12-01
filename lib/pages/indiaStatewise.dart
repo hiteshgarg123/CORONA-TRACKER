@@ -9,7 +9,9 @@ class IndiaStatewise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
@@ -20,6 +22,7 @@ class IndiaStatewise extends StatelessWidget {
                   context: context,
                   delegate: Search(
                     indiaData,
+                    height,
                   ),
                 );
               }
@@ -38,6 +41,7 @@ class IndiaStatewise extends StatelessWidget {
             return StateCard(
               index: index,
               indiaStatewiseData: indiaData.statewise,
+              height: height,
             );
           },
           itemCount: indiaData.statewise.length,
@@ -49,8 +53,9 @@ class IndiaStatewise extends StatelessWidget {
 
 class Search extends SearchDelegate {
   final IndiaData indiaData;
+  final double height;
 
-  Search(this.indiaData);
+  Search(this.indiaData, this.height);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -98,8 +103,26 @@ class Search extends SearchDelegate {
         return StateCard(
           index: index,
           indiaStatewiseData: suggestionList,
+          height: height,
         );
       },
+    );
+  }
+
+  @override
+  String get searchFieldLabel => 'Enter a State...';
+
+  @override
+  TextStyle get searchFieldStyle => TextStyle(color: Colors.white);
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData(
+      scaffoldBackgroundColor: Theme.of(context).backgroundColor,
+      primaryColor: Theme.of(context).primaryColor,
+      textTheme: Theme.of(context).textTheme,
+      backgroundColor: Theme.of(context).backgroundColor,
+      canvasColor: Theme.of(context).backgroundColor,
     );
   }
 }
