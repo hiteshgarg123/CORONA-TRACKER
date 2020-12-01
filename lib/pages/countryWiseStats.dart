@@ -199,12 +199,13 @@ class Search extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return ThemeData(
+    final theme = ThemeData(
       scaffoldBackgroundColor: Theme.of(context).backgroundColor,
       primaryColor: Theme.of(context).primaryColor,
       textTheme: Theme.of(context).textTheme,
       backgroundColor: Theme.of(context).backgroundColor,
-      canvasColor: Theme.of(context).backgroundColor,
+      canvasColor: Theme.of(context).canvasColor,
     );
+    return theme;
   }
 }

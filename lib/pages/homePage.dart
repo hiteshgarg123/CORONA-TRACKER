@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
@@ -42,8 +43,10 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
+    getCachedData();
+    updateData();
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
     animation = CurvedAnimation(
@@ -51,8 +54,6 @@ class _HomePageState extends State<HomePage>
       curve: Curves.easeInOut,
     );
     _animationController.forward();
-    getCachedData();
-    updateData();
   }
 
   @override
@@ -191,6 +192,7 @@ class _HomePageState extends State<HomePage>
     circularAnimation = true;
     themeNotifier.setTheme(
         _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme());
+    await DarkThemePreference().setDarkTheme(_darkModeEnabled);
     if (_animationController.status == AnimationStatus.forward ||
         _animationController.status == AnimationStatus.completed) {
       _animationController.reset();
@@ -198,25 +200,12 @@ class _HomePageState extends State<HomePage>
     } else {
       _animationController.forward();
     }
-    await DarkThemePreference().setDarkTheme(_darkModeEnabled);
   }
 
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
     _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
-    AppBar appbar = AppBar(
-      title: const Text('COVID-19 TRACKER'),
-      elevation: 2.0,
-      actions: [
-        IconButton(
-          icon: _darkModeEnabled
-              ? Icon(Icons.wb_sunny_outlined)
-              : Icon(Icons.nights_stay_outlined),
-          onPressed: () => onThemeChange(themeNotifier),
-        ),
-      ],
-    );
     final size = MediaQuery.of(context).size;
     return circularAnimation
         ? CircularRevealAnimation(
@@ -225,22 +214,32 @@ class _HomePageState extends State<HomePage>
               size.height / 15,
             ),
             animation: animation,
-            child: _buildContent(context, appbar, size),
+            child: _buildContent(size, themeNotifier),
           )
-        : _buildContent(context, appbar, size);
+        : _buildContent(size, themeNotifier);
   }
 
-  Scaffold _buildContent(BuildContext context, AppBar appbar, Size size) {
+  Scaffold _buildContent(Size size, ThemeNotifier themeNotifier) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: appbar,
+      appBar: AppBar(
+        title: const Text('COVID-19 TRACKER'),
+        elevation: 2.0,
+        actions: [
+          IconButton(
+            icon: _darkModeEnabled
+                ? Icon(Icons.wb_sunny_outlined)
+                : Icon(Icons.nights_stay_outlined),
+            onPressed: () => onThemeChange(themeNotifier),
+          ),
+        ],
+      ),
       body: LiquidPullToRefresh(
         showChildOpacityTransition: false,
         onRefresh: () => updateData(),
         height: 60.0,
         animSpeedFactor: 5.0,
-        // backgroundColor: ,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).accentColor,
         child: Builder(
           builder: (BuildContext context) {
             return WillPopScope(
@@ -251,18 +250,17 @@ class _HomePageState extends State<HomePage>
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(bottom: 5.0),
-                      height: (size.height -
-                              (appbar.preferredSize.height +
-                                  MediaQuery.of(context).padding.top)) *
-                          0.1,
+                      height: size.height * 0.1,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10.0,
                         vertical: 2.0,
                       ),
                       color: Colors.orange[100],
-                      child: Text(
+                      child: AutoSizeText(
                         StaticData.quote,
+                        maxLines: 3,
+                        minFontSize: 12.0,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           color: Colors.orange[800],
@@ -281,11 +279,13 @@ class _HomePageState extends State<HomePage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            AutoSizeText(
                               'Worldwide',
+                              maxLines: 1,
+                              minFontSize: 18.0,
                               style: Theme.of(context).textTheme.headline1,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
                             Expanded(
@@ -309,8 +309,10 @@ class _HomePageState extends State<HomePage>
                                         borderRadius:
                                             BorderRadius.circular(15.0),
                                       ),
-                                      child: Text(
+                                      child: AutoSizeText(
                                         'Regional',
+                                        maxLines: 1,
+                                        minFontSize: 14.0,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline2,
@@ -333,8 +335,10 @@ class _HomePageState extends State<HomePage>
                                             BorderRadius.circular(15.0),
                                         color: Theme.of(context).buttonColor,
                                       ),
-                                      child: Text(
+                                      child: AutoSizeText(
                                         'India\'s Stats ',
+                                        maxLines: 1,
+                                        minFontSize: 14.0,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline2,
@@ -362,8 +366,10 @@ class _HomePageState extends State<HomePage>
                         horizontal: 10.0,
                         vertical: 10.0,
                       ),
-                      child: Text(
+                      child: AutoSizeText(
                         'Most Affected Countries',
+                        maxLines: 1,
+                        minFontSize: 18.0,
                         style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
@@ -381,8 +387,10 @@ class _HomePageState extends State<HomePage>
                         horizontal: 10.0,
                         vertical: 10.0,
                       ),
-                      child: Text(
+                      child: AutoSizeText(
                         'Statistics...',
+                        maxLines: 1,
+                        minFontSize: 18.0,
                         style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
@@ -408,8 +416,10 @@ class _HomePageState extends State<HomePage>
                         vertical: 10.0,
                       ),
                       child: Center(
-                        child: Text(
+                        child: AutoSizeText(
                           'WE STAND TOGETHER TO FIGHT WITH THIS',
+                          maxLines: 1,
+                          minFontSize: 12,
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ),

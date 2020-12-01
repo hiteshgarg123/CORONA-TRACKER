@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
@@ -96,7 +96,7 @@ class _IndiaStatsState extends State<IndiaStats> {
         showChildOpacityTransition: false,
         height: 60.0,
         animSpeedFactor: 5.0,
-        color: primaryBlack,
+        color: Theme.of(context).accentColor,
         child: StreamBuilder<bool>(
           stream: bloc.indiaDataLoadingStream,
           initialData: true,
@@ -133,12 +133,11 @@ class _IndiaStatsState extends State<IndiaStats> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text(
+                AutoSizeText(
                   'Overall Stats...',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  maxLines: 1,
+                  minFontSize: 20.0,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -159,8 +158,10 @@ class _IndiaStatsState extends State<IndiaStats> {
                       borderRadius: BorderRadius.circular(15.0),
                       color: Theme.of(context).buttonColor,
                     ),
-                    child: Text(
+                    child: AutoSizeText(
                       'Statewise',
+                      maxLines: 1,
+                      minFontSize: 14.0,
                       style: Theme.of(context).textTheme.headline2,
                     ),
                   ),
@@ -183,13 +184,13 @@ class _IndiaStatsState extends State<IndiaStats> {
                 GridBox(
                   title: 'TOTAL CASES',
                   count: indiaData.confirmed,
-                  boxColor: Colors.red[300].withOpacity(0.80),
+                  boxColor: Colors.red[200],
                   textColor: Colors.red[900],
                 ),
                 GridBox(
                   title: 'ACTIVE',
                   count: indiaData.active,
-                  boxColor: Colors.blue[300],
+                  boxColor: Colors.blue[200],
                   textColor: Colors.blue[900],
                 ),
                 GridBox(
@@ -201,7 +202,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                 GridBox(
                   title: 'RECOVERED',
                   count: indiaData.recovered,
-                  boxColor: Colors.green[400],
+                  boxColor: Colors.green[300],
                   textColor: Colors.green[900],
                 ),
               ],
@@ -210,12 +211,11 @@ class _IndiaStatsState extends State<IndiaStats> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-            child: const Text(
+            child: AutoSizeText(
               'Visuals',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
+              maxLines: 1,
+              minFontSize: 20.0,
+              style: Theme.of(context).textTheme.headline1,
             ),
           ),
           Card(
@@ -243,22 +243,21 @@ class _IndiaStatsState extends State<IndiaStats> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5.0,
           ),
           InfoWidget(),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
-              child: const Text(
+              child: AutoSizeText(
                 'WE STAND TOGETHER TO FIGHT WITH THIS',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                ),
+                maxLines: 1,
+                minFontSize: 12.0,
+                style: Theme.of(context).textTheme.headline3,
               ),
             ),
           ),
