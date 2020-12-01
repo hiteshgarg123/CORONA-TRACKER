@@ -16,6 +16,9 @@ class AppTheme {
       cardColor: Colors.white,
       canvasColor: Colors.grey[50],
       brightness: Brightness.light,
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: primaryBlack,
+      ),
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
         headline1: TextStyle(
@@ -64,6 +67,9 @@ class AppTheme {
       cardColor: Color(0xFF151515),
       canvasColor: Color(0xff0E1D36),
       brightness: Brightness.dark,
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: Colors.orange[100],
+      ),
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
         headline1: TextStyle(
