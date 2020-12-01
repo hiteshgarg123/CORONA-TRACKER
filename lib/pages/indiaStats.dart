@@ -97,15 +97,17 @@ class _IndiaStatsState extends State<IndiaStats> {
         height: 60.0,
         animSpeedFactor: 5.0,
         color: primaryBlack,
-        child: StreamBuilder<bool>(
-          stream: bloc.indiaDataLoadingStream,
-          initialData: true,
-          builder: (context, snapshot) {
-            return _buildContent(
-              bloc,
-              snapshot.data,
-            );
-          },
+        child: SingleChildScrollView(
+          child: StreamBuilder<bool>(
+            stream: bloc.indiaDataLoadingStream,
+            initialData: true,
+            builder: (context, snapshot) {
+              return _buildContent(
+                bloc,
+                snapshot.data,
+              );
+            },
+          ),
         ),
       ),
     );
