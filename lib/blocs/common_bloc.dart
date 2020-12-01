@@ -123,7 +123,9 @@ class CommonBloc {
       getWorldWideData(),
       getCountriesData(),
     ]);
-    setDataLoading(false);
+    if (!_combinedDataLoadingController.isClosed) {
+      setDataLoading(false);
+    }
   }
 
   Future<void> loadIndiaDataOnRefresh() async {
