@@ -96,7 +96,7 @@ class _IndiaStatsState extends State<IndiaStats> {
         showChildOpacityTransition: false,
         height: 60.0,
         animSpeedFactor: 5.0,
-        color: primaryBlack,
+        color: Theme.of(context).accentColor,
         child: SingleChildScrollView(
           child: StreamBuilder<bool>(
             stream: bloc.indiaDataLoadingStream,
