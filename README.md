@@ -32,14 +32,15 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 - Complete Data Caching with Hive Database.
 - Error Handling
+- Beautiful Dark Theme with Cool Animation
 
 ## To be implemented 📝
 
 - [x] Complete Data Caching Service
 - [x] Error Handling.
+- [x] Dark mode.
 - [ ] Date and Numbers formatting.
 - [ ] Last Refreshed/Updated.
-- [ ] Dark mode.
 - [ ] Top banner cutting in low ppi devices.
 - [ ] Fix margins(of chart) in low ppi devices.
 
@@ -58,6 +59,8 @@ pie_chart: ^3.1.1
 provider: ^4.1.3
 shared_preferences: ^0.5.6+3
 url_launcher: ^5.4.2
+circular_reveal_animation: ^1.1.5
+auto_size_text: ^2.1.0
 build_runner: ^1.10.4
 hive_generator: ^0.8.2
 flutter_launcher_icons: "^0.7.3"
@@ -66,17 +69,29 @@ flutter_launcher_icons: "^0.7.3"
 </p>
 </details>
 
-## Preview 📸
+# Preview 📸
 
-|                                           |                                           |                                           |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| <img src="screenshots/1.png" width="400"> | <img src="screenshots/2.png" width="400"> | <img src="screenshots/3.png" width="400"> |
+## Light Theme 🌞
 
-|                                           |                                           |                                           |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| <img src="screenshots/4.png" width="400"> | <img src="screenshots/5.png" width="400"> | <img src="screenshots/6.png" width="400"> |
+|                                                       |                                                       |                                                       |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| <img src="screenshots/light_theme/1.jpg" width="400"> | <img src="screenshots/light_theme/2.jpg" width="400"> | <img src="screenshots/light_theme/3.jpg" width="400"> |
 
-# Pull Requests
+|                                                       |                                                       |                                                       |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| <img src="screenshots/light_theme/4.jpg" width="400"> | <img src="screenshots/light_theme/5.jpg" width="400"> | <img src="screenshots/light_theme/6.jpg" width="400"> |
+
+## Dark Theme 🌑
+
+|                                                      |                                                      |                                                      |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| <img src="screenshots/dark_theme/1.jpg" width="400"> | <img src="screenshots/dark_theme/2.jpg" width="400"> | <img src="screenshots/dark_theme/3.jpg" width="400"> |
+
+|                                                      |                                                      |                                                      |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| <img src="screenshots/dark_theme/4.jpg" width="400"> | <img src="screenshots/dark_theme/5.jpg" width="400"> | <img src="screenshots/dark_theme/6.jpg" width="400"> |
+
+## Pull Requests
 
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
 
