@@ -252,18 +252,17 @@ class _IndiaStatsState extends State<IndiaStats> {
           const SizedBox(
             height: 10.0,
           ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: AutoSizeText(
-                'WE STAND TOGETHER TO FIGHT WITH THIS',
-                maxLines: 1,
-                minFontSize: 12.0,
-                style: Theme.of(context).textTheme.headline3,
-              ),
+          Container(
+            height: 20.0,
+            alignment: Alignment.bottomCenter,
+            child: AutoSizeText(
+              'WE STAND TOGETHER TO FIGHT WITH THIS',
+              maxLines: 1,
+              minFontSize: 12.0,
+              style: Theme.of(context).textTheme.headline3,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
         ],

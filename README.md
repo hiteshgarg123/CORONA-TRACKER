@@ -75,21 +75,21 @@ flutter_launcher_icons: "^0.7.3"
 
 |                                                       |                                                       |                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| <img src="screenshots/light_theme/1.jpg" width="400"> | <img src="screenshots/light_theme/2.jpg" width="400"> | <img src="screenshots/light_theme/3.jpg" width="400"> |
+| <img src="screenshots/light_theme/1.png" width="400"> | <img src="screenshots/light_theme/2.png" width="400"> | <img src="screenshots/light_theme/3.png" width="400"> |
 
 |                                                       |                                                       |                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| <img src="screenshots/light_theme/4.jpg" width="400"> | <img src="screenshots/light_theme/5.jpg" width="400"> | <img src="screenshots/light_theme/6.jpg" width="400"> |
+| <img src="screenshots/light_theme/4.png" width="400"> | <img src="screenshots/light_theme/5.png" width="400"> | <img src="screenshots/light_theme/6.png" width="400"> |
 
 ## Dark Theme 🌑
 
 |                                                      |                                                      |                                                      |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| <img src="screenshots/dark_theme/1.jpg" width="400"> | <img src="screenshots/dark_theme/2.jpg" width="400"> | <img src="screenshots/dark_theme/3.jpg" width="400"> |
+| <img src="screenshots/dark_theme/1.png" width="400"> | <img src="screenshots/dark_theme/2.png" width="400"> | <img src="screenshots/dark_theme/3.png" width="400"> |
 
 |                                                      |                                                      |                                                      |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| <img src="screenshots/dark_theme/4.jpg" width="400"> | <img src="screenshots/dark_theme/5.jpg" width="400"> | <img src="screenshots/dark_theme/6.jpg" width="400"> |
+| <img src="screenshots/dark_theme/4.png" width="400"> | <img src="screenshots/dark_theme/5.png" width="400"> | <img src="screenshots/dark_theme/6.png" width="400"> |
 
 ## Pull Requests
 

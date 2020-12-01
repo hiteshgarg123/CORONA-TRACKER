@@ -26,79 +26,82 @@ class StateCard extends StatelessWidget {
           horizontal: 10.0,
           vertical: 10.0,
         ),
-        height: height * 0.17,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.fromLTRB(
-                20,
-                15,
-                15,
-                15,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    width: 170,
-                    margin: const EdgeInsets.only(bottom: 10.0),
-                    child: AutoSizeText(
-                      '${indiaStatewiseData[index]['state']}',
-                      minFontSize: 15,
-                      maxFontSize: 22.0,
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(
+                  20,
+                  15,
+                  15,
+                  15,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 170,
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      child: AutoSizeText(
+                        '${indiaStatewiseData[index]['state']}',
+                        minFontSize: 15,
+                        maxFontSize: 22.0,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  AutoSizeText(
-                    'CONFIRMED : ${indiaStatewiseData[index]['confirmed']}',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                    AutoSizeText(
+                      'CONFIRMED : ${indiaStatewiseData[index]['confirmed']}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
                     ),
-                  ),
-                  AutoSizeText(
-                    'ACTIVE : ${indiaStatewiseData[index]['active']}',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                    AutoSizeText(
+                      'ACTIVE : ${indiaStatewiseData[index]['active']}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     ),
-                  ),
-                  AutoSizeText(
-                    'RECOVERED : ${indiaStatewiseData[index]['recovered']}',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                    AutoSizeText(
+                      'RECOVERED : ${indiaStatewiseData[index]['recovered']}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
                     ),
-                  ),
-                  AutoSizeText(
-                    'DEATHS : ${indiaStatewiseData[index]['deaths']}',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                    AutoSizeText(
+                      'DEATHS : ${indiaStatewiseData[index]['deaths']}',
+                      maxLines: 1,
+                      minFontSize: 12.0,
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Expanded(
+              flex: 2,
               child: Container(
                 padding: const EdgeInsets.all(5.0),
                 margin: const EdgeInsets.only(right: 10.0),
