@@ -11,6 +11,7 @@ import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
 import 'package:covid_19_tracker/utils/app_theme.dart';
 import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
+import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
@@ -110,26 +111,18 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  Widget _buildProgressIndicator() {
-    return Container(
-      height: 100.0,
-      child: SpinKitFadingCircle(
-        color: primaryBlack,
-      ),
-    );
-  }
-
   Widget _buildWorldWidePannel(
     bool isLoading,
   ) {
     if (isLoading && (worldDataBox?.isEmpty ?? false)) {
       return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.width * 0.12,
+        ),
+        child: CustomProgressIndicator(),
       );
     }
     return WorldWideWidget(
-      //TODO! CHECK THIS
       worldData: isLoading ? worldCachedData : bloc.worldData,
     );
   }
@@ -139,8 +132,10 @@ class _HomePageState extends State<HomePage>
   ) {
     if (isLoading && countryDataBox.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.width * 0.12,
+        ),
+        child: CustomProgressIndicator(),
       );
     }
     return MostAffectedWidget(
@@ -151,8 +146,10 @@ class _HomePageState extends State<HomePage>
   Widget _buildPieChartPannel(bool isLoading) {
     if (isLoading && worldDataBox.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.width * 0.12,
+        ),
+        child: CustomProgressIndicator(),
       );
     }
     return Card(
@@ -209,6 +206,7 @@ class _HomePageState extends State<HomePage>
     final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
     _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
     final size = MediaQuery.of(context).size;
+    print('${size.height}  ${size.width * 0.12}');
     return circularAnimation
         ? CircularRevealAnimation(
             centerOffset: Offset(

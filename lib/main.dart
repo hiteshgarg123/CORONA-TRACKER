@@ -22,6 +22,8 @@ Future<void> main() async {
   await Hive.openBox(HiveBoxes.worldData);
   await Hive.openBox(HiveBoxes.countriesData);
   await Hive.openBox(HiveBoxes.stateData);
+  await Hive.box(HiveBoxes.worldData).clear();
+  await Hive.box(HiveBoxes.countriesData).clear();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

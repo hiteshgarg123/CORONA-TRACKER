@@ -62,14 +62,15 @@ class _IndiaStatsState extends State<IndiaStats> {
     try {
       await bloc.getIndiaData();
     } on SocketException catch (_) {
-      showAlertDialog(
+      await showAlertDialog(
         context: context,
         titleText: 'Connection error',
-        contentText: 'Could not retrieve latest data, Please try again later.',
+        contentText:
+            'Could not retrieve latest data, Check your internet connection.',
         defaultActionButtonText: 'Ok',
       );
     } on Response catch (response) {
-      showAlertDialog(
+      await showAlertDialog(
         context: context,
         titleText: response.statusCode.toString(),
         contentText: 'Error Retrieving Data',
@@ -116,8 +117,8 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   Widget _buildContent(CommonBloc bloc, bool isLoading) {
     if (isLoading && (indiaDataBox?.isEmpty ?? false)) {
-      return Padding(
-        padding: const EdgeInsets.all(50.0),
+      return Container(
+        height: MediaQuery.of(context).size.height,
         child: CustomProgressIndicator(),
       );
     }
