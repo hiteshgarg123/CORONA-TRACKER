@@ -33,12 +33,12 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   WorldData worldCachedData;
   List countriesCachedData;
-  Box<WorldData> worldDataBox;
+  Box worldDataBox;
   Box countryDataBox;
   CommonBloc bloc;
-  var _darkModeEnabled = false;
   AnimationController _animationController;
   Animation<double> animation;
+  var _darkModeEnabled = false;
   var circularAnimation = false;
 
   void initState() {
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage>
 
   void getCachedData() {
     try {
-      worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+      worldDataBox = Hive.box(HiveBoxes.worldData);
       countryDataBox = Hive.box(HiveBoxes.countriesData);
       worldCachedData =
           worldDataBox.isNotEmpty ? worldDataBox.values.last : null;
@@ -122,13 +122,14 @@ class _HomePageState extends State<HomePage>
   Widget _buildWorldWidePannel(
     bool isLoading,
   ) {
-    if (isLoading && worldDataBox.isEmpty) {
+    if (isLoading && (worldDataBox?.isEmpty ?? false)) {
       return Padding(
         padding: const EdgeInsets.all(50.0),
         child: _buildProgressIndicator(),
       );
     }
     return WorldWideWidget(
+      //TODO! CHECK THIS
       worldData: isLoading ? worldCachedData : bloc.worldData,
     );
   }

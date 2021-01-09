@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
@@ -23,9 +23,9 @@ class IndiaStats extends StatefulWidget {
 }
 
 class _IndiaStatsState extends State<IndiaStats> {
-  Box<IndiaData> indiaDataBox;
-  IndiaData indiaCachedData;
-  IndiaData indiaData;
+  Box indiaDataBox;
+  List indiaCachedData;
+  List indiaData;
   CommonBloc bloc;
 
   @override
@@ -44,7 +44,7 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   void getCachedData() {
     try {
-      indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+      indiaDataBox = Hive.box(HiveBoxes.stateData);
       indiaCachedData =
           indiaDataBox.isNotEmpty ? indiaDataBox.values.last : null;
     } catch (_) {
@@ -115,7 +115,7 @@ class _IndiaStatsState extends State<IndiaStats> {
   }
 
   Widget _buildContent(CommonBloc bloc, bool isLoading) {
-    if (isLoading && indiaDataBox.isEmpty) {
+    if (isLoading && (indiaDataBox?.isEmpty ?? false)) {
       return Padding(
         padding: const EdgeInsets.all(50.0),
         child: CustomProgressIndicator(),
@@ -172,25 +172,25 @@ class _IndiaStatsState extends State<IndiaStats> {
               children: <Widget>[
                 GridBox(
                   title: 'TOTAL CASES',
-                  count: indiaData.confirmed,
+                  count: indiaData[0].confirmed,
                   boxColor: Colors.red[200],
                   textColor: Colors.red[900],
                 ),
                 GridBox(
                   title: 'ACTIVE',
-                  count: indiaData.active,
+                  count: indiaData[0].active,
                   boxColor: Colors.blue[200],
                   textColor: Colors.blue[900],
                 ),
                 GridBox(
                   title: 'DEATHS',
-                  count: indiaData.deaths,
+                  count: indiaData[0].deaths,
                   boxColor: Colors.grey,
                   textColor: Colors.grey[900],
                 ),
                 GridBox(
                   title: 'RECOVERED',
-                  count: indiaData.recovered,
+                  count: indiaData[0].recovered,
                   boxColor: Colors.green[300],
                   textColor: Colors.green[900],
                 ),
@@ -221,10 +221,10 @@ class _IndiaStatsState extends State<IndiaStats> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
               child: PieChartWidget(
-                total: double.tryParse(indiaData.confirmed),
-                active: double.tryParse(indiaData.active),
-                recovered: double.tryParse(indiaData.recovered),
-                deaths: double.tryParse(indiaData.deaths),
+                total: double.tryParse(indiaData[0].confirmed),
+                active: double.tryParse(indiaData[0].active),
+                recovered: double.tryParse(indiaData[0].recovered),
+                deaths: double.tryParse(indiaData[0].deaths),
                 totalColor: Colors.red[400],
                 activeColor: Colors.blue[400],
                 recoveredColor: Colors.green[300],

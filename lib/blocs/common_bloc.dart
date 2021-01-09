@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
-import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +18,7 @@ class CommonBloc {
 
   WorldData worldData;
   List<CountryData> countriesData;
-  IndiaData indiaData;
+  List<StatewiseData> indiaData;
 
   final snackBar = const SnackBar(
     content: const Text('Press back again to exit'),
@@ -67,11 +67,13 @@ class CommonBloc {
   }
 
   Future<void> getWorldWideData() async {
-    final response = await http.get('https://corona.lmao.ninja/v2/all');
+    final response = await http.get(
+      'https://corona.lmao.ninja/v2/all',
+    );
     if (response.statusCode == HttpStatus.ok) {
       final _worldData = json.decode(response.body);
       worldData = WorldData.fromJSON(_worldData);
-      Box<WorldData> worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+      Box worldDataBox = Hive.box(HiveBoxes.worldData);
       await worldDataBox.clear();
       await worldDataBox.add(worldData);
       if (!_worldDataLoadingController.isClosed) {
@@ -83,8 +85,9 @@ class CommonBloc {
   }
 
   Future<void> getCountriesData() async {
-    http.Response response =
-        await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
+    http.Response response = await http.get(
+      'https://corona.lmao.ninja/v2/countries?sort=cases',
+    );
     if (response.statusCode == HttpStatus.ok) {
       countriesData = (json.decode(response.body) as List)
           .map<CountryData>(
@@ -103,11 +106,16 @@ class CommonBloc {
 
   Future<void> getIndiaData() async {
     final response = await http.get(
-        'https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise');
+      'https://api.covid19india.org/data.json',
+    );
     if (response.statusCode == HttpStatus.ok) {
-      final _indiaData = json.decode(response.body);
-      indiaData = IndiaData.fromJSON(_indiaData);
-      Box<IndiaData> indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+      final _indiaData = ((json.decode(response.body))['statewise'] as List);
+      indiaData = _indiaData
+          .map<StatewiseData>(
+            (e) => StatewiseData.fromJson(e),
+          )
+          .toList();
+      Box indiaDataBox = Hive.box(HiveBoxes.stateData);
       await indiaDataBox.clear();
       await indiaDataBox.add(indiaData);
       if (!_indiaDataLoadingController.isClosed) {
