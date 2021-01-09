@@ -36,13 +36,14 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## To be implemented 📝
 
-- [x] Complete Data Caching Service
+- [x] Complete Data Caching Service.
 - [x] Error Handling.
 - [x] Dark mode.
+- [x] Top banner cutting in some devices [FIXED].
+- [x] Pie Charts cutting from right side in some devices [FIXED].
 - [ ] Date and Numbers formatting.
 - [ ] Last Refreshed/Updated.
-- [ ] Top banner cutting in low ppi devices.
-- [ ] Fix margins(of chart) in low ppi devices.
+- [ ] Top buttons `Regional` and `India Stats` not fitting on screen in some devices.
 
 ## Dependencies ✨
 

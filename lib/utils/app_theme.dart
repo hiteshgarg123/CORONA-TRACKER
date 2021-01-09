@@ -19,6 +19,10 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: primaryBlack,
       ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: primaryBlack,
+        highlightColor: Colors.grey[850],
+      ),
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
         headline1: TextStyle(
@@ -69,6 +73,10 @@ class AppTheme {
       brightness: Brightness.dark,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: Colors.orange[100],
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.orange[100],
+        highlightColor: Colors.orange[200],
       ),
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.

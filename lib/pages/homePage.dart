@@ -11,6 +11,7 @@ import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
 import 'package:covid_19_tracker/utils/app_theme.dart';
 import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
+import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
@@ -271,7 +272,7 @@ class _HomePageState extends State<HomePage>
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 10.0,
+                        vertical: 5.0,
                         horizontal: 10.0,
                       ),
                       child: Container(
@@ -279,22 +280,27 @@ class _HomePageState extends State<HomePage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            AutoSizeText(
-                              'Worldwide',
-                              maxLines: 1,
-                              minFontSize: 18.0,
-                              style: Theme.of(context).textTheme.headline1,
+                            Expanded(
+                              flex: 4,
+                              child: AutoSizeText(
+                                'Worldwide',
+                                maxLines: 1,
+                                minFontSize: 18.0,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
                             ),
                             const SizedBox(
                               width: 10.0,
                             ),
                             Expanded(
+                              flex: 7,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  GestureDetector(
-                                    onTap: () => Navigator.push(
+                                  CustomRaisedButton(
+                                    title: 'Regional',
+                                    onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
@@ -302,46 +308,15 @@ class _HomePageState extends State<HomePage>
                                         },
                                       ),
                                     ),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(7.0),
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).buttonColor,
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: AutoSizeText(
-                                        'Regional',
-                                        maxLines: 1,
-                                        minFontSize: 14.0,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline2,
-                                      ),
-                                    ),
                                   ),
-                                  GestureDetector(
-                                    onTap: () => Navigator.push(
+                                  CustomRaisedButton(
+                                    title: 'India\'s Stats',
+                                    onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
                                           return IndiaStats();
                                         },
-                                      ),
-                                    ),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(7.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                        color: Theme.of(context).buttonColor,
-                                      ),
-                                      child: AutoSizeText(
-                                        'India\'s Stats ',
-                                        maxLines: 1,
-                                        minFontSize: 14.0,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline2,
                                       ),
                                     ),
                                   ),

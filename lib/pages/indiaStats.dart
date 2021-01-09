@@ -6,6 +6,7 @@ import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
+import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
@@ -141,30 +142,16 @@ class _IndiaStatsState extends State<IndiaStats> {
                   minFontSize: 20.0,
                   style: Theme.of(context).textTheme.headline1,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return IndiaStatewise(
-                            indiaData: indiaData,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(7.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Theme.of(context).buttonColor,
-                    ),
-                    child: AutoSizeText(
-                      'Statewise',
-                      maxLines: 1,
-                      minFontSize: 14.0,
-                      style: Theme.of(context).textTheme.headline2,
+                CustomRaisedButton(
+                  title: 'Statewise',
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return IndiaStatewise(
+                          indiaData: indiaData,
+                        );
+                      },
                     ),
                   ),
                 ),
