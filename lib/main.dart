@@ -22,8 +22,6 @@ Future<void> main() async {
   await Hive.openBox(HiveBoxes.worldData);
   await Hive.openBox(HiveBoxes.countriesData);
   await Hive.openBox(HiveBoxes.stateData);
-  await Hive.box(HiveBoxes.worldData).clear();
-  await Hive.box(HiveBoxes.countriesData).clear();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -47,12 +45,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    Hive.box(HiveBoxes.stateData).clear();
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);

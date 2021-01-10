@@ -5,6 +5,7 @@ import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
+import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
@@ -62,7 +63,7 @@ class _IndiaStatsState extends State<IndiaStats> {
     try {
       await bloc.getIndiaData();
     } on SocketException catch (_) {
-      await showAlertDialog(
+      showAlertDialog(
         context: context,
         titleText: 'Connection error',
         contentText:
@@ -70,7 +71,7 @@ class _IndiaStatsState extends State<IndiaStats> {
         defaultActionButtonText: 'Ok',
       );
     } on Response catch (response) {
-      await showAlertDialog(
+      showAlertDialog(
         context: context,
         titleText: response.statusCode.toString(),
         contentText: 'Error Retrieving Data',
@@ -116,7 +117,7 @@ class _IndiaStatsState extends State<IndiaStats> {
   }
 
   Widget _buildContent(CommonBloc bloc, bool isLoading) {
-    if (isLoading && (indiaDataBox?.isEmpty ?? false)) {
+    if (isLoading && (indiaDataBox?.isEmpty ?? true)) {
       return Container(
         height: MediaQuery.of(context).size.height,
         child: CustomProgressIndicator(),
@@ -129,21 +130,16 @@ class _IndiaStatsState extends State<IndiaStats> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AutoSizeText(
-                  'Overall Stats...',
-                  maxLines: 1,
-                  minFontSize: 20.0,
-                  style: Theme.of(context).textTheme.headline1,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const CustomHeadingWidget(title: 'Overall Stats...'),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10,
                 ),
-                CustomRaisedButton(
+                child: CustomRaisedButton(
                   title: 'Statewise',
                   onPressed: () => Navigator.push(
                     context,
@@ -156,8 +152,8 @@ class _IndiaStatsState extends State<IndiaStats> {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Container(
             margin: const EdgeInsets.symmetric(
@@ -198,16 +194,7 @@ class _IndiaStatsState extends State<IndiaStats> {
               ],
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-            child: AutoSizeText(
-              'Visuals',
-              maxLines: 1,
-              minFontSize: 20.0,
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          ),
+          const CustomHeadingWidget(title: 'Visuals'),
           Card(
             color: Colors.orange[300],
             shape: RoundedRectangleBorder(

@@ -42,12 +42,12 @@ class IndiaStatewise extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return StateCard(
-              index: index,
+              index: index + 1,
               indiaStatewiseData: indiaData,
               height: height,
             );
           },
-          itemCount: indiaData.length,
+          itemCount: indiaData.length - 1,
         ),
       ),
     );
