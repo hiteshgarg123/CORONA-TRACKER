@@ -1,4 +1,5 @@
 import 'package:covid_19_tracker/pages/faqsPage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,7 +13,7 @@ class InfoWidget extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                CupertinoPageRoute(
                   builder: (context) => FAQsPage(),
                 ),
               );

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
 import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
@@ -13,6 +12,7 @@ import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
@@ -144,7 +144,7 @@ class _IndiaStatsState extends State<IndiaStats> {
                   title: 'Statewise',
                   onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                       builder: (context) {
                         return IndiaStatewise(
                           indiaData: indiaData,

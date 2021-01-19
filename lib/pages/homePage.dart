@@ -19,6 +19,7 @@ import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
@@ -287,7 +288,7 @@ class _HomePageState extends State<HomePage>
                                     title: 'Regional',
                                     onPressed: () => Navigator.push(
                                       context,
-                                      MaterialPageRoute(
+                                      CupertinoPageRoute(
                                         builder: (context) {
                                           return CountryWiseStats();
                                         },
@@ -298,7 +299,7 @@ class _HomePageState extends State<HomePage>
                                     title: 'India\'s Stats',
                                     onPressed: () => Navigator.push(
                                       context,
-                                      MaterialPageRoute(
+                                      CupertinoPageRoute(
                                         builder: (context) {
                                           return IndiaStats();
                                         },
