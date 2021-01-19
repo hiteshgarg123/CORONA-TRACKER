@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
+import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'CONFIRMED : ${indiaStatewiseData[index].confirmed}',
+                      'CONFIRMED : ${NumberFormatter.formatString(indiaStatewiseData[index].confirmed)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -68,7 +69,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'ACTIVE : ${indiaStatewiseData[index].active}',
+                      'ACTIVE : ${NumberFormatter.formatString(indiaStatewiseData[index].active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -78,7 +79,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'RECOVERED : ${indiaStatewiseData[index].recovered}',
+                      'RECOVERED : ${NumberFormatter.formatString(indiaStatewiseData[index].recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -88,7 +89,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'DEATHS : ${indiaStatewiseData[index].deaths}',
+                      'DEATHS : ${NumberFormatter.formatString(indiaStatewiseData[index].deaths)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(

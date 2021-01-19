@@ -5,6 +5,7 @@ import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
+import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
@@ -169,25 +170,25 @@ class _IndiaStatsState extends State<IndiaStats> {
               children: <Widget>[
                 GridBox(
                   title: 'TOTAL CASES',
-                  count: indiaData[0].confirmed,
+                  count: NumberFormatter.formatString(indiaData[0].confirmed),
                   boxColor: Colors.red[200],
                   textColor: Colors.red[900],
                 ),
                 GridBox(
                   title: 'ACTIVE',
-                  count: indiaData[0].active,
+                  count: NumberFormatter.formatString(indiaData[0].active),
                   boxColor: Colors.blue[200],
                   textColor: Colors.blue[900],
                 ),
                 GridBox(
                   title: 'DEATHS',
-                  count: indiaData[0].deaths,
+                  count: NumberFormatter.formatString(indiaData[0].deaths),
                   boxColor: Colors.grey,
                   textColor: Colors.grey[900],
                 ),
                 GridBox(
                   title: 'RECOVERED',
-                  count: indiaData[0].recovered,
+                  count: NumberFormatter.formatString(indiaData[0].recovered),
                   boxColor: Colors.green[300],
                   textColor: Colors.green[900],
                 ),

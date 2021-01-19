@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
@@ -66,7 +67,7 @@ class CountryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     AutoSizeText(
-                      'CONFIRMED : ${countryData[index].cases}',
+                      'CONFIRMED : ${NumberFormatter.formatString(countryData[index].cases)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -76,7 +77,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      '[+${countryData[index].todayCases}]',
+                      '[+${NumberFormatter.formatString(countryData[index].todayCases)}]',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -86,7 +87,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'ACTIVE : ${countryData[index].active}',
+                      'ACTIVE : ${NumberFormatter.formatString(countryData[index].active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -96,7 +97,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'RECOVERED : ${countryData[index].recovered}',
+                      'RECOVERED : ${NumberFormatter.formatString(countryData[index].recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -106,7 +107,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'DEATHS : ${countryData[index].deaths} [+${countryData[index].todayDeaths}]'
+                      'DEATHS : ${NumberFormatter.formatString(countryData[index].deaths)} [+${NumberFormatter.formatString(countryData[index].todayDeaths)}]'
                           .toString(),
                       maxLines: 1,
                       minFontSize: 12.0,

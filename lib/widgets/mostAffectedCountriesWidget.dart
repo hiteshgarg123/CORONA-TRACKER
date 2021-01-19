@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
 
 class MostAffectedWidget extends StatelessWidget {
@@ -49,9 +50,9 @@ class MostAffectedWidget extends StatelessWidget {
                   width: 10,
                 ),
                 Expanded(
-                  flex: 7,
+                  flex: 8,
                   child: AutoSizeText(
-                    'No. of cases: ${countryData[index].cases} ,  Deaths: ${countryData[index].deaths}',
+                    'No. of cases: ${NumberFormatter.formatString(countryData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countryData[index].deaths)}',
                     maxLines: 1,
                     minFontSize: 12.0,
                     maxFontSize: 17.0,
