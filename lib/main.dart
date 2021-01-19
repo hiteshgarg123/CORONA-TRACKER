@@ -22,7 +22,7 @@ Future<void> main() async {
   await Hive.openBox(HiveBoxes.worldData);
   await Hive.openBox(HiveBoxes.countriesData);
   await Hive.openBox(HiveBoxes.stateData);
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
@@ -47,14 +47,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Provider<CommonBloc>(
       create: (_) => CommonBloc(),
-      child: MaterialApp(
-        theme: themeNotifier.getTheme(),
-        debugShowCheckedModeBanner: false,
-        title: 'COVID-19 Tracker',
-        home: HomePage(),
+      child: Consumer<ThemeNotifier>(
+        builder: (_, notifier, __) {
+          return MaterialApp(
+            theme: notifier.getTheme(),
+            debugShowCheckedModeBanner: false,
+            title: 'COVID-19 Tracker',
+            home: HomePage(),
+          );
+        },
       ),
     );
   }
