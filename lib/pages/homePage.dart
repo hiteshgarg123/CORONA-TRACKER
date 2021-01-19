@@ -11,6 +11,8 @@ import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
 import 'package:covid_19_tracker/utils/app_theme.dart';
 import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
+import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
+import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
@@ -18,7 +20,6 @@ import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -33,12 +34,12 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   WorldData worldCachedData;
   List countriesCachedData;
-  Box<WorldData> worldDataBox;
+  Box worldDataBox;
   Box countryDataBox;
   CommonBloc bloc;
-  var _darkModeEnabled = false;
   AnimationController _animationController;
   Animation<double> animation;
+  var _darkModeEnabled = false;
   var circularAnimation = false;
 
   void initState() {
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage>
 
   void getCachedData() {
     try {
-      worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+      worldDataBox = Hive.box(HiveBoxes.worldData);
       countryDataBox = Hive.box(HiveBoxes.countriesData);
       worldCachedData =
           worldDataBox.isNotEmpty ? worldDataBox.values.last : null;
@@ -110,50 +111,7 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  Widget _buildProgressIndicator() {
-    return Container(
-      height: 100.0,
-      child: SpinKitFadingCircle(
-        color: primaryBlack,
-      ),
-    );
-  }
-
-  Widget _buildWorldWidePannel(
-    bool isLoading,
-  ) {
-    if (isLoading && worldDataBox.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
-      );
-    }
-    return WorldWideWidget(
-      worldData: isLoading ? worldCachedData : bloc.worldData,
-    );
-  }
-
-  Widget _buildMostAffectedCountriesPannel(
-    bool isLoading,
-  ) {
-    if (isLoading && countryDataBox.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
-      );
-    }
-    return MostAffectedWidget(
-      countryData: isLoading ? countriesCachedData : bloc.countriesData,
-    );
-  }
-
   Widget _buildPieChartPannel(bool isLoading) {
-    if (isLoading && worldDataBox.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: _buildProgressIndicator(),
-      );
-    }
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
@@ -201,6 +159,33 @@ class _HomePageState extends State<HomePage>
     } else {
       _animationController.forward();
     }
+  }
+
+  Widget _buildStreamContents(bool isLoading) {
+    if (isLoading &&
+        ((worldDataBox?.isEmpty ?? true) ||
+            (countryDataBox?.isEmpty ?? true))) {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: CustomProgressIndicator(),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        WorldWideWidget(
+          worldData: isLoading ? worldCachedData : bloc.worldData,
+        ),
+        const CustomHeadingWidget(title: 'Most Affected Countries'),
+        MostAffectedWidget(
+          countryData: isLoading ? countriesCachedData : bloc.countriesData,
+        ),
+        const CustomHeadingWidget(title: 'Statistics...'),
+        _buildPieChartPannel(
+          isLoading,
+        ),
+      ],
+    );
   }
 
   @override
@@ -331,51 +316,7 @@ class _HomePageState extends State<HomePage>
                       stream: bloc.dataLoadingStream,
                       initialData: true,
                       builder: (context, snapshot) {
-                        return _buildWorldWidePannel(
-                          snapshot.data,
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 10.0,
-                      ),
-                      child: AutoSizeText(
-                        'Most Affected Countries',
-                        maxLines: 1,
-                        minFontSize: 18.0,
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
-                    StreamBuilder<bool>(
-                      stream: bloc.dataLoadingStream,
-                      initialData: true,
-                      builder: (context, snapshot) {
-                        return _buildMostAffectedCountriesPannel(
-                          snapshot.data,
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 10.0,
-                      ),
-                      child: AutoSizeText(
-                        'Statistics...',
-                        maxLines: 1,
-                        minFontSize: 18.0,
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
-                    StreamBuilder<bool>(
-                      stream: bloc.dataLoadingStream,
-                      initialData: true,
-                      builder: (context, snapshot) {
-                        return _buildPieChartPannel(
-                          snapshot.data,
-                        );
+                        return _buildStreamContents(snapshot.data);
                       },
                     ),
                     const SizedBox(

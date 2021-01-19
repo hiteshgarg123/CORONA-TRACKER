@@ -15,10 +15,12 @@ class FAQsPage extends StatelessWidget {
             title: AutoSizeText(
               StaticData.commonQuestions[index]['question'],
               maxLines: 2,
-              minFontSize: 15.0,
+              minFontSize: 12.0,
+              maxFontSize: 16.0,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
             children: <Widget>[
               Padding(

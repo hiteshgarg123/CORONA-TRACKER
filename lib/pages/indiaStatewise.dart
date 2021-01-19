@@ -1,11 +1,14 @@
-import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/widgets/india_state_card.dart';
 import 'package:flutter/material.dart';
 
 class IndiaStatewise extends StatelessWidget {
-  final IndiaData indiaData;
+  final List indiaData;
 
-  IndiaStatewise({Key key, this.indiaData}) : super(key: key);
+  IndiaStatewise({
+    Key key,
+    @required this.indiaData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,12 @@ class IndiaStatewise extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return StateCard(
-              index: index,
-              indiaStatewiseData: indiaData.statewise,
+              index: index + 1,
+              indiaStatewiseData: indiaData,
               height: height,
             );
           },
-          itemCount: indiaData.statewise.length,
+          itemCount: indiaData.length - 1,
         ),
       ),
     );
@@ -52,7 +55,7 @@ class IndiaStatewise extends StatelessWidget {
 }
 
 class Search extends SearchDelegate {
-  final IndiaData indiaData;
+  final List<StatewiseData> indiaData;
   final double height;
 
   Search(this.indiaData, this.height);
@@ -87,10 +90,10 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = query.isEmpty
-        ? indiaData.statewise
-        : indiaData.statewise
+        ? indiaData
+        : indiaData
             .where(
-              (element) => element['state']
+              (element) => element.state
                   .toString()
                   .toLowerCase()
                   .startsWith(query.toLowerCase()),

@@ -1,34 +1,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'indiaData.dart';
+part of 'statewiseData.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class IndiaDataAdapter extends TypeAdapter<IndiaData> {
+class StatewiseDataAdapter extends TypeAdapter<StatewiseData> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
-  IndiaData read(BinaryReader reader) {
+  StatewiseData read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return IndiaData(
-      confirmed: fields[0] as String,
+    return StatewiseData(
       active: fields[1] as String,
+      confirmed: fields[0] as String,
       deaths: fields[2] as String,
       recovered: fields[3] as String,
-      statewise: (fields[4] as List)?.cast<dynamic>(),
+      state: fields[5] as String,
+      statecode: fields[6] as String,
+      lastupdatedtime: fields[4] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, IndiaData obj) {
+  void write(BinaryWriter writer, StatewiseData obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.confirmed)
       ..writeByte(1)
@@ -38,7 +40,11 @@ class IndiaDataAdapter extends TypeAdapter<IndiaData> {
       ..writeByte(3)
       ..write(obj.recovered)
       ..writeByte(4)
-      ..write(obj.statewise);
+      ..write(obj.lastupdatedtime)
+      ..writeByte(5)
+      ..write(obj.state)
+      ..writeByte(6)
+      ..write(obj.statecode);
   }
 
   @override
@@ -47,7 +53,7 @@ class IndiaDataAdapter extends TypeAdapter<IndiaData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is IndiaDataAdapter &&
+      other is StatewiseDataAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

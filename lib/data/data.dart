@@ -34,7 +34,7 @@ class StaticData {
           "Studies to date suggest that the virus that causes COVID-19 is mainly transmitted through contact with respiratory droplets rather than through the air"
     },
     {
-      "question": "Can CoVID-19 be caught from a person who has no symptoms?",
+      "question": "Can COVID-19 be caught from a person who has no symptoms?",
       "answer":
           "The main way the disease spreads is through respiratory droplets expelled by someone who is coughing. The risk of catching COVID-19 from someone with no symptoms at all is very low. However, many people with COVID-19 experience only mild symptoms. This is particularly true at the early stages of the disease. It is therefore possible to catch COVID-19 from someone who has, for example, just a mild cough and does not feel ill.  WHO is assessing ongoing research on the period of transmission of COVID-19 and will continue to share updated findings.    "
     },

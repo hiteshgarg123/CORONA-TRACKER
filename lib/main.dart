@@ -1,7 +1,7 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
-import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/homePage.dart';
@@ -18,11 +18,11 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(WorldDataAdapter());
   Hive.registerAdapter(CountryDataAdapter());
-  Hive.registerAdapter(IndiaDataAdapter());
-  await Hive.openBox<WorldData>(HiveBoxes.worldData);
+  Hive.registerAdapter(StatewiseDataAdapter());
+  await Hive.openBox(HiveBoxes.worldData);
   await Hive.openBox(HiveBoxes.countriesData);
-  await Hive.openBox<IndiaData>(HiveBoxes.indiaData);
-  SystemChrome.setPreferredOrientations([
+  await Hive.openBox(HiveBoxes.stateData);
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
@@ -47,14 +47,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Provider<CommonBloc>(
       create: (_) => CommonBloc(),
-      child: MaterialApp(
-        theme: themeNotifier.getTheme(),
-        debugShowCheckedModeBanner: false,
-        title: 'COVID-19 Tracker',
-        home: HomePage(),
+      child: Consumer<ThemeNotifier>(
+        builder: (_, notifier, __) {
+          return MaterialApp(
+            theme: notifier.getTheme(),
+            debugShowCheckedModeBanner: false,
+            title: 'COVID-19 Tracker',
+            home: HomePage(),
+          );
+        },
       ),
     );
   }

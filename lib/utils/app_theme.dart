@@ -53,6 +53,12 @@ class AppTheme {
           fontSize: 20.0,
           color: Colors.white,
         ),
+        //For Custom Progress Indicator
+        subtitle1: TextStyle(
+          fontSize: 22,
+          color: primaryBlack,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -107,6 +113,12 @@ class AppTheme {
         headline6: TextStyle(
           fontSize: 20.0,
           color: Colors.white,
+        ),
+        //For Custom Progress Indicator
+        subtitle1: TextStyle(
+          fontSize: 22,
+          color: Colors.orange[100],
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

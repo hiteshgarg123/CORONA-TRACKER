@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
-import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
+import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
@@ -23,9 +24,9 @@ class IndiaStats extends StatefulWidget {
 }
 
 class _IndiaStatsState extends State<IndiaStats> {
-  Box<IndiaData> indiaDataBox;
-  IndiaData indiaCachedData;
-  IndiaData indiaData;
+  Box indiaDataBox;
+  List indiaCachedData;
+  List indiaData;
   CommonBloc bloc;
 
   @override
@@ -44,7 +45,7 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   void getCachedData() {
     try {
-      indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+      indiaDataBox = Hive.box(HiveBoxes.stateData);
       indiaCachedData =
           indiaDataBox.isNotEmpty ? indiaDataBox.values.last : null;
     } catch (_) {
@@ -65,7 +66,8 @@ class _IndiaStatsState extends State<IndiaStats> {
       showAlertDialog(
         context: context,
         titleText: 'Connection error',
-        contentText: 'Could not retrieve latest data, Please try again later.',
+        contentText:
+            'Could not retrieve latest data, Check your internet connection.',
         defaultActionButtonText: 'Ok',
       );
     } on Response catch (response) {
@@ -115,9 +117,9 @@ class _IndiaStatsState extends State<IndiaStats> {
   }
 
   Widget _buildContent(CommonBloc bloc, bool isLoading) {
-    if (isLoading && indiaDataBox.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(50.0),
+    if (isLoading && (indiaDataBox?.isEmpty ?? true)) {
+      return Container(
+        height: MediaQuery.of(context).size.height,
         child: CustomProgressIndicator(),
       );
     }
@@ -128,21 +130,16 @@ class _IndiaStatsState extends State<IndiaStats> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AutoSizeText(
-                  'Overall Stats...',
-                  maxLines: 1,
-                  minFontSize: 20.0,
-                  style: Theme.of(context).textTheme.headline1,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const CustomHeadingWidget(title: 'Overall Stats...'),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10,
                 ),
-                CustomRaisedButton(
+                child: CustomRaisedButton(
                   title: 'Statewise',
                   onPressed: () => Navigator.push(
                     context,
@@ -155,8 +152,8 @@ class _IndiaStatsState extends State<IndiaStats> {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Container(
             margin: const EdgeInsets.symmetric(
@@ -172,41 +169,32 @@ class _IndiaStatsState extends State<IndiaStats> {
               children: <Widget>[
                 GridBox(
                   title: 'TOTAL CASES',
-                  count: indiaData.confirmed,
+                  count: indiaData[0].confirmed,
                   boxColor: Colors.red[200],
                   textColor: Colors.red[900],
                 ),
                 GridBox(
                   title: 'ACTIVE',
-                  count: indiaData.active,
+                  count: indiaData[0].active,
                   boxColor: Colors.blue[200],
                   textColor: Colors.blue[900],
                 ),
                 GridBox(
                   title: 'DEATHS',
-                  count: indiaData.deaths,
+                  count: indiaData[0].deaths,
                   boxColor: Colors.grey,
                   textColor: Colors.grey[900],
                 ),
                 GridBox(
                   title: 'RECOVERED',
-                  count: indiaData.recovered,
+                  count: indiaData[0].recovered,
                   boxColor: Colors.green[300],
                   textColor: Colors.green[900],
                 ),
               ],
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-            child: AutoSizeText(
-              'Visuals',
-              maxLines: 1,
-              minFontSize: 20.0,
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          ),
+          const CustomHeadingWidget(title: 'Visuals'),
           Card(
             color: Colors.orange[300],
             shape: RoundedRectangleBorder(
@@ -221,10 +209,10 @@ class _IndiaStatsState extends State<IndiaStats> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
               child: PieChartWidget(
-                total: double.tryParse(indiaData.confirmed),
-                active: double.tryParse(indiaData.active),
-                recovered: double.tryParse(indiaData.recovered),
-                deaths: double.tryParse(indiaData.deaths),
+                total: double.tryParse(indiaData[0].confirmed),
+                active: double.tryParse(indiaData[0].active),
+                recovered: double.tryParse(indiaData[0].recovered),
+                deaths: double.tryParse(indiaData[0].deaths),
                 totalColor: Colors.red[400],
                 activeColor: Colors.blue[400],
                 recoveredColor: Colors.green[300],
