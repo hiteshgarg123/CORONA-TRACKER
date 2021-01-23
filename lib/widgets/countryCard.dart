@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
 
@@ -49,12 +50,19 @@ class CountryCard extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 3.0),
-                      child: Image.network(
-                        "${countryData[index].countryFlagUrl}",
-                        height: 60.0,
-                        width: 75.0,
+                      child: CachedNetworkImage(
+                        imageUrl: "${countryData[index].countryFlagUrl}",
+                        height: height * 0.08,
+                        width: height * 0.09,
+                        progressIndicatorBuilder: (context, url, progress) =>
+                            Center(
+                          child: LinearProgressIndicator(
+                            value: progress.progress,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

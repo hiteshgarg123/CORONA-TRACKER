@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,15 @@ class MostAffectedWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                     ),
-                    child: Image.network(
-                      countryData[index].countryFlagUrl,
-                      height: 25,
+                    child: CachedNetworkImage(
+                      imageUrl: countryData[index].countryFlagUrl,
+                      progressIndicatorBuilder: (context, url, progress) =>
+                          Center(
+                        child: LinearProgressIndicator(
+                          value: progress.progress,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                 ),

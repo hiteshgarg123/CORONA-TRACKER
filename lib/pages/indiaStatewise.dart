@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/widgets/india_state_card.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +54,7 @@ class IndiaStatewise extends StatelessWidget {
 }
 
 class Search extends SearchDelegate {
-  final List<StatewiseData> indiaData;
+  final List indiaData;
   final double height;
 
   Search(this.indiaData, this.height);

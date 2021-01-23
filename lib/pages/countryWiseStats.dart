@@ -6,6 +6,7 @@ import 'package:covid_19_tracker/widgets/countryCard.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
@@ -49,11 +50,10 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
     try {
       await bloc.getCountriesData();
     } on SocketException catch (_) {
-      showAlertDialog(
-        context: context,
-        titleText: 'Connection error',
-        contentText: 'Could not retrieve latest data, Please try again later.',
-        defaultActionButtonText: 'Ok',
+      Fluttertoast.showToast(
+        msg: 'No Internet',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
       );
     } on Response catch (response) {
       showAlertDialog(

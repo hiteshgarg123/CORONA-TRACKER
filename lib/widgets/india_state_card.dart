@@ -11,7 +11,7 @@ class StateCard extends StatelessWidget {
     @required this.index,
     @required this.height,
   }) : super(key: key);
-  final List<StatewiseData> indiaStatewiseData;
+  final List indiaStatewiseData;
   final int index;
   final double height;
 

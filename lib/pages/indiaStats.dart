@@ -14,6 +14,7 @@ import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -64,12 +65,10 @@ class _IndiaStatsState extends State<IndiaStats> {
     try {
       await bloc.getIndiaData();
     } on SocketException catch (_) {
-      showAlertDialog(
-        context: context,
-        titleText: 'Connection error',
-        contentText:
-            'Could not retrieve latest data, Check your internet connection.',
-        defaultActionButtonText: 'Ok',
+      Fluttertoast.showToast(
+        msg: 'No Internet',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
       );
     } on Response catch (response) {
       showAlertDialog(

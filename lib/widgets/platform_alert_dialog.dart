@@ -14,7 +14,12 @@ Future<void> showAlertDialog({
       context: context,
       builder: (context) => CupertinoAlertDialog(
         title: Text(titleText),
-        content: Text(contentText),
+        content: Text(
+          contentText,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.045,
+          ),
+        ),
         actions: [
           CupertinoDialogAction(
             child: Text(defaultActionButtonText),
@@ -32,10 +37,16 @@ Future<void> showAlertDialog({
       ),
       title: Text(
         titleText,
+        style: TextStyle(
+          fontSize: MediaQuery.of(context).size.width * 0.055,
+        ),
       ),
       content: SingleChildScrollView(
         child: Text(
           contentText,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.04,
+          ),
         ),
       ),
       actions: [
