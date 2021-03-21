@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/utils/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
