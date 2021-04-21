@@ -7,7 +7,7 @@ class ThemeNotifier extends ChangeNotifier {
 
   ThemeData getTheme() => _themeData;
 
-  setTheme(ThemeData themeData) async {
+  Future<void> setTheme(ThemeData themeData) async {
     _themeData = themeData;
     notifyListeners();
   }

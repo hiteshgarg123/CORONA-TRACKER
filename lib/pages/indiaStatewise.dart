@@ -17,7 +17,7 @@ class IndiaStatewise extends StatelessWidget {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               if (indiaData != null) {
                 showSearch(
@@ -31,14 +31,14 @@ class IndiaStatewise extends StatelessWidget {
             },
           ),
         ],
-        title: Text(
+        title: const Text(
           'Statewise Stats',
         ),
       ),
       body: SingleChildScrollView(
         child: ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return StateCard(
               index: index + 1,
@@ -75,9 +75,7 @@ class Search extends SearchDelegate {
   Widget buildLeading(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop(context);
-      },
+      onPressed: () => Navigator.of(context).pop(),
     );
   }
 

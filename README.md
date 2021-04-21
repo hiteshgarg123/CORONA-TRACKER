@@ -30,9 +30,9 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Recent Changes
 
-- Complete Data Caching with Hive Database.
-- Error Handling
-- Beautiful Dark Theme with Cool Animation
+- Complete Data Caching.
+- Error Handling.
+- Beautiful Dark Theme.
 
 ## To be implemented 📝
 
@@ -51,20 +51,21 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 <p>
 
 ```dart
+auto_size_text: ^2.1.0
+cached_network_image: ^2.5.0
+cupertino_icons: ^0.1.2
+day_night_switcher: ^0.1.1+1
 flutter_spinkit: ^4.1.2
+fluttertoast: ^7.1.6
 hive: ^1.4.4+1
 hive_flutter: ^0.3.1
 http: ^0.12.0+4
+intl: ^0.16.1
 liquid_pull_to_refresh: ^2.0.0
 pie_chart: ^3.1.1
 provider: ^4.1.3
 shared_preferences: ^0.5.6+3
 url_launcher: ^5.4.2
-circular_reveal_animation: ^1.1.5
-auto_size_text: ^2.1.0
-build_runner: ^1.10.4
-hive_generator: ^0.8.2
-flutter_launcher_icons: "^0.7.3"
 ```
 
 </p>

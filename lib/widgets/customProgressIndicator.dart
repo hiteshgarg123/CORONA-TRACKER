@@ -14,7 +14,7 @@ class CustomProgressIndicator extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.subtitle1,
         ),
-        SizedBox(
+        const SizedBox(
           height: 25.0,
         ),
         SpinKitCircle(

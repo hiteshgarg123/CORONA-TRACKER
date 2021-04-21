@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/data/data.dart';
 import 'package:covid_19_tracker/data/hive_boxes.dart';
@@ -19,6 +18,7 @@ import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,38 +32,27 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> {
   WorldData worldCachedData;
   List countriesCachedData;
   Box worldDataBox;
   Box countryDataBox;
   CommonBloc bloc;
-  AnimationController _animationController;
-  Animation<double> animation;
-  var _darkModeEnabled = false;
-  var circularAnimation = false;
+  ThemeNotifier themeNotifier;
+  bool _darkModeEnabled;
 
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
+    themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
+    _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
     getCachedData();
     updateData();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      vsync: this,
-    );
-    animation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-    _animationController.forward();
   }
 
   @override
   void dispose() {
     bloc.disposeWorldandCountryDataStreams();
-    _animationController.dispose();
     super.dispose();
   }
 
@@ -78,7 +67,7 @@ class _HomePageState extends State<HomePage>
     } catch (_) {
       showAlertDialog(
         context: context,
-        titleText: 'Error Reading Data',
+        titleText: 'Error in Reading Data',
         contentText:
             'Can\'t read data from storage, Contact support or try again later',
         defaultActionButtonText: 'Ok',
@@ -95,11 +84,11 @@ class _HomePageState extends State<HomePage>
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_SHORT,
       );
-    } on Response catch (response) {
+    } on Response catch (_) {
       showAlertDialog(
         context: context,
-        titleText: response.statusCode.toString(),
-        contentText: 'Error Retrieving Data',
+        titleText: 'Error',
+        contentText: 'Please try again later',
         defaultActionButtonText: 'Ok',
       );
     } catch (_) {
@@ -147,19 +136,11 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Future<void> onThemeChange(ThemeNotifier themeNotifier) async {
+  Future<void> onThemeChange() async {
     _darkModeEnabled = !_darkModeEnabled;
-    circularAnimation = true;
     themeNotifier.setTheme(
         _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme());
     await DarkThemePreference().setDarkTheme(_darkModeEnabled);
-    if (_animationController.status == AnimationStatus.forward ||
-        _animationController.status == AnimationStatus.completed) {
-      _animationController.reset();
-      _animationController.forward();
-    } else {
-      _animationController.forward();
-    }
   }
 
   Widget _buildStreamContents(bool isLoading) {
@@ -191,33 +172,21 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
-    _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
     final size = MediaQuery.of(context).size;
-    return circularAnimation
-        ? CircularRevealAnimation(
-            centerOffset: Offset(
-              size.width,
-              size.height / 15,
-            ),
-            animation: animation,
-            child: _buildContent(size, themeNotifier),
-          )
-        : _buildContent(size, themeNotifier);
-  }
-
-  Scaffold _buildContent(Size size, ThemeNotifier themeNotifier) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text('COVID-19 TRACKER'),
         elevation: 2.0,
         actions: [
-          IconButton(
-            icon: _darkModeEnabled
-                ? Icon(Icons.wb_sunny_outlined)
-                : Icon(Icons.nights_stay_outlined),
-            onPressed: () => onThemeChange(themeNotifier),
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 12.0,
+            ),
+            child: DayNightSwitcherIcon(
+              isDarkModeEnabled: _darkModeEnabled,
+              onStateChanged: (_) => onThemeChange(),
+            ),
           ),
         ],
       ),
@@ -297,8 +266,7 @@ class _HomePageState extends State<HomePage>
                                   ),
                                   CustomRaisedButton(
                                     title: 'India\'s Stats',
-                                    onPressed: () => Navigator.push(
-                                      context,
+                                    onPressed: () => Navigator.of(context).push(
                                       CupertinoPageRoute(
                                         builder: (context) {
                                           return IndiaStats();
@@ -308,7 +276,7 @@ class _HomePageState extends State<HomePage>
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
