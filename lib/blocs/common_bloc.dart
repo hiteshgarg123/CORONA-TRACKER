@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
+import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 

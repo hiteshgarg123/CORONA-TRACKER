@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-
-Color primaryBlack = Color(0xff202c3b);
-
 class StaticData {
-  static const String quote =
+  static const quote =
       "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.";
 
-  static const List commonQuestions = [
+  static const commonQuestions = [
     {
       "question": "What is a coronavirus?",
       "answer":

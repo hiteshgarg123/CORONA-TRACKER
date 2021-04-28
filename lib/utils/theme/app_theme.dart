@@ -1,5 +1,6 @@
-import 'package:covid_19_tracker/data/data.dart';
 import 'package:flutter/material.dart';
+
+const primaryBlack = const Color(0xff202c3b);
 
 class AppTheme {
   static ThemeData lightTheme() {
@@ -7,8 +8,8 @@ class AppTheme {
       primaryColor: primaryBlack,
       accentColor: primaryBlack,
       fontFamily: 'Circular',
-      backgroundColor: Color(0xffF1F5FB),
-      indicatorColor: Color(0xffCBDCF8),
+      backgroundColor: const Color(0xffF1F5FB),
+      indicatorColor: const Color(0xffCBDCF8),
       buttonColor: primaryBlack,
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
@@ -16,45 +17,45 @@ class AppTheme {
       cardColor: Colors.white,
       canvasColor: Colors.grey[50],
       brightness: Brightness.light,
-      snackBarTheme: SnackBarThemeData(
+      snackBarTheme: const SnackBarThemeData(
         backgroundColor: primaryBlack,
       ),
       buttonTheme: ButtonThemeData(
         buttonColor: primaryBlack,
         highlightColor: Colors.grey[850],
       ),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
-        headline1: TextStyle(
+        headline1: const TextStyle(
           fontSize: 25,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //Used in some Bigger texts like "We stand together to fight with this".
-        headline2: TextStyle(
+        headline2: const TextStyle(
           fontSize: 20,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
         //Used in Custom Buttons like "Regional" , "India's Stats".
-        headline3: TextStyle(
+        headline3: const TextStyle(
           fontSize: 16,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //Used in Legend of PieChart Widget.
-        headline4: TextStyle(
+        headline4: const TextStyle(
           fontSize: 15.0,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //For search delegate's textfield search text
-        headline6: TextStyle(
+        headline6: const TextStyle(
           fontSize: 20.0,
           color: Colors.white,
         ),
         //For Custom Progress Indicator
-        subtitle1: TextStyle(
+        subtitle1: const TextStyle(
           fontSize: 22,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
@@ -66,16 +67,16 @@ class AppTheme {
   static ThemeData darkTheme() {
     return ThemeData(
       primaryColor: primaryBlack,
-      accentColor: Color(0xff4285F4),
-      backgroundColor: Color(0xff0E1D36),
+      accentColor: const Color(0xff4285F4),
+      backgroundColor: const Color(0xff0E1D36),
       fontFamily: 'Circular',
-      indicatorColor: Color(0xff0E1D36),
+      indicatorColor: const Color(0xff0E1D36),
       buttonColor: Colors.orange[100],
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
       textSelectionColor: Colors.white,
-      cardColor: Color(0xFF151515),
-      canvasColor: Color(0xff0E1D36),
+      cardColor: const Color(0xFF151515),
+      canvasColor: const Color(0xff0E1D36),
       brightness: Brightness.dark,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: Colors.orange[100],
@@ -86,31 +87,31 @@ class AppTheme {
       ),
       textTheme: TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
-        headline1: TextStyle(
+        headline1: const TextStyle(
           fontSize: 25,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
         //Used in some Bigger texts like "We stand together to fight with this".
-        headline2: TextStyle(
+        headline2: const TextStyle(
           fontSize: 20,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //Used in Custom Buttons like "Regional" , "India's Stats".
-        headline3: TextStyle(
+        headline3: const TextStyle(
           fontSize: 16,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
         //Used in Legend of PieChart Widget.
-        headline4: TextStyle(
+        headline4: const TextStyle(
           fontSize: 15.0,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //For search delegate's textfield search text
-        headline6: TextStyle(
+        headline6: const TextStyle(
           fontSize: 20.0,
           color: Colors.white,
         ),

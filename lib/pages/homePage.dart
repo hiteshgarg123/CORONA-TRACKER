@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/data.dart';
-import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
 import 'package:covid_19_tracker/pages/indiaStats.dart';
-import 'package:covid_19_tracker/utils/app_theme.dart';
-import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
+import 'package:covid_19_tracker/utils/constants/constants.dart';
+import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
+import 'package:covid_19_tracker/utils/theme/app_theme.dart';
+import 'package:covid_19_tracker/utils/theme/dark_theme_preference.dart';
 import 'package:covid_19_tracker/widgets/customHeadingWidget.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
@@ -139,7 +139,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> onThemeChange() async {
     _darkModeEnabled = !_darkModeEnabled;
     themeNotifier.setTheme(
-        _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme());
+      _darkModeEnabled ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+    );
     await DarkThemePreference().setDarkTheme(_darkModeEnabled);
   }
 
@@ -180,8 +181,8 @@ class _HomePageState extends State<HomePage> {
         elevation: 2.0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(
-              right: 12.0,
+            padding: EdgeInsets.only(
+              right: size.width * 0.04,
             ),
             child: DayNightSwitcherIcon(
               isDarkModeEnabled: _darkModeEnabled,

@@ -1,5 +1,5 @@
 import 'package:covid_19_tracker/models/worldData.dart';
-import 'package:covid_19_tracker/utils/number_formatter.dart';
+import 'package:covid_19_tracker/utils/formatter/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:flutter/material.dart';
 

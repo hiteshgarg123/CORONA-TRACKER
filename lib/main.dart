@@ -1,12 +1,12 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/hive_boxes.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/homePage.dart';
-import 'package:covid_19_tracker/utils/app_theme.dart';
-import 'package:covid_19_tracker/utils/dark_theme_preference.dart';
+import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
+import 'package:covid_19_tracker/utils/theme/dark_theme_preference.dart';
+import 'package:covid_19_tracker/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';

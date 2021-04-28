@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
-import 'package:covid_19_tracker/data/hive_boxes.dart';
+import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:covid_19_tracker/widgets/countryCard.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
