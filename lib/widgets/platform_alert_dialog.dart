@@ -50,7 +50,7 @@ Future<void> showAlertDialog({
         ),
       ),
       actions: [
-        FlatButton(
+        TextButton(
           child: Text(defaultActionButtonText),
           onPressed: () => Navigator.of(context).pop(),
         ),

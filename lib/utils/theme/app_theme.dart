@@ -13,7 +13,9 @@ class AppTheme {
       buttonColor: primaryBlack,
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
-      textSelectionColor: Colors.black,
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: Colors.black,
+      ),
       cardColor: Colors.white,
       canvasColor: Colors.grey[50],
       brightness: Brightness.light,
@@ -74,7 +76,9 @@ class AppTheme {
       buttonColor: Colors.orange[100],
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
-      textSelectionColor: Colors.white,
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: Colors.white,
+      ),
       cardColor: const Color(0xFF151515),
       canvasColor: const Color(0xff0E1D36),
       brightness: Brightness.dark,

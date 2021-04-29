@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
     themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
-    _darkModeEnabled = (themeNotifier.getTheme() == AppTheme.darkTheme());
+    _darkModeEnabled = themeNotifier.getTheme() == AppTheme.darkTheme();
     getCachedData();
     updateData();
   }
