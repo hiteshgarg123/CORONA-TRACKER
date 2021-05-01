@@ -23,7 +23,7 @@ class IndiaStatewise extends StatelessWidget {
                 showSearch(
                   context: context,
                   delegate: Search(
-                    indiaData,
+                    indiaData.sublist(1),
                     height,
                   ),
                 );
@@ -44,6 +44,7 @@ class IndiaStatewise extends StatelessWidget {
               index: index + 1,
               indiaStatewiseData: indiaData,
               height: height,
+              showPieChartAnimation: true,
             );
           },
           itemCount: indiaData.length - 1,
@@ -56,6 +57,7 @@ class IndiaStatewise extends StatelessWidget {
 class Search extends SearchDelegate {
   final List indiaData;
   final double height;
+  List suggestionList;
 
   Search(this.indiaData, this.height);
 
@@ -63,8 +65,9 @@ class Search extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
+          suggestionList = indiaData;
           query = '';
         },
       )
@@ -74,19 +77,29 @@ class Search extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () => Navigator.of(context).pop(),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+    return ListView.builder(
+      itemCount: indiaData == null ? 0 : suggestionList.length,
+      itemBuilder: (context, index) {
+        return StateCard(
+          index: index,
+          indiaStatewiseData: suggestionList,
+          height: height,
+          showPieChartAnimation: false,
+        );
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
+    suggestionList = query.isEmpty
         ? indiaData
         : indiaData
             .where(
@@ -96,7 +109,6 @@ class Search extends SearchDelegate {
                   .startsWith(query.toLowerCase()),
             )
             .toList();
-
     return ListView.builder(
       itemCount: indiaData == null ? 0 : suggestionList.length,
       itemBuilder: (context, index) {
@@ -104,6 +116,7 @@ class Search extends SearchDelegate {
           index: index,
           indiaStatewiseData: suggestionList,
           height: height,
+          showPieChartAnimation: false,
         );
       },
     );
@@ -113,16 +126,13 @@ class Search extends SearchDelegate {
   String get searchFieldLabel => 'Enter a State...';
 
   @override
-  TextStyle get searchFieldStyle => TextStyle(color: Colors.white);
-
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return ThemeData(
-      scaffoldBackgroundColor: Theme.of(context).backgroundColor,
-      primaryColor: Theme.of(context).primaryColor,
-      textTheme: Theme.of(context).textTheme,
-      backgroundColor: Theme.of(context).backgroundColor,
-      canvasColor: Theme.of(context).backgroundColor,
+    return Theme.of(context).copyWith(
+      hintColor: Colors.white70,
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+      ),
     );
   }
 }

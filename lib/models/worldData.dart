@@ -26,7 +26,7 @@ class WorldData {
     @required this.affetctedCountries,
   });
 
-  factory WorldData.fromJSON(Map<dynamic, dynamic> worldData) {
+  factory WorldData.fromJSON(Map<String, dynamic> worldData) {
     return WorldData(
       cases: worldData['cases'].toString(),
       active: worldData['active'].toString(),

@@ -94,9 +94,8 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 2.0,
         actions: <Widget>[
@@ -136,6 +135,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 class Search extends SearchDelegate {
   final List countryData;
   final double height;
+  List suggestionList;
 
   Search(this.countryData, this.height);
 
@@ -143,8 +143,9 @@ class Search extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
+          suggestionList = countryData;
           query = '';
         },
       )
@@ -154,21 +155,28 @@ class Search extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop(context);
-      },
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => Navigator.of(context).pop(),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+    return ListView.builder(
+      itemCount: countryData == null ? 0 : suggestionList.length,
+      itemBuilder: (context, index) {
+        return CountryCard(
+          countryData: suggestionList,
+          height: height,
+          index: index,
+        );
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
+    suggestionList = query.isEmpty
         ? countryData
         : countryData
             .where(
@@ -195,17 +203,12 @@ class Search extends SearchDelegate {
   String get searchFieldLabel => 'Enter a Country...';
 
   @override
-  TextStyle get searchFieldStyle => TextStyle(color: Colors.white);
-
-  @override
   ThemeData appBarTheme(BuildContext context) {
-    final theme = ThemeData(
-      scaffoldBackgroundColor: Theme.of(context).backgroundColor,
-      primaryColor: Theme.of(context).primaryColor,
-      textTheme: Theme.of(context).textTheme,
-      backgroundColor: Theme.of(context).backgroundColor,
-      canvasColor: Theme.of(context).canvasColor,
+    return Theme.of(context).copyWith(
+      hintColor: Colors.white70,
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+      ),
     );
-    return theme;
   }
 }

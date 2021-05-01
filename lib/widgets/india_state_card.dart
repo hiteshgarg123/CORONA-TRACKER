@@ -9,10 +9,13 @@ class StateCard extends StatelessWidget {
     @required this.indiaStatewiseData,
     @required this.index,
     @required this.height,
+    this.showPieChartAnimation = true,
   }) : super(key: key);
+
   final List indiaStatewiseData;
   final int index;
   final double height;
+  final bool showPieChartAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +120,7 @@ class StateCard extends StatelessWidget {
                   recoveredColor: Colors.green[300],
                   deathsColor: Colors.grey[400],
                   showLegends: false,
+                  duration: showPieChartAnimation ? 800 : 0,
                 ),
               ),
             )

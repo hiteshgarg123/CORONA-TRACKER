@@ -12,6 +12,8 @@ class PieChartWidget extends StatelessWidget {
   final Color recoveredColor;
   final Color deathsColor;
 
+  final int duration;
+
   final bool showLegends;
 
   const PieChartWidget({
@@ -25,6 +27,7 @@ class PieChartWidget extends StatelessWidget {
     @required this.recoveredColor,
     @required this.deathsColor,
     this.showLegends: true,
+    this.duration = 800,
   }) : super(key: key);
 
   @override
@@ -45,6 +48,7 @@ class PieChartWidget extends StatelessWidget {
       legendStyle: Theme.of(context).textTheme.headline4,
       showLegends: showLegends,
       legendPosition: LegendPosition.right,
+      animationDuration: Duration(milliseconds: duration),
     );
   }
 }

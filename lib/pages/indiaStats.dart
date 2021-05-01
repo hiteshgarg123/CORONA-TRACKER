@@ -101,65 +101,62 @@ class _IndiaStatsState extends State<IndiaStats> {
         animSpeedFactor: 5.0,
         color: Theme.of(context).accentColor,
         child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const CustomHeadingWidget(title: 'Overall Stats...'),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 10,
-                      ),
-                      child: CustomRaisedButton(
-                        title: 'Statewise',
-                        onPressed: () => Navigator.of(context).push(
-                          CupertinoPageRoute(
-                            builder: (context) {
-                              return IndiaStatewise(
-                                indiaData: indiaData,
-                              );
-                            },
-                          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const CustomHeadingWidget(title: 'Overall Stats...'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 10,
+                    ),
+                    child: CustomRaisedButton(
+                      title: 'Statewise',
+                      onPressed: () => Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder: (context) {
+                            return IndiaStatewise(
+                              indiaData: indiaData,
+                            );
+                          },
                         ),
                       ),
                     ),
-                  ],
-                ),
-                StreamBuilder<bool>(
-                  stream: bloc.indiaDataLoadingStream,
-                  initialData: true,
-                  builder: (context, snapshot) {
-                    return _buildContent(snapshot.data);
-                  },
-                ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                InfoWidget(),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  height: 20.0,
-                  alignment: Alignment.bottomCenter,
-                  child: AutoSizeText(
-                    'WE STAND TOGETHER TO FIGHT WITH THIS',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    style: Theme.of(context).textTheme.headline3,
                   ),
+                ],
+              ),
+              StreamBuilder<bool>(
+                stream: bloc.indiaDataLoadingStream,
+                initialData: true,
+                builder: (context, snapshot) {
+                  return _buildContent(snapshot.data);
+                },
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              InfoWidget(),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                height: 20.0,
+                alignment: Alignment.bottomCenter,
+                child: AutoSizeText(
+                  'WE STAND TOGETHER TO FIGHT WITH THIS',
+                  maxLines: 1,
+                  minFontSize: 12.0,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+            ],
           ),
         ),
       ),
