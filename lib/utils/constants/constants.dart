@@ -4,14 +4,9 @@ class StaticData {
 
   static const commonQuestions = [
     {
-      "question": "What is a coronavirus?",
-      "answer":
-          "Coronaviruses are a large family of viruses which may cause illness in animals or humans.  In humans, several coronaviruses are known to cause respiratory infections ranging from the common cold to more severe diseases such as Middle East Respiratory Syndrome (MERS) and Severe Acute Respiratory Syndrome (SARS). The most recently discovered coronavirus causes coronavirus disease COVID-19."
-    },
-    {
       "question": "What is COVID-19?",
       "answer":
-          "COVID-19 is the infectious disease caused by the most recently discovered coronavirus. This new virus and disease were unknown before the outbreak began in Wuhan, China, in December 2019."
+          "COVID-19 is a disease caused by a new strain of coronavirus. 'CO' stands for corona, 'VI' for virus, and 'D' for disease. Formerly, this disease was referred to as '2019 novel coronavirus' or '2019-nCoV.'"
     },
     {
       "question": "What are the symptoms of COVID-19?",
@@ -21,45 +16,67 @@ class StaticData {
     {
       "question": "How does COVID-19 spread?",
       "answer":
-          "People can catch COVID-19 from others who have the virus. The disease can spread from person to person through small droplets from the nose or mouth which are spread when a person with COVID-19 coughs or exhales. These droplets land on objects and surfaces around the person. Other people then catch COVID-19 by touching these objects or surfaces, then touching their eyes, nose or mouth. People can also catch COVID-19 if they breathe in droplets from a person with COVID-19 who coughs out or exhales droplets. This is why it is important to stay more than 1 meter (3 feet) away from a person who is sick. \nWHO is assessing ongoing research on the ways COVID-19 is spread and will continue to share updated findings."
+          "SARS-CoV-2, the virus that causes COVID-19, can spread from person to person through droplets produced during coughing or breathing during close contact with an infected individual. Infection can also occur indirect contact when these droplets land on objects and surfaces around the infected individual and the other person touches these objects or surfaces, then touches their eyes, nose or mouth. This is why it is important to stay at least 1-2 meters (3-6 feet) away from a person who is sick. Given that some individuals have no symptoms while still infected with the virus, physical distancing of 1-2 meters should be observed regardless of whether the other person seems sick."
     },
     {
       "question":
           "Can the virus that causes COVID-19 be transmitted through the air?",
       "answer":
-          "Studies to date suggest that the virus that causes COVID-19 is mainly transmitted through contact with respiratory droplets rather than through the air"
+          "Studies to date suggest that the virus that causes COVID-19 is mainly transmitted through respiratory droplets rather than through the air. See previous answer on “How does COVID-19 spread?” Aerosols may be generated during certain medical procedures and other activities, such as singing, but are not considered the predominant route of spread for this infection."
     },
     {
-      "question": "Can COVID-19 be caught from a person who has no symptoms?",
+      "question": "How long does the virus survive on surfaces?",
       "answer":
-          "The main way the disease spreads is through respiratory droplets expelled by someone who is coughing. The risk of catching COVID-19 from someone with no symptoms at all is very low. However, many people with COVID-19 experience only mild symptoms. This is particularly true at the early stages of the disease. It is therefore possible to catch COVID-19 from someone who has, for example, just a mild cough and does not feel ill.  WHO is assessing ongoing research on the period of transmission of COVID-19 and will continue to share updated findings.    "
+          "It is not certain how long the virus that causes COVID-19 survives on surfaces, but it seems to behave like other coronaviruses. Studies suggest that coronaviruses (including preliminary information on the COVID-19 virus) may persist on surfaces for a few hours or up to several days. This may vary under different conditions (e.g. type of surface, temperature or humidity of the environment). If you think a surface may be infected, clean it with simple disinfectant to kill the virus and protect yourself and others. Cleaning your hands with an alcohol-based hand rub or washing them with soap and water is very important. Avoid touching your eyes, mouth, or nose."
     },
     {
       "question":
-          "Can I catch COVID-19 from the feces of someone with the disease?",
+          "Is there a connection between COVID -19 and environment temperature?",
       "answer":
-          "The risk of catching COVID-19 from the feces of an infected person appears to be low. While initial investigations suggest the virus may be present in feces in some cases, spread through this route is not a main feature of the outbreak. WHO is assessing ongoing research on the ways COVID-19 is spread and will continue to share new findings. Because this is a risk, however, it is another reason to clean hands regularly, after using the bathroom and before eating."
+          "It does not seem likely that temperature changes impact or have any connection with COVID-19. COVID-19 cases have been seen in all seasons and all countries and continents in the world."
     },
     {
       "question": "How likely am I to catch COVID-19?",
       "answer":
-          "The risk depends on where you  are - and more specifically, whether there is a COVID-19 outbreak unfolding there.\nFor most people in most locations the risk of catching COVID-19 is still low. However, there are now places around the world (cities or areas) where the disease is spreading. For people living in, or visiting, these areas the risk of catching COVID-19 is higher. Governments and health authorities are taking vigorous action every time a new case of COVID-19 is identified. Be sure to comply with any local restrictions on travel, movement or large gatherings. Cooperating with disease control efforts will reduce your risk of catching or spreading COVID-19.\nCOVID-19 outbreaks can be contained and transmission stopped, as has been shown in China and some other countries. Unfortunately, new outbreaks can emerge rapidly. It’s important to be aware of the situation where you are or intend to go. WHO publishes daily updates on the COVID-19 situation worldwide."
+          "The COVID-19 situation continues to evolve globally. To date, all countries and continents have reported cases. Make sure you are aware of the local situation in your country and duty station."
+    },
+    {
+      "question": "Should I worry about COVID-19?",
+      "answer":
+          "COVID-19 should be taken seriously and vigilance is required. While illness due to COVID-19 infection is generally mild in most infected, it can cause serious illness: about 1 in every 5 people who catch it need hospital care. It is therefore quite normal for people to worry about how the COVID-19 outbreak will affect them and their loved ones. We can channel our concerns into actions to protect ourselves, our loved ones and our communities. First and foremost among these actions is regular and thorough hand-washing, physical distancing, mask use and good respiratory hygiene. Secondly, keep informed and follow the advice of the local health authorities including any restrictions put in place on travel, movement and gatherings."
     },
     {
       "question": "Who is at risk of developing severe illness?",
       "answer":
-          "While we are still learning about how COVID-2019 affects people, older persons and persons with pre-existing medical conditions (such as high blood pressure, heart disease, lung disease, cancer or diabetes)  appear to develop serious illness more often than others. "
+          "Those at most risk of severe illness are those aged 60 and above and those with underlying medical problems such as high blood pressure, heart and lung problems, diabetes, obesity ad cancer. Although these groups are at highest risk, severe illness and death have been described even in those without these risk factors."
     },
     {
       "question": "Should I wear a mask to protect myself?",
       "answer":
-          "Only wear a mask if you are ill with COVID-19 symptoms (especially coughing) or looking after someone who may have COVID-19. Disposable face mask can only be used once. If you are not ill or looking after someone who is ill then you are wasting a mask. There is a world-wide shortage of masks, so WHO urges people to use masks wisely.\nWHO advises rational use of medical masks to avoid unnecessary wastage of precious resources and mis-use of masks\nThe most effective ways to protect yourself and others against COVID-19 are to frequently clean your hands, cover your cough with the bend of elbow or tissue and maintain a distance of at least 1 meter (3 feet) from people who are coughing or sneezing"
+          "Masks should be used as part of a comprehensive strategy of measures to suppress transmission and save lives; the use of a mask alone is not sufficient to provide an adequate level of protection against COVID-19. If COVID-19 is spreading in your community, stay safe by taking some simple precautions, such as physical distancing, wearing a mask, keeping rooms well ventilated, avoiding crowds, cleaning your hands, and coughing into a bent elbow or tissue. Check local advice where you live and work. Do it all! Make wearing a mask a normal part of being around other people. The appropriate use, storage and cleaning or disposal of masks are essential to make them as effective as possible."
+    },
+    {
+      "question": "Should I wear a mask while exercising?",
+      "answer":
+          "The WHO recommends that masks not be worn during vigorous physical activity. Please ensure a 1-2-meter distance from others when exercising and that there is adequate ventilation."
+    },
+    {
+      "question":
+          "Can humans become infected with COVID-19 from an animal source?",
+      "answer":
+          "Possible animal sources of COVID-19 have not yet been confirmed though are postulated. To protect yourself, such as when visiting live animal markets, avoid direct contact with animals and surfaces in contact with animals. Ensure good food safety practices at all times. Handle raw meat, milk or animal organs with care to avoid contamination of uncooked foods and avoid consuming raw or undercooked animal products."
+    },
+    {
+      "question":
+          "How long is the incubation and transmission period for COVID-19?",
+      "answer":
+          "The “incubation period” means the time between catching the virus and beginning to have symptoms of the disease. Most estimates of the incubation period for COVID-19 range from 1-14 days, most commonly around five days. The transmission period refers to the period where you can spread infection to someone else which is currently 48 hours before symptom onset to 14 days after symptom resolution, or date of test in those who were asymptomatic."
     },
     {
       "question":
           "Are antibiotics effective in preventing or treating the COVID-19?",
       "answer":
-          "No. Antibiotics do not work against viruses, they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19. They should only be used as directed by a physician to treat a bacterial infection. "
+          "Antibiotics are used to treat bacterial infections. Since COVID-19 is a virus, antibiotics are not indicated for the direct treatment. However, it may be required in some instances, such as for treating secondary bacterial infections."
     }
   ];
 }
