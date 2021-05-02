@@ -45,10 +45,17 @@ class PieChartWidget extends StatelessWidget {
         activeColor,
         deathsColor,
       ],
-      legendStyle: Theme.of(context).textTheme.headline4,
-      showLegends: showLegends,
-      legendPosition: LegendPosition.right,
+      legendOptions: LegendOptions(
+        legendTextStyle: Theme.of(context).textTheme.headline4,
+        showLegends: showLegends,
+        legendPosition: LegendPosition.right,
+      ),
       animationDuration: Duration(milliseconds: duration),
+      chartValuesOptions: ChartValuesOptions(
+        showChartValueBackground: false,
+        decimalPlaces: 0,
+        showChartValuesInPercentage: true,
+      ),
     );
   }
 }

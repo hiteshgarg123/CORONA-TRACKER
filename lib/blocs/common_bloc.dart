@@ -68,7 +68,7 @@ class CommonBloc {
 
   Future<void> getWorldWideData() async {
     final response = await http.get(
-      'https://corona.lmao.ninja/v3/covid-19/all',
+      Uri.parse('https://corona.lmao.ninja/v3/covid-19/all'),
     );
     if (response.statusCode == HttpStatus.ok) {
       final _worldData = json.decode(response.body);
@@ -87,7 +87,7 @@ class CommonBloc {
 
   Future<void> getCountriesData() async {
     http.Response response = await http.get(
-      'https://corona.lmao.ninja/v3/covid-19/countries?sort=cases',
+      Uri.parse('https://corona.lmao.ninja/v3/covid-19/countries?sort=cases'),
     );
     if (response.statusCode == HttpStatus.ok) {
       countriesData = (json.decode(response.body) as List)
@@ -107,7 +107,7 @@ class CommonBloc {
 
   Future<void> getIndiaData() async {
     final response = await http.get(
-      'https://api.covid19india.org/data.json',
+      Uri.parse('https://api.covid19india.org/data.json'),
     );
     if (response.statusCode == HttpStatus.ok) {
       final _indiaData = ((json.decode(response.body))['statewise'] as List);
