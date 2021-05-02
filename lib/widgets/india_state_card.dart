@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class StateCard extends StatelessWidget {
   const StateCard({
-    Key key,
-    @required this.indiaStatewiseData,
-    @required this.index,
-    @required this.height,
+    Key? key,
+    required this.indiaStatewiseData,
+    required this.index,
+    required this.height,
     this.showPieChartAnimation = true,
   }) : super(key: key);
 
@@ -110,15 +110,15 @@ class StateCard extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 margin: const EdgeInsets.only(right: 10.0),
                 child: PieChartWidget(
-                  total: double.tryParse(indiaStatewiseData[index].confirmed),
-                  active: double.tryParse(indiaStatewiseData[index].active),
+                  total: double.tryParse(indiaStatewiseData[index].confirmed)!,
+                  active: double.tryParse(indiaStatewiseData[index].active)!,
                   recovered:
-                      double.tryParse(indiaStatewiseData[index].recovered),
-                  deaths: double.tryParse(indiaStatewiseData[index].deaths),
-                  totalColor: Colors.red[400],
-                  activeColor: Colors.blue[400],
-                  recoveredColor: Colors.green[300],
-                  deathsColor: Colors.grey[400],
+                      double.tryParse(indiaStatewiseData[index].recovered)!,
+                  deaths: double.tryParse(indiaStatewiseData[index].deaths)!,
+                  totalColor: Colors.red[400]!,
+                  activeColor: Colors.blue[400]!,
+                  recoveredColor: Colors.green[300]!,
+                  deathsColor: Colors.grey[400]!,
                   showLegends: false,
                   duration: showPieChartAnimation ? 800 : 0,
                 ),

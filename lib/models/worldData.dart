@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'worldData.g.dart';
 
@@ -18,12 +17,12 @@ class WorldData {
   String affetctedCountries;
 
   WorldData({
-    @required this.cases,
-    @required this.active,
-    @required this.recovered,
-    @required this.deaths,
-    @required this.todayCases,
-    @required this.affetctedCountries,
+    required this.cases,
+    required this.active,
+    required this.recovered,
+    required this.deaths,
+    required this.todayCases,
+    required this.affetctedCountries,
   });
 
   factory WorldData.fromJSON(Map<String, dynamic> worldData) {

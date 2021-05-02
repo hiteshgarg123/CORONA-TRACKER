@@ -6,9 +6,9 @@ class CustomRaisedButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const CustomRaisedButton({
-    Key key,
-    this.title,
-    this.onPressed,
+    Key? key,
+    required this.title,
+    required this.onPressed,
   }) : super(key: key);
 
   @override

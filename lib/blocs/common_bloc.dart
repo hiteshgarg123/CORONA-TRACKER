@@ -16,15 +16,15 @@ class CommonBloc {
   final _indiaDataLoadingController = StreamController<bool>.broadcast();
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
-  WorldData worldData;
-  List<CountryData> countriesData;
-  List<StatewiseData> indiaData;
+  WorldData? worldData;
+  late List<CountryData> countriesData;
+  late List<StatewiseData> indiaData;
 
   final snackBar = const SnackBar(
     content: const Text('Press back again to exit'),
     duration: snackBarDuration,
   );
-  DateTime backButtonPressedTime;
+  DateTime? backButtonPressedTime;
   static const snackBarDuration = Duration(seconds: 3);
 
   Stream<bool> get worldDataLoadingStream => _worldDataLoadingController.stream;
@@ -56,7 +56,7 @@ class CommonBloc {
     final currentTime = DateTime.now();
 
     final backButtonNotPressedTwice = backButtonPressedTime == null ||
-        currentTime.difference(backButtonPressedTime) > snackBarDuration;
+        currentTime.difference(backButtonPressedTime!) > snackBarDuration;
 
     if (backButtonNotPressedTwice) {
       backButtonPressedTime = currentTime;

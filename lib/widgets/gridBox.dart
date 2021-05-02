@@ -8,11 +8,11 @@ class GridBox extends StatelessWidget {
   final String count;
 
   const GridBox({
-    Key key,
-    @required this.boxColor,
-    @required this.textColor,
-    @required this.title,
-    @required this.count,
+    Key? key,
+    required this.boxColor,
+    required this.textColor,
+    required this.title,
+    required this.count,
   }) : super(key: key);
 
   @override

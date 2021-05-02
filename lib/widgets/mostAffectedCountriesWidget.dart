@@ -7,8 +7,8 @@ class MostAffectedWidget extends StatelessWidget {
   final List countryData;
 
   const MostAffectedWidget({
-    Key key,
-    @required this.countryData,
+    Key? key,
+    required this.countryData,
   }) : super(key: key);
 
   @override

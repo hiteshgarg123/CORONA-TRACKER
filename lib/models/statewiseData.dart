@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'statewiseData.g.dart';
 
@@ -20,13 +19,13 @@ class StatewiseData {
   final String statecode;
 
   StatewiseData({
-    @required this.active,
-    @required this.confirmed,
-    @required this.deaths,
-    @required this.recovered,
-    @required this.state,
-    @required this.statecode,
-    this.lastupdatedtime,
+    required this.active,
+    required this.confirmed,
+    required this.deaths,
+    required this.recovered,
+    required this.state,
+    required this.statecode,
+    required this.lastupdatedtime,
   });
 
   factory StatewiseData.fromJson(Map<String, dynamic> json) {

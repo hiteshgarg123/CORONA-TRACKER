@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showAlertDialog({
-  @required BuildContext context,
-  @required String titleText,
-  @required String contentText,
-  @required String defaultActionButtonText,
+  required BuildContext context,
+  required String titleText,
+  required String contentText,
+  required String defaultActionButtonText,
 }) async {
   if (Platform.isIOS) {
     return await showCupertinoDialog(

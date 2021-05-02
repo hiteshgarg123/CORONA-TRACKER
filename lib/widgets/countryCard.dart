@@ -9,10 +9,10 @@ class CountryCard extends StatelessWidget {
   final int index;
 
   const CountryCard({
-    Key key,
-    @required this.countryData,
-    @required this.height,
-    @required this.index,
+    Key? key,
+    required this.countryData,
+    required this.height,
+    required this.index,
   }) : super(key: key);
 
   @override

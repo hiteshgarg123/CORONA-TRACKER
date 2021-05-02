@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'countryData.g.dart';
 
@@ -22,14 +21,14 @@ class CountryData {
   String todayDeaths;
 
   CountryData({
-    @required this.cases,
-    @required this.deaths,
-    @required this.countryFlagUrl,
-    @required this.country,
-    @required this.todayCases,
-    @required this.active,
-    @required this.recovered,
-    @required this.todayDeaths,
+    required this.cases,
+    required this.deaths,
+    required this.countryFlagUrl,
+    required this.country,
+    required this.todayCases,
+    required this.active,
+    required this.recovered,
+    required this.todayDeaths,
   });
 
   factory CountryData.fromJSON(Map<String, dynamic> countriesData) {
