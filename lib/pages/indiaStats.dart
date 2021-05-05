@@ -48,8 +48,7 @@ class _IndiaStatsState extends State<IndiaStats> {
   void getCachedData() {
     try {
       indiaDataBox = Hive.box(HiveBoxes.stateData);
-      indiaCachedData =
-          indiaDataBox.isNotEmpty ? indiaDataBox.values.last : null;
+      indiaCachedData = indiaDataBox.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,

@@ -36,7 +36,8 @@ class MostAffectedWidget extends StatelessWidget {
                           value: progress.progress,
                         ),
                       ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 ),

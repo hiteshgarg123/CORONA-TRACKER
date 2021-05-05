@@ -17,8 +17,8 @@ class CommonBloc {
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
   WorldData? worldData;
-  late List<CountryData> countriesData;
-  late List<StatewiseData> indiaData;
+  List<CountryData>? countriesData;
+  List<StatewiseData>? indiaData;
 
   final snackBar = const SnackBar(
     content: const Text('Press back again to exit'),

@@ -19,8 +19,8 @@ class CountryWiseStats extends StatefulWidget {
 class _CountryWiseStatsState extends State<CountryWiseStats> {
   List? countriesData;
   List? countriesCachedData;
-  late Box countryDataBox;
-  late CommonBloc bloc;
+  late final Box countryDataBox;
+  late final CommonBloc bloc;
 
   @override
   void initState() {
@@ -33,8 +33,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   Future<void> getCachedData() async {
     try {
       countryDataBox = Hive.box(HiveBoxes.countriesData);
-      countriesCachedData =
-          countryDataBox.isNotEmpty ? countryDataBox.values.last : null;
+      countriesCachedData = countryDataBox.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,

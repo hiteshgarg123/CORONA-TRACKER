@@ -60,10 +60,8 @@ class _HomePageState extends State<HomePage> {
     try {
       worldDataBox = Hive.box(HiveBoxes.worldData);
       countryDataBox = Hive.box(HiveBoxes.countriesData);
-      worldCachedData =
-          worldDataBox!.isNotEmpty ? worldDataBox!.values.last : null;
-      countriesCachedData =
-          countryDataBox!.isNotEmpty ? countryDataBox!.values.last : null;
+      worldCachedData = worldDataBox!.values.last;
+      countriesCachedData = countryDataBox!.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,
@@ -161,7 +159,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const CustomHeadingWidget(title: 'Most Affected Countries'),
         MostAffectedWidget(
-          countryData: isLoading ? countriesCachedData! : bloc.countriesData,
+          countryData: isLoading ? countriesCachedData! : bloc.countriesData!,
         ),
         const CustomHeadingWidget(title: 'Statistics...'),
         _buildPieChartPannel(

@@ -53,9 +53,9 @@ class IndiaStatewise extends StatelessWidget {
 }
 
 class Search extends SearchDelegate {
-  final List? indiaData;
+  final List indiaData;
   final double height;
-  late List? suggestionList;
+  late List suggestionList;
 
   Search(this.indiaData, this.height);
 
@@ -83,11 +83,11 @@ class Search extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return ListView.builder(
-      itemCount: indiaData == null ? 0 : suggestionList!.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
           index: index,
-          indiaStatewiseData: suggestionList!,
+          indiaStatewiseData: suggestionList,
           height: height,
           showPieChartAnimation: false,
         );
@@ -99,7 +99,7 @@ class Search extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     suggestionList = query.isEmpty
         ? indiaData
-        : indiaData!
+        : indiaData
             .where(
               (element) => element.state
                   .toString()
@@ -108,11 +108,11 @@ class Search extends SearchDelegate {
             )
             .toList();
     return ListView.builder(
-      itemCount: indiaData == null ? 0 : suggestionList!.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
           index: index,
-          indiaStatewiseData: suggestionList!,
+          indiaStatewiseData: suggestionList,
           height: height,
           showPieChartAnimation: false,
         );

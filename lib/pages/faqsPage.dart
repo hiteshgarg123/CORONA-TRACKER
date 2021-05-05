@@ -7,7 +7,7 @@ class FAQsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FAQs'),
+        title: const Text('FAQs'),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
