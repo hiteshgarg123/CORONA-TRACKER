@@ -17,15 +17,15 @@ class PieChartWidget extends StatelessWidget {
   final bool showLegends;
 
   const PieChartWidget({
-    Key key,
-    @required this.total,
-    @required this.active,
-    @required this.recovered,
-    @required this.deaths,
-    @required this.totalColor,
-    @required this.activeColor,
-    @required this.recoveredColor,
-    @required this.deathsColor,
+    Key? key,
+    required this.total,
+    required this.active,
+    required this.recovered,
+    required this.deaths,
+    required this.totalColor,
+    required this.activeColor,
+    required this.recoveredColor,
+    required this.deathsColor,
     this.showLegends: true,
     this.duration = 800,
   }) : super(key: key);
@@ -45,10 +45,17 @@ class PieChartWidget extends StatelessWidget {
         activeColor,
         deathsColor,
       ],
-      legendStyle: Theme.of(context).textTheme.headline4,
-      showLegends: showLegends,
-      legendPosition: LegendPosition.right,
+      legendOptions: LegendOptions(
+        legendTextStyle: Theme.of(context).textTheme.headline4!,
+        showLegends: showLegends,
+        legendPosition: LegendPosition.right,
+      ),
       animationDuration: Duration(milliseconds: duration),
+      chartValuesOptions: ChartValuesOptions(
+        showChartValueBackground: false,
+        decimalPlaces: 0,
+        showChartValuesInPercentage: true,
+      ),
     );
   }
 }

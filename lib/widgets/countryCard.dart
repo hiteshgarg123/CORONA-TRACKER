@@ -9,10 +9,10 @@ class CountryCard extends StatelessWidget {
   final int index;
 
   const CountryCard({
-    Key key,
-    @required this.countryData,
-    @required this.height,
-    @required this.index,
+    Key? key,
+    required this.countryData,
+    required this.height,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -60,7 +60,8 @@ class CountryCard extends StatelessWidget {
                             value: progress.progress,
                           ),
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ],

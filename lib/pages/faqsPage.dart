@@ -7,13 +7,13 @@ class FAQsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FAQs'),
+        title: const Text('FAQs'),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return ExpansionTile(
             title: AutoSizeText(
-              StaticData.commonQuestions[index]['question'],
+              StaticData.commonQuestions[index]['question']!,
               maxLines: 2,
               minFontSize: 12.0,
               maxFontSize: 16.0,
@@ -25,7 +25,7 @@ class FAQsPage extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(StaticData.commonQuestions[index]['answer']),
+                child: Text(StaticData.commonQuestions[index]['answer']!),
               ),
             ],
           );

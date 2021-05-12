@@ -7,8 +7,8 @@ class MostAffectedWidget extends StatelessWidget {
   final List countryData;
 
   const MostAffectedWidget({
-    Key key,
-    @required this.countryData,
+    Key? key,
+    required this.countryData,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,8 @@ class MostAffectedWidget extends StatelessWidget {
                           value: progress.progress,
                         ),
                       ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 ),

@@ -17,10 +17,10 @@ class CountryWiseStats extends StatefulWidget {
 }
 
 class _CountryWiseStatsState extends State<CountryWiseStats> {
-  List countriesData;
-  List countriesCachedData;
-  Box countryDataBox;
-  CommonBloc bloc;
+  List? countriesData;
+  List? countriesCachedData;
+  late final Box countryDataBox;
+  late final CommonBloc bloc;
 
   @override
   void initState() {
@@ -33,8 +33,7 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   Future<void> getCachedData() async {
     try {
       countryDataBox = Hive.box(HiveBoxes.countriesData);
-      countriesCachedData =
-          countryDataBox.isNotEmpty ? countryDataBox.values.last : null;
+      countriesCachedData = countryDataBox.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,
@@ -73,18 +72,18 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
   }
 
   Widget _buildContent(
-    bool isLoading,
+    bool? isLoading,
     double height,
   ) {
-    if (countryDataBox.isEmpty && isLoading) {
+    if (countryDataBox.isEmpty && isLoading!) {
       return CustomProgressIndicator();
     }
-    countriesData = isLoading ? countriesCachedData : bloc.countriesData;
+    countriesData = isLoading! ? countriesCachedData : bloc.countriesData;
     return ListView.builder(
-      itemCount: countriesData.length,
+      itemCount: countriesData!.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: countriesData,
+          countryData: countriesData!,
           height: height,
           index: index,
         );
@@ -133,9 +132,9 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 }
 
 class Search extends SearchDelegate {
-  final List countryData;
+  final List? countryData;
   final double height;
-  List suggestionList;
+  List? suggestionList;
 
   Search(this.countryData, this.height);
 
@@ -163,10 +162,10 @@ class Search extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return ListView.builder(
-      itemCount: countryData == null ? 0 : suggestionList.length,
+      itemCount: countryData == null ? 0 : suggestionList!.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: suggestionList,
+          countryData: suggestionList!,
           height: height,
           index: index,
         );
@@ -178,7 +177,7 @@ class Search extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     suggestionList = query.isEmpty
         ? countryData
-        : countryData
+        : countryData!
             .where(
               (element) => element.country
                   .toString()
@@ -188,10 +187,10 @@ class Search extends SearchDelegate {
             .toList();
 
     return ListView.builder(
-      itemCount: countryData == null ? 0 : suggestionList.length,
+      itemCount: countryData == null ? 0 : suggestionList!.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: suggestionList,
+          countryData: suggestionList!,
           height: height,
           index: index,
         );

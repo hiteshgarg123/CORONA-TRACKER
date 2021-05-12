@@ -16,15 +16,15 @@ class CommonBloc {
   final _indiaDataLoadingController = StreamController<bool>.broadcast();
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
-  WorldData worldData;
-  List<CountryData> countriesData;
-  List<StatewiseData> indiaData;
+  WorldData? worldData;
+  List<CountryData>? countriesData;
+  List<StatewiseData>? indiaData;
 
   final snackBar = const SnackBar(
     content: const Text('Press back again to exit'),
     duration: snackBarDuration,
   );
-  DateTime backButtonPressedTime;
+  DateTime? backButtonPressedTime;
   static const snackBarDuration = Duration(seconds: 3);
 
   Stream<bool> get worldDataLoadingStream => _worldDataLoadingController.stream;
@@ -56,7 +56,7 @@ class CommonBloc {
     final currentTime = DateTime.now();
 
     final backButtonNotPressedTwice = backButtonPressedTime == null ||
-        currentTime.difference(backButtonPressedTime) > snackBarDuration;
+        currentTime.difference(backButtonPressedTime!) > snackBarDuration;
 
     if (backButtonNotPressedTwice) {
       backButtonPressedTime = currentTime;
@@ -68,7 +68,7 @@ class CommonBloc {
 
   Future<void> getWorldWideData() async {
     final response = await http.get(
-      'https://corona.lmao.ninja/v3/covid-19/all',
+      Uri.parse('https://corona.lmao.ninja/v3/covid-19/all'),
     );
     if (response.statusCode == HttpStatus.ok) {
       final _worldData = json.decode(response.body);
@@ -87,7 +87,7 @@ class CommonBloc {
 
   Future<void> getCountriesData() async {
     http.Response response = await http.get(
-      'https://corona.lmao.ninja/v3/covid-19/countries?sort=cases',
+      Uri.parse('https://corona.lmao.ninja/v3/covid-19/countries?sort=cases'),
     );
     if (response.statusCode == HttpStatus.ok) {
       countriesData = (json.decode(response.body) as List)
@@ -107,7 +107,7 @@ class CommonBloc {
 
   Future<void> getIndiaData() async {
     final response = await http.get(
-      'https://api.covid19india.org/data.json',
+      Uri.parse('https://api.covid19india.org/data.json'),
     );
     if (response.statusCode == HttpStatus.ok) {
       final _indiaData = ((json.decode(response.body))['statewise'] as List);

@@ -5,8 +5,8 @@ class IndiaStatewise extends StatelessWidget {
   final List indiaData;
 
   IndiaStatewise({
-    Key key,
-    @required this.indiaData,
+    Key? key,
+    required this.indiaData,
   }) : super(key: key);
 
   @override
@@ -19,15 +19,13 @@ class IndiaStatewise extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              if (indiaData != null) {
-                showSearch(
-                  context: context,
-                  delegate: Search(
-                    indiaData.sublist(1),
-                    height,
-                  ),
-                );
-              }
+              showSearch(
+                context: context,
+                delegate: Search(
+                  indiaData.sublist(1),
+                  height,
+                ),
+              );
             },
           ),
         ],
@@ -57,7 +55,7 @@ class IndiaStatewise extends StatelessWidget {
 class Search extends SearchDelegate {
   final List indiaData;
   final double height;
-  List suggestionList;
+  late List suggestionList;
 
   Search(this.indiaData, this.height);
 
@@ -85,7 +83,7 @@ class Search extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return ListView.builder(
-      itemCount: indiaData == null ? 0 : suggestionList.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
           index: index,
@@ -110,7 +108,7 @@ class Search extends SearchDelegate {
             )
             .toList();
     return ListView.builder(
-      itemCount: indiaData == null ? 0 : suggestionList.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
           index: index,

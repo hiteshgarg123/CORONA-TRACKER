@@ -5,8 +5,8 @@ class CustomHeadingWidget extends StatelessWidget {
   final String title;
 
   const CustomHeadingWidget({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
