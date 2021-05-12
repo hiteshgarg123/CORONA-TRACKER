@@ -19,10 +19,11 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 ## Features 💡
 
 - Based on BLoC Architecture.
+- Null Safe Code-base.
 - Shows Worldwide as well as Country-wise stats.
 - Dedicated pages for India's stats.
 - Statewise stats of India.
-- Added beautiful PieCharts for data visualisation.
+- Beautiful PieCharts for data visualisation.
 - Myth Buster section.
 - FAQs Section.
 - Search Functionality (in countrywise stats and India's statewise stats).
@@ -30,6 +31,7 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Recent Changes
 
+- Null Safety Migration.
 - Complete Data Caching.
 - Error Handling.
 - Beautiful Dark Theme.
@@ -51,21 +53,22 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 <p>
 
 ```dart
-auto_size_text: ^2.1.0
-cached_network_image: ^2.5.0
-cupertino_icons: ^0.1.2
-day_night_switcher: ^0.1.1+1
-flutter_spinkit: ^4.1.2
-fluttertoast: ^7.1.6
-hive: ^1.4.4+1
-hive_flutter: ^0.3.1
-http: ^0.12.0+4
-intl: ^0.16.1
-liquid_pull_to_refresh: ^2.0.0
-pie_chart: ^3.1.1
-provider: ^4.1.3
-shared_preferences: ^0.5.6+3
-url_launcher: ^5.4.2
+auto_size_text: ^3.0.0-nullsafety.0
+cached_network_image: ^3.0.0
+cupertino_icons: ^1.0.2
+day_night_switcher: ^0.2.0+1
+fl_chart: ^0.36.0
+flutter_spinkit: ^5.0.0
+fluttertoast: ^8.0.6
+hive: ^2.0.4
+hive_flutter: ^1.0.0
+http: ^0.13.2
+intl: ^0.17.0
+liquid_pull_to_refresh: ^3.0.0
+pie_chart: ^5.0.0
+provider: ^5.0.0
+shared_preferences: ^2.0.5
+url_launcher: ^6.0.3
 ```
 
 </p>
