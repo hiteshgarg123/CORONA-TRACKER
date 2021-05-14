@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/countryWiseStats.dart';
@@ -33,17 +34,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  WorldData? worldCachedData;
-  List? countriesCachedData;
-  Box? worldDataBox;
-  Box? countryDataBox;
   late final CommonBloc bloc;
   late final ThemeNotifier themeNotifier;
+  late final Box<WorldData> worldDataBox;
+  late final Box<CountriesData> countryDataBox;
+
   late bool _darkModeEnabled;
+
+  WorldData? worldCachedData;
+  CountriesData? countriesCachedData;
 
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
+    worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+    countryDataBox = Hive.box<CountriesData>(HiveBoxes.countriesData);
     themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
     _darkModeEnabled = themeNotifier.getTheme() == AppTheme.darkTheme();
     getCachedData();
@@ -58,10 +63,10 @@ class _HomePageState extends State<HomePage> {
 
   void getCachedData() {
     try {
-      worldDataBox = Hive.box(HiveBoxes.worldData);
-      countryDataBox = Hive.box(HiveBoxes.countriesData);
-      worldCachedData = worldDataBox!.values.last;
-      countriesCachedData = countryDataBox!.values.last;
+      if (worldDataBox.isNotEmpty && countryDataBox.isNotEmpty) {
+        worldCachedData = worldDataBox.values.last;
+        countriesCachedData = countryDataBox.values.last;
+      }
     } catch (_) {
       showAlertDialog(
         context: context,
@@ -115,16 +120,16 @@ class _HomePageState extends State<HomePage> {
       elevation: 4.0,
       child: PieChartWidget(
         total: double.tryParse(
-          isLoading ? worldCachedData!.cases : bloc.worldData!.cases,
+          isLoading ? worldCachedData!.cases : bloc.worldData.cases,
         )!,
         active: double.tryParse(
-          isLoading ? worldCachedData!.active : bloc.worldData!.active,
+          isLoading ? worldCachedData!.active : bloc.worldData.active,
         )!,
         recovered: double.tryParse(
-          isLoading ? worldCachedData!.recovered : bloc.worldData!.recovered,
+          isLoading ? worldCachedData!.recovered : bloc.worldData.recovered,
         )!,
         deaths: double.tryParse(
-          isLoading ? worldCachedData!.deaths : bloc.worldData!.deaths,
+          isLoading ? worldCachedData!.deaths : bloc.worldData.deaths,
         )!,
         totalColor: Colors.red[400]!,
         activeColor: Colors.blue,
@@ -143,9 +148,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildStreamContents(bool isLoading) {
-    if (isLoading &&
-        ((worldDataBox?.isEmpty ?? true) ||
-            (countryDataBox?.isEmpty ?? true))) {
+    if (isLoading && (worldDataBox.isEmpty || countryDataBox.isEmpty)) {
       return Container(
         height: MediaQuery.of(context).size.height * 0.5,
         child: CustomProgressIndicator(),
@@ -155,11 +158,11 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         WorldWideWidget(
-          worldData: isLoading ? worldCachedData! : bloc.worldData!,
+          worldData: isLoading ? worldCachedData! : bloc.worldData,
         ),
         const CustomHeadingWidget(title: 'Most Affected Countries'),
         MostAffectedWidget(
-          countryData: isLoading ? countriesCachedData! : bloc.countriesData!,
+          countriesData: isLoading ? countriesCachedData! : bloc.countriesData,
         ),
         const CustomHeadingWidget(title: 'Statistics...'),
         _buildPieChartPannel(

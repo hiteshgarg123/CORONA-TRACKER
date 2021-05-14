@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/pages/indiaStatewise.dart';
 import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:covid_19_tracker/utils/formatter/number_formatter.dart';
@@ -26,15 +27,17 @@ class IndiaStats extends StatefulWidget {
 }
 
 class _IndiaStatsState extends State<IndiaStats> {
-  List? indiaCachedData;
-  List? indiaData;
-  late final Box indiaDataBox;
+  late final Box<IndiaData> indiaDataBox;
   late final CommonBloc bloc;
+
+  IndiaData? indiaCachedData;
+  IndiaData? indiaData;
 
   @override
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
+    indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
     getCachedData();
     updateData();
   }
@@ -47,8 +50,7 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   void getCachedData() {
     try {
-      indiaDataBox = Hive.box(HiveBoxes.stateData);
-      indiaCachedData = indiaDataBox.values.last;
+      if (indiaDataBox.isNotEmpty) indiaCachedData = indiaDataBox.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,
@@ -69,11 +71,11 @@ class _IndiaStatsState extends State<IndiaStats> {
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_SHORT,
       );
-    } on Response catch (response) {
+    } on Response catch (_) {
       showAlertDialog(
         context: context,
-        titleText: response.statusCode.toString(),
-        contentText: 'Error Retrieving Data',
+        titleText: 'Error...',
+        contentText: 'Can\'t retrieve data\n Please try again later.',
         defaultActionButtonText: 'Ok',
       );
     } catch (_) {
@@ -184,25 +186,29 @@ class _IndiaStatsState extends State<IndiaStats> {
             children: <Widget>[
               GridBox(
                 title: 'TOTAL CASES',
-                count: NumberFormatter.formatString(indiaData![0].confirmed),
+                count: NumberFormatter.formatString(
+                    indiaData!.stateData[0].confirmed),
                 boxColor: Colors.red[200]!,
                 textColor: Colors.red[900]!,
               ),
               GridBox(
                 title: 'ACTIVE',
-                count: NumberFormatter.formatString(indiaData![0].active),
+                count: NumberFormatter.formatString(
+                    indiaData!.stateData[0].active),
                 boxColor: Colors.blue[200]!,
                 textColor: Colors.blue[900]!,
               ),
               GridBox(
                 title: 'DEATHS',
-                count: NumberFormatter.formatString(indiaData![0].deaths),
+                count: NumberFormatter.formatString(
+                    indiaData!.stateData[0].deaths),
                 boxColor: Colors.grey,
                 textColor: Colors.grey[900]!,
               ),
               GridBox(
                 title: 'RECOVERED',
-                count: NumberFormatter.formatString(indiaData![0].recovered),
+                count: NumberFormatter.formatString(
+                    indiaData!.stateData[0].recovered),
                 boxColor: Colors.green[300]!,
                 textColor: Colors.green[900]!,
               ),
@@ -224,10 +230,10 @@ class _IndiaStatsState extends State<IndiaStats> {
           child: Container(
             padding: const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
             child: PieChartWidget(
-              total: double.tryParse(indiaData![0].confirmed)!,
-              active: double.tryParse(indiaData![0].active)!,
-              recovered: double.tryParse(indiaData![0].recovered)!,
-              deaths: double.tryParse(indiaData![0].deaths)!,
+              total: double.tryParse(indiaData!.stateData[0].confirmed)!,
+              active: double.tryParse(indiaData!.stateData[0].active)!,
+              recovered: double.tryParse(indiaData!.stateData[0].recovered)!,
+              deaths: double.tryParse(indiaData!.stateData[0].deaths)!,
               totalColor: Colors.red[400]!,
               activeColor: Colors.blue[400]!,
               recoveredColor: Colors.green[300]!,

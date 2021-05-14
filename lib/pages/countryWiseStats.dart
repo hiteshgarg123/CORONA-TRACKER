@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/models/countriesData.dart';
+import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:covid_19_tracker/widgets/countryCard.dart';
 import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
+import 'package:covid_19_tracker/widgets/notFound.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,23 +20,25 @@ class CountryWiseStats extends StatefulWidget {
 }
 
 class _CountryWiseStatsState extends State<CountryWiseStats> {
-  List? countriesData;
-  List? countriesCachedData;
-  late final Box countryDataBox;
+  late final Box<CountriesData> countryDataBox;
   late final CommonBloc bloc;
+
+  CountriesData? countriesCachedData;
+  CountriesData? countriesData;
 
   @override
   void initState() {
-    bloc = Provider.of<CommonBloc>(context, listen: false);
     super.initState();
+    bloc = Provider.of<CommonBloc>(context, listen: false);
+    countryDataBox = Hive.box<CountriesData>(HiveBoxes.countriesData);
     getCachedData();
     updateData();
   }
 
   Future<void> getCachedData() async {
     try {
-      countryDataBox = Hive.box(HiveBoxes.countriesData);
-      countriesCachedData = countryDataBox.values.last;
+      if (countryDataBox.isNotEmpty)
+        countriesCachedData = countryDataBox.values.last;
     } catch (_) {
       showAlertDialog(
         context: context,
@@ -54,11 +59,11 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_SHORT,
       );
-    } on Response catch (response) {
+    } on Response catch (_) {
       showAlertDialog(
         context: context,
-        titleText: response.statusCode.toString(),
-        contentText: 'Error Retrieving Data',
+        titleText: 'Oops! Error...',
+        contentText: 'Something went wrong :(\nPlease try again later',
         defaultActionButtonText: 'Ok',
       );
     } catch (_) {
@@ -80,12 +85,11 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
     }
     countriesData = isLoading! ? countriesCachedData : bloc.countriesData;
     return ListView.builder(
-      itemCount: countriesData!.length,
+      itemCount: countriesData!.countriesData.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: countriesData!,
+          countryData: countriesData!.countriesData[index],
           height: height,
-          index: index,
         );
       },
     );
@@ -101,15 +105,13 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              if (countriesData != null) {
-                showSearch(
-                  context: context,
-                  delegate: Search(
-                    countriesData,
-                    height,
-                  ),
-                );
-              }
+              showSearch(
+                context: context,
+                delegate: Search(
+                  countriesData!,
+                  height,
+                ),
+              );
             },
           ),
         ],
@@ -132,11 +134,11 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 }
 
 class Search extends SearchDelegate {
-  final List? countryData;
+  final CountriesData countriesData;
   final double height;
-  List? suggestionList;
+  late List<CountryData> suggestionList;
 
-  Search(this.countryData, this.height);
+  Search(this.countriesData, this.height);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -144,7 +146,7 @@ class Search extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          suggestionList = countryData;
+          suggestionList = countriesData.countriesData;
           query = '';
         },
       )
@@ -161,13 +163,17 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    if (suggestionList.isEmpty) {
+      return const NotFound(
+        title: 'No Country Found',
+      );
+    }
     return ListView.builder(
-      itemCount: countryData == null ? 0 : suggestionList!.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: suggestionList!,
+          countryData: suggestionList[index],
           height: height,
-          index: index,
         );
       },
     );
@@ -176,8 +182,8 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     suggestionList = query.isEmpty
-        ? countryData
-        : countryData!
+        ? countriesData.countriesData
+        : countriesData.countriesData
             .where(
               (element) => element.country
                   .toString()
@@ -185,14 +191,17 @@ class Search extends SearchDelegate {
                   .startsWith(query.toLowerCase()),
             )
             .toList();
-
+    if (suggestionList.isEmpty) {
+      return const NotFound(
+        title: 'No Country Found',
+      );
+    }
     return ListView.builder(
-      itemCount: countryData == null ? 0 : suggestionList!.length,
+      itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return CountryCard(
-          countryData: suggestionList!,
+          countryData: suggestionList[index],
           height: height,
-          index: index,
         );
       },
     );

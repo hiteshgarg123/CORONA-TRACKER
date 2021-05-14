@@ -51,6 +51,12 @@ class AppTheme {
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
+        //Used in `No Country found text (in search)`
+        headline5: TextStyle(
+          fontSize: 22,
+          color: primaryBlack,
+          fontWeight: FontWeight.w600,
+        ),
         //For search delegate's textfield search text
         headline6: const TextStyle(
           fontSize: 20.0,
@@ -107,6 +113,12 @@ class AppTheme {
           fontSize: 16,
           color: Colors.white,
           fontWeight: FontWeight.bold,
+        ),
+        //Used in `No Country found text (in search)`
+        headline5: TextStyle(
+          fontSize: 22,
+          color: Colors.orange[100],
+          fontWeight: FontWeight.w600,
         ),
         //Used in Legend of PieChart Widget.
         headline4: const TextStyle(

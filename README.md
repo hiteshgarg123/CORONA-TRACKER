@@ -29,7 +29,7 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 - Search Functionality (in countrywise stats and India's statewise stats).
 - You can directly donate to PMNRF by opening from App.
 
-## Recent Changes
+## Recent Changes 🕒
 
 - Null Safety Migration.
 - Complete Data Caching.
@@ -101,7 +101,7 @@ url_launcher: ^6.0.3
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
 
 1.  Match the document style as closely as possible.
-2.  Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
+2.  Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge.
 3.  Pull requests _must_ be made against `master` branch for this particular repository.
 4.  Have fun!
 

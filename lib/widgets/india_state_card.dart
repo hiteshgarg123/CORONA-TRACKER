@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/utils/formatter/number_formatter.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,12 @@ import 'package:flutter/material.dart';
 class StateCard extends StatelessWidget {
   const StateCard({
     Key? key,
-    required this.indiaStatewiseData,
-    required this.index,
+    required this.stateData,
     required this.height,
     this.showPieChartAnimation = true,
   }) : super(key: key);
 
-  final List indiaStatewiseData;
-  final int index;
+  final StatewiseData stateData;
   final double height;
   final bool showPieChartAnimation;
 
@@ -50,7 +49,7 @@ class StateCard extends StatelessWidget {
                       width: 170,
                       margin: const EdgeInsets.only(bottom: 10.0),
                       child: AutoSizeText(
-                        '${indiaStatewiseData[index].state}',
+                        '${stateData.state}',
                         minFontSize: 15,
                         maxFontSize: 22.0,
                         maxLines: 1,
@@ -61,7 +60,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'CONFIRMED : ${NumberFormatter.formatString(indiaStatewiseData[index].confirmed)}',
+                      'CONFIRMED : ${NumberFormatter.formatString(stateData.confirmed)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -71,7 +70,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'ACTIVE : ${NumberFormatter.formatString(indiaStatewiseData[index].active)}',
+                      'ACTIVE : ${NumberFormatter.formatString(stateData.active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -81,7 +80,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'RECOVERED : ${NumberFormatter.formatString(indiaStatewiseData[index].recovered)}',
+                      'RECOVERED : ${NumberFormatter.formatString(stateData.recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -91,7 +90,7 @@ class StateCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'DEATHS : ${NumberFormatter.formatString(indiaStatewiseData[index].deaths)}',
+                      'DEATHS : ${NumberFormatter.formatString(stateData.deaths)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -110,11 +109,10 @@ class StateCard extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 margin: const EdgeInsets.only(right: 10.0),
                 child: PieChartWidget(
-                  total: double.tryParse(indiaStatewiseData[index].confirmed)!,
-                  active: double.tryParse(indiaStatewiseData[index].active)!,
-                  recovered:
-                      double.tryParse(indiaStatewiseData[index].recovered)!,
-                  deaths: double.tryParse(indiaStatewiseData[index].deaths)!,
+                  total: double.tryParse(stateData.confirmed)!,
+                  active: double.tryParse(stateData.active)!,
+                  recovered: double.tryParse(stateData.recovered)!,
+                  deaths: double.tryParse(stateData.deaths)!,
                   totalColor: Colors.red[400]!,
                   activeColor: Colors.blue[400]!,
                   recoveredColor: Colors.green[300]!,

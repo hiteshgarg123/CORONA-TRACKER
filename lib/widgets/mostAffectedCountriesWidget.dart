@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/utils/formatter/number_formatter.dart';
 import 'package:flutter/material.dart';
 
 class MostAffectedWidget extends StatelessWidget {
-  final List countryData;
+  final CountriesData countriesData;
 
   const MostAffectedWidget({
     Key? key,
-    required this.countryData,
+    required this.countriesData,
   }) : super(key: key);
 
   @override
@@ -29,7 +30,8 @@ class MostAffectedWidget extends StatelessWidget {
                       shape: BoxShape.rectangle,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: countryData[index].countryFlagUrl,
+                      imageUrl:
+                          countriesData.countriesData[index].countryFlagUrl,
                       progressIndicatorBuilder: (context, url, progress) =>
                           Center(
                         child: LinearProgressIndicator(
@@ -47,7 +49,7 @@ class MostAffectedWidget extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: AutoSizeText(
-                    countryData[index].country,
+                    countriesData.countriesData[index].country,
                     maxLines: 1,
                     minFontSize: 12.0,
                     maxFontSize: 17.0,
@@ -60,7 +62,7 @@ class MostAffectedWidget extends StatelessWidget {
                 Expanded(
                   flex: 8,
                   child: AutoSizeText(
-                    'No. of cases: ${NumberFormatter.formatString(countryData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countryData[index].deaths)}',
+                    'No. of cases: ${NumberFormatter.formatString(countriesData.countriesData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countriesData.countriesData[index].deaths)}',
                     maxLines: 1,
                     minFontSize: 12.0,
                     maxFontSize: 17.0,

@@ -1,5 +1,7 @@
 import 'package:covid_19_tracker/blocs/common_bloc.dart';
+import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
+import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
 import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
@@ -19,9 +21,11 @@ Future<void> main() async {
   Hive.registerAdapter(WorldDataAdapter());
   Hive.registerAdapter(CountryDataAdapter());
   Hive.registerAdapter(StatewiseDataAdapter());
-  await Hive.openBox(HiveBoxes.worldData);
-  await Hive.openBox(HiveBoxes.countriesData);
-  await Hive.openBox(HiveBoxes.stateData);
+  Hive.registerAdapter(CountriesDataAdapter());
+  Hive.registerAdapter(IndiaDataAdapter());
+  await Hive.openBox<WorldData>(HiveBoxes.worldData);
+  await Hive.openBox<CountriesData>(HiveBoxes.countriesData);
+  await Hive.openBox<IndiaData>(HiveBoxes.indiaData);
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

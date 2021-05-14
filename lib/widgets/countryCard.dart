@@ -1,18 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/utils/formatter/number_formatter.dart';
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
-  final List countryData;
+  final CountryData countryData;
   final double height;
-  final int index;
 
   const CountryCard({
     Key? key,
     required this.countryData,
     required this.height,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -40,7 +39,7 @@ class CountryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AutoSizeText(
-                      '${countryData[index].country}',
+                      '${countryData.country}',
                       maxLines: 2,
                       minFontSize: 12.0,
                       maxFontSize: 17.0,
@@ -51,7 +50,7 @@ class CountryCard extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(top: 3.0),
                       child: CachedNetworkImage(
-                        imageUrl: "${countryData[index].countryFlagUrl}",
+                        imageUrl: "${countryData.countryFlagUrl}",
                         height: height * 0.08,
                         width: height * 0.09,
                         progressIndicatorBuilder: (context, url, progress) =>
@@ -76,7 +75,7 @@ class CountryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     AutoSizeText(
-                      'CONFIRMED : ${NumberFormatter.formatString(countryData[index].cases)}',
+                      'CONFIRMED : ${NumberFormatter.formatString(countryData.cases)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -86,7 +85,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      '[+${NumberFormatter.formatString(countryData[index].todayCases)}]',
+                      '[+${NumberFormatter.formatString(countryData.todayCases)}]',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -96,7 +95,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'ACTIVE : ${NumberFormatter.formatString(countryData[index].active)}',
+                      'ACTIVE : ${NumberFormatter.formatString(countryData.active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -106,7 +105,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'RECOVERED : ${NumberFormatter.formatString(countryData[index].recovered)}',
+                      'RECOVERED : ${NumberFormatter.formatString(countryData.recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
                       style: TextStyle(
@@ -116,7 +115,7 @@ class CountryCard extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'DEATHS : ${NumberFormatter.formatString(countryData[index].deaths)} [+${NumberFormatter.formatString(countryData[index].todayDeaths)}]'
+                      'DEATHS : ${NumberFormatter.formatString(countryData.deaths)} [+${NumberFormatter.formatString(countryData.todayDeaths)}]'
                           .toString(),
                       maxLines: 1,
                       minFontSize: 12.0,

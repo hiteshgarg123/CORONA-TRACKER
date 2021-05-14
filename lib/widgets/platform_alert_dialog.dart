@@ -33,11 +33,12 @@ Future<void> showAlertDialog({
     context: context,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+          // borderRadius: BorderRadius.circular(10.0),
+          ),
       title: Text(
         titleText,
         style: TextStyle(
+          color: Colors.red,
           fontSize: MediaQuery.of(context).size.width * 0.055,
         ),
       ),

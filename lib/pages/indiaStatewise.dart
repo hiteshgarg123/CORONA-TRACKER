@@ -1,10 +1,13 @@
+import 'package:covid_19_tracker/models/indiaData.dart';
+import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/widgets/india_state_card.dart';
+import 'package:covid_19_tracker/widgets/notFound.dart';
 import 'package:flutter/material.dart';
 
 class IndiaStatewise extends StatelessWidget {
-  final List indiaData;
+  final IndiaData indiaData;
 
-  IndiaStatewise({
+  const IndiaStatewise({
     Key? key,
     required this.indiaData,
   }) : super(key: key);
@@ -22,7 +25,7 @@ class IndiaStatewise extends StatelessWidget {
               showSearch(
                 context: context,
                 delegate: Search(
-                  indiaData.sublist(1),
+                  indiaData,
                   height,
                 ),
               );
@@ -39,13 +42,12 @@ class IndiaStatewise extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return StateCard(
-              index: index + 1,
-              indiaStatewiseData: indiaData,
+              stateData: indiaData.stateData[index + 1],
               height: height,
               showPieChartAnimation: true,
             );
           },
-          itemCount: indiaData.length - 1,
+          itemCount: indiaData.stateData.length - 1,
         ),
       ),
     );
@@ -53,9 +55,9 @@ class IndiaStatewise extends StatelessWidget {
 }
 
 class Search extends SearchDelegate {
-  final List indiaData;
+  final IndiaData indiaData;
   final double height;
-  late List suggestionList;
+  late List<StatewiseData> suggestionList;
 
   Search(this.indiaData, this.height);
 
@@ -65,7 +67,7 @@ class Search extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          suggestionList = indiaData;
+          suggestionList = indiaData.stateData;
           query = '';
         },
       )
@@ -82,12 +84,16 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    if (suggestionList.isEmpty) {
+      return const NotFound(
+        title: 'No State Found',
+      );
+    }
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
-          index: index,
-          indiaStatewiseData: suggestionList,
+          stateData: suggestionList[index],
           height: height,
           showPieChartAnimation: false,
         );
@@ -98,8 +104,9 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     suggestionList = query.isEmpty
-        ? indiaData
-        : indiaData
+        ? indiaData.stateData.sublist(1)
+        : indiaData.stateData
+            .sublist(1)
             .where(
               (element) => element.state
                   .toString()
@@ -107,12 +114,16 @@ class Search extends SearchDelegate {
                   .startsWith(query.toLowerCase()),
             )
             .toList();
+    if (suggestionList.isEmpty) {
+      return const NotFound(
+        title: 'No State Found',
+      );
+    }
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {
         return StateCard(
-          index: index,
-          indiaStatewiseData: suggestionList,
+          stateData: suggestionList[index],
           height: height,
           showPieChartAnimation: false,
         );
@@ -123,7 +134,6 @@ class Search extends SearchDelegate {
   @override
   String get searchFieldLabel => 'Enter a State...';
 
-  @override
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
