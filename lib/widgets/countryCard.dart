@@ -43,7 +43,7 @@ class CountryCard extends StatelessWidget {
                       maxLines: 2,
                       minFontSize: 12.0,
                       maxFontSize: 17.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -78,7 +78,7 @@ class CountryCard extends StatelessWidget {
                       'CONFIRMED : ${NumberFormatter.formatString(countryData.cases)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
@@ -88,7 +88,7 @@ class CountryCard extends StatelessWidget {
                       '[+${NumberFormatter.formatString(countryData.todayCases)}]',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
@@ -98,7 +98,7 @@ class CountryCard extends StatelessWidget {
                       'ACTIVE : ${NumberFormatter.formatString(countryData.active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -108,18 +108,17 @@ class CountryCard extends StatelessWidget {
                       'RECOVERED : ${NumberFormatter.formatString(countryData.recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
                     ),
                     AutoSizeText(
-                      'DEATHS : ${NumberFormatter.formatString(countryData.deaths)} [+${NumberFormatter.formatString(countryData.todayDeaths)}]'
-                          .toString(),
+                      'DEATHS : ${NumberFormatter.formatString(countryData.deaths)} [+${NumberFormatter.formatString(countryData.todayDeaths)}]',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,

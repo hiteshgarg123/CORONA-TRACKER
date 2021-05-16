@@ -31,7 +31,7 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   SharedPreferences.getInstance().then((pref) {
-    final isDarkMode = pref.getBool(DarkThemePreference.THEME_STATUS) ?? false;
+    final isDarkMode = pref.getBool(DarkThemePreference.themeStatus) ?? false;
     runApp(
       ChangeNotifierProvider<ThemeNotifier>(
         create: (_) => ThemeNotifier(

@@ -37,14 +37,15 @@ class _CountryWiseStatsState extends State<CountryWiseStats> {
 
   Future<void> getCachedData() async {
     try {
-      if (countryDataBox.isNotEmpty)
+      if (countryDataBox.isNotEmpty) {
         countriesCachedData = countryDataBox.values.last;
+      }
     } catch (_) {
       showAlertDialog(
         context: context,
         titleText: 'Error Reading Data',
         contentText:
-            'Can\'t read data from storage, Contact support or try again later',
+            "Can't read data from storage, Contact support or try again later",
         defaultActionButtonText: 'Ok',
       );
     }
@@ -214,7 +215,7 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
       hintColor: Colors.white70,
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
     );

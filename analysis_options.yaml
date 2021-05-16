@@ -1,0 +1,36 @@
+include: package:lint/analysis_options.yaml
+analyzer:
+  strong-mode:
+    implicit-casts: true
+
+linter:
+  rules:
+    # Doesn't matter for simple usecase
+    avoid_positional_boolean_parameters: false
+
+    # Util classes are awesome!
+    avoid_classes_with_only_static_members: false
+
+    # It doesn't matter if constructor comes first or not
+    sort_constructors_first: false
+
+    # Unnecessary errors
+    public_member_api_docs: false
+
+    # Personal Preference
+    lines_longer_than_80_chars: false
+
+    # Personal Preference
+    file_names: false
+
+    # Personal Preference
+    argument_type_not_assignable: false
+
+    # Unnecessary errors
+    avoid_redundant_argument_values: false
+
+    # Unnecessary errors
+    unnecessary_string_interpolations: false
+
+    # Unnecessary errors
+    sort_pub_dependencies: false

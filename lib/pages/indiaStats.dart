@@ -11,6 +11,7 @@ import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/gridBox.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
+import 'package:covid_19_tracker/widgets/notFound.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,7 +57,7 @@ class _IndiaStatsState extends State<IndiaStats> {
         context: context,
         titleText: 'Error Reading Data',
         contentText:
-            'Can\'t read data from storage, Contact support or try again later',
+            "Can't read data from storage, Contact support or try again later",
         defaultActionButtonText: 'Ok',
       );
     }
@@ -75,7 +76,7 @@ class _IndiaStatsState extends State<IndiaStats> {
       showAlertDialog(
         context: context,
         titleText: 'Error...',
-        contentText: 'Can\'t retrieve data\n Please try again later.',
+        contentText: "Can't retrieve data\n Please try again later.",
         defaultActionButtonText: 'Ok',
       );
     } catch (_) {
@@ -93,7 +94,7 @@ class _IndiaStatsState extends State<IndiaStats> {
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        title: const Text('India\'s Stats'),
+        title: const Text("India's Stats"),
       ),
       body: LiquidPullToRefresh(
         onRefresh: () => updateData(),
@@ -162,9 +163,17 @@ class _IndiaStatsState extends State<IndiaStats> {
 
   Widget _buildContent(bool isLoading) {
     if (isLoading && indiaDataBox.isEmpty) {
-      return Container(
+      return SizedBox(
         height: MediaQuery.of(context).size.width * 1.25,
         child: CustomProgressIndicator(),
+      );
+    }
+    if (indiaDataBox.isEmpty && bloc.indiaData == null) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: const NotFound(
+          title: "Can't load data at the moment",
+        ),
       );
     }
     indiaData = isLoading ? indiaCachedData : bloc.indiaData;
@@ -178,8 +187,8 @@ class _IndiaStatsState extends State<IndiaStats> {
           ),
           child: GridView(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 2.0,
             ),

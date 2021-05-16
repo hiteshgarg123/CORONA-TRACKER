@@ -16,13 +16,13 @@ class CommonBloc {
   final _indiaDataLoadingController = StreamController<bool>.broadcast();
   final _combinedDataLoadingController = StreamController<bool>.broadcast();
 
-  late WorldData worldData;
-  late CountriesData countriesData;
-  late IndiaData indiaData;
+  WorldData? worldData;
+  CountriesData? countriesData;
+  IndiaData? indiaData;
   DateTime? backButtonPressedTime;
 
-  static const snackBar = const SnackBar(
-    content: const Text('Press back again to exit'),
+  static const snackBar = SnackBar(
+    content: Text('Press back again to exit'),
     duration: snackBarDuration,
   );
   static const snackBarDuration = Duration(seconds: 3);
@@ -67,61 +67,92 @@ class CommonBloc {
   }
 
   Future<void> getWorldWideData() async {
-    final response = await http.get(
-      Uri.parse('https://corona.lmao.ninja/v3/covid-19/all'),
-    );
-    if (response.statusCode == HttpStatus.ok) {
-      final _worldData = json.decode(response.body);
-      worldData = WorldData.fromJSON(_worldData);
-      final worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
-      await worldDataBox.clear();
-      await worldDataBox.add(worldData);
+    try {
+      final response = await http.get(
+        Uri.parse('https://corona.lmao.ninja/v3/covid-19/all'),
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        final _worldData = json.decode(response.body) as Map<String, dynamic>;
+        worldData = WorldData.fromJSON(_worldData);
+        final worldDataBox = Hive.box<WorldData>(HiveBoxes.worldData);
+        await worldDataBox.clear();
+        await worldDataBox.add(worldData!);
+        if (!_worldDataLoadingController.isClosed) {
+          setWorldDataLoading(false);
+        }
+      } else {
+        throw response;
+      }
+    } catch (e) {
       if (!_worldDataLoadingController.isClosed) {
         setWorldDataLoading(false);
       }
-    } else {
-      throw response;
+      if (!_combinedDataLoadingController.isClosed) {
+        setDataLoading(false);
+      }
+      rethrow;
     }
   }
 
   Future<void> getCountriesData() async {
-    http.Response response = await http.get(
-      Uri.parse('https://corona.lmao.ninja/v3/covid-19/countries?sort=cases'),
-    );
-    if (response.statusCode == HttpStatus.ok) {
-      countriesData = CountriesData.fromJSON(
-        json.decode(response.body) as List,
+    try {
+      final response = await http.get(
+        Uri.parse('https://corona.lmao.ninja/v3/covid-19/countries?sort=cases'),
       );
-      final countriesDataBox = Hive.box<CountriesData>(HiveBoxes.countriesData);
-      await countriesDataBox.clear();
-      await countriesDataBox.add(countriesData);
+      if (response.statusCode == HttpStatus.ok) {
+        countriesData = CountriesData.fromJSON(
+          json.decode(response.body) as List,
+        );
+        final countriesDataBox =
+            Hive.box<CountriesData>(HiveBoxes.countriesData);
+        await countriesDataBox.clear();
+        await countriesDataBox.add(countriesData!);
+        if (!_countriesDataLoadingController.isClosed) {
+          setCountriesDataLoading(false);
+        }
+      } else {
+        throw response;
+      }
+    } catch (_) {
       if (!_countriesDataLoadingController.isClosed) {
         setCountriesDataLoading(false);
       }
-    } else {
-      throw response;
+      if (!_combinedDataLoadingController.isClosed) {
+        setDataLoading(false);
+      }
+      rethrow;
     }
   }
 
   Future<void> getIndiaData() async {
-    final response = await http.get(
-      Uri.parse('https://api.covid19india.org/data.json'),
-    );
-    if (response.statusCode == HttpStatus.ok) {
-      final _indiaData = ((json.decode(response.body))['statewise'] as List);
-      indiaData = IndiaData.fromJson(_indiaData);
-      final indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
-      await indiaDataBox.clear();
-      await indiaDataBox.add(indiaData);
+    try {
+      final response = await http.get(
+        Uri.parse('https://api.covid19india.org/data.json'),
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        final _indiaData = (json.decode(response.body))['statewise'] as List;
+        indiaData = IndiaData.fromJson(_indiaData);
+        final indiaDataBox = Hive.box<IndiaData>(HiveBoxes.indiaData);
+        await indiaDataBox.clear();
+        await indiaDataBox.add(indiaData!);
+        if (!_indiaDataLoadingController.isClosed) {
+          setIndiaDataLoading(false);
+        }
+      } else {
+        throw response;
+      }
+    } catch (_) {
       if (!_indiaDataLoadingController.isClosed) {
         setIndiaDataLoading(false);
       }
-    } else {
-      throw response;
+      rethrow;
     }
   }
 
   Future<void> getCombinedData() async {
+    if (!_combinedDataLoadingController.isClosed) {
+      setDataLoading(true);
+    }
     await Future.wait([
       getWorldWideData(),
       getCountriesData(),
@@ -131,7 +162,5 @@ class CommonBloc {
     }
   }
 
-  Future<void> loadIndiaDataOnRefresh() async {
-    return await getIndiaData();
-  }
+  Future<void> loadIndiaDataOnRefresh() => getIndiaData();
 }

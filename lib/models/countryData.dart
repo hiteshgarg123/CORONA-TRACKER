@@ -31,16 +31,16 @@ class CountryData {
     required this.todayDeaths,
   });
 
-  factory CountryData.fromJSON(Map<String, dynamic> countriesData) {
+  factory CountryData.fromJSON(Map<String, dynamic> countryData) {
     return CountryData(
-      cases: countriesData['cases'].toString(),
-      deaths: countriesData['deaths'].toString(),
-      countryFlagUrl: countriesData['countryInfo']['flag'],
-      country: countriesData['country'],
-      todayCases: countriesData['todayCases'].toString(),
-      active: countriesData['active'].toString(),
-      recovered: countriesData['recovered'].toString(),
-      todayDeaths: countriesData['todayDeaths'].toString(),
+      cases: countryData['cases'].toString(),
+      deaths: countryData['deaths'].toString(),
+      countryFlagUrl: countryData['countryInfo']['flag'],
+      country: countryData['country'].toString(),
+      todayCases: countryData['todayCases'].toString(),
+      active: countryData['active'].toString(),
+      recovered: countryData['recovered'].toString(),
+      todayDeaths: countryData['todayDeaths'].toString(),
     );
   }
 

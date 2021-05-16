@@ -53,7 +53,7 @@ class StateCard extends StatelessWidget {
                         minFontSize: 15,
                         maxFontSize: 22.0,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -63,7 +63,7 @@ class StateCard extends StatelessWidget {
                       'CONFIRMED : ${NumberFormatter.formatString(stateData.confirmed)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
@@ -73,7 +73,7 @@ class StateCard extends StatelessWidget {
                       'ACTIVE : ${NumberFormatter.formatString(stateData.active)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -83,7 +83,7 @@ class StateCard extends StatelessWidget {
                       'RECOVERED : ${NumberFormatter.formatString(stateData.recovered)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
@@ -93,7 +93,7 @@ class StateCard extends StatelessWidget {
                       'DEATHS : ${NumberFormatter.formatString(stateData.deaths)}',
                       maxLines: 1,
                       minFontSize: 12.0,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,

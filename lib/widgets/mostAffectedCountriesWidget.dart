@@ -14,70 +14,67 @@ class MostAffectedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          countriesData.countriesData[index].countryFlagUrl,
-                      progressIndicatorBuilder: (context, url, progress) =>
-                          Center(
-                        child: LinearProgressIndicator(
-                          value: progress.progress,
-                        ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: countriesData.countriesData[index].countryFlagUrl,
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        Center(
+                      child: LinearProgressIndicator(
+                        value: progress.progress,
                       ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
                     ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
-                SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 1,
+                child: AutoSizeText(
+                  countriesData.countriesData[index].country,
+                  maxLines: 1,
+                  minFontSize: 12.0,
+                  maxFontSize: 17.0,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: AutoSizeText(
-                    countriesData.countriesData[index].country,
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    maxFontSize: 17.0,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 8,
+                child: AutoSizeText(
+                  'No. of cases: ${NumberFormatter.formatString(countriesData.countriesData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countriesData.countriesData[index].deaths)}',
+                  maxLines: 1,
+                  minFontSize: 12.0,
+                  maxFontSize: 17.0,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  flex: 8,
-                  child: AutoSizeText(
-                    'No. of cases: ${NumberFormatter.formatString(countriesData.countriesData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countriesData.countriesData[index].deaths)}',
-                    maxLines: 1,
-                    minFontSize: 12.0,
-                    maxFontSize: 17.0,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-        itemCount: 5,
-      ),
+              ),
+            ],
+          ),
+        );
+      },
+      itemCount: 5,
     );
   }
 }

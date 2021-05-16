@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const primaryBlack = const Color(0xff202c3b);
+const primaryBlack = Color(0xff202c3b);
 
 class AppTheme {
   static ThemeData lightTheme() {
@@ -13,7 +13,7 @@ class AppTheme {
       buttonColor: primaryBlack,
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
-      textSelectionTheme: TextSelectionThemeData(
+      textSelectionTheme: const TextSelectionThemeData(
         selectionColor: Colors.black,
       ),
       cardColor: Colors.white,
@@ -28,25 +28,25 @@ class AppTheme {
       ),
       textTheme: const TextTheme(
         //Used in Main Headings like "WorldWide", "Statistics" etc.
-        headline1: const TextStyle(
+        headline1: TextStyle(
           fontSize: 25,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //Used in some Bigger texts like "We stand together to fight with this".
-        headline2: const TextStyle(
+        headline2: TextStyle(
           fontSize: 20,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
         //Used in Custom Buttons like "Regional" , "India's Stats".
-        headline3: const TextStyle(
+        headline3: TextStyle(
           fontSize: 16,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
         ),
         //Used in Legend of PieChart Widget.
-        headline4: const TextStyle(
+        headline4: TextStyle(
           fontSize: 15.0,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
@@ -58,12 +58,12 @@ class AppTheme {
           fontWeight: FontWeight.w600,
         ),
         //For search delegate's textfield search text
-        headline6: const TextStyle(
+        headline6: TextStyle(
           fontSize: 20.0,
           color: Colors.white,
         ),
         //For Custom Progress Indicator
-        subtitle1: const TextStyle(
+        subtitle1: TextStyle(
           fontSize: 22,
           color: primaryBlack,
           fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class AppTheme {
       buttonColor: Colors.orange[100],
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
-      textSelectionTheme: TextSelectionThemeData(
+      textSelectionTheme: const TextSelectionThemeData(
         selectionColor: Colors.white,
       ),
       cardColor: const Color(0xFF151515),

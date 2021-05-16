@@ -10,7 +10,7 @@ Future<void> showAlertDialog({
   required String defaultActionButtonText,
 }) async {
   if (Platform.isIOS) {
-    return await showCupertinoDialog(
+    return showCupertinoDialog(
       context: context,
       builder: (context) => CupertinoAlertDialog(
         title: Text(titleText),
@@ -22,19 +22,19 @@ Future<void> showAlertDialog({
         ),
         actions: [
           CupertinoDialogAction(
-            child: Text(defaultActionButtonText),
             onPressed: () => Navigator.of(context).pop(),
+            child: Text(defaultActionButtonText),
           ),
         ],
       ),
     );
   }
-  return await showDialog(
+  return showDialog(
     context: context,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(
-          // borderRadius: BorderRadius.circular(10.0),
-          ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       title: Text(
         titleText,
         style: TextStyle(
@@ -52,8 +52,8 @@ Future<void> showAlertDialog({
       ),
       actions: [
         TextButton(
-          child: Text(defaultActionButtonText),
           onPressed: () => Navigator.of(context).pop(),
+          child: Text(defaultActionButtonText),
         ),
       ],
     ),

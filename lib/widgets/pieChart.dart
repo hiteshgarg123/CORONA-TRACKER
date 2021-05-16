@@ -26,7 +26,7 @@ class PieChartWidget extends StatelessWidget {
     required this.activeColor,
     required this.recoveredColor,
     required this.deathsColor,
-    this.showLegends: true,
+    this.showLegends = true,
     this.duration = 800,
   }) : super(key: key);
 
@@ -51,7 +51,7 @@ class PieChartWidget extends StatelessWidget {
         legendPosition: LegendPosition.right,
       ),
       animationDuration: Duration(milliseconds: duration),
-      chartValuesOptions: ChartValuesOptions(
+      chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: false,
         decimalPlaces: 0,
         showChartValuesInPercentage: true,

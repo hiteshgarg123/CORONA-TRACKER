@@ -15,7 +15,7 @@ class CustomRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 7.0,
           vertical: 7.0,
         ),
@@ -24,13 +24,13 @@ class CustomRaisedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
+      onPressed: onPressed,
       child: AutoSizeText(
         title,
         maxLines: 1,
         minFontSize: 14.0,
         style: Theme.of(context).textTheme.headline2,
       ),
-      onPressed: onPressed,
     );
   }
 }

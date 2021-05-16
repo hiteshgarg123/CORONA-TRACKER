@@ -16,6 +16,7 @@ import 'package:covid_19_tracker/widgets/customProgressIndicator.dart';
 import 'package:covid_19_tracker/widgets/custom_button.dart';
 import 'package:covid_19_tracker/widgets/infoWidget.dart';
 import 'package:covid_19_tracker/widgets/mostAffectedCountriesWidget.dart';
+import 'package:covid_19_tracker/widgets/notFound.dart';
 import 'package:covid_19_tracker/widgets/pieChart.dart';
 import 'package:covid_19_tracker/widgets/platform_alert_dialog.dart';
 import 'package:covid_19_tracker/widgets/worldWideWidget.dart';
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   WorldData? worldCachedData;
   CountriesData? countriesCachedData;
 
+  @override
   void initState() {
     super.initState();
     bloc = Provider.of<CommonBloc>(context, listen: false);
@@ -72,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         titleText: 'Error in Reading Data',
         contentText:
-            'Can\'t read data from storage, Contact support or try again later',
+            "Can't read data from storage, Contact support or try again later",
         defaultActionButtonText: 'Ok',
       );
     }
@@ -120,16 +122,16 @@ class _HomePageState extends State<HomePage> {
       elevation: 4.0,
       child: PieChartWidget(
         total: double.tryParse(
-          isLoading ? worldCachedData!.cases : bloc.worldData.cases,
+          isLoading ? worldCachedData!.cases : bloc.worldData!.cases,
         )!,
         active: double.tryParse(
-          isLoading ? worldCachedData!.active : bloc.worldData.active,
+          isLoading ? worldCachedData!.active : bloc.worldData!.active,
         )!,
         recovered: double.tryParse(
-          isLoading ? worldCachedData!.recovered : bloc.worldData.recovered,
+          isLoading ? worldCachedData!.recovered : bloc.worldData!.recovered,
         )!,
         deaths: double.tryParse(
-          isLoading ? worldCachedData!.deaths : bloc.worldData.deaths,
+          isLoading ? worldCachedData!.deaths : bloc.worldData!.deaths,
         )!,
         totalColor: Colors.red[400]!,
         activeColor: Colors.blue,
@@ -149,20 +151,29 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildStreamContents(bool isLoading) {
     if (isLoading && (worldDataBox.isEmpty || countryDataBox.isEmpty)) {
-      return Container(
+      return SizedBox(
         height: MediaQuery.of(context).size.height * 0.5,
         child: CustomProgressIndicator(),
+      );
+    }
+    if ((worldDataBox.isEmpty && countryDataBox.isEmpty) &&
+        (bloc.worldData == null && bloc.countriesData == null)) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: const NotFound(
+          title: "Can't load data at the moment",
+        ),
       );
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         WorldWideWidget(
-          worldData: isLoading ? worldCachedData! : bloc.worldData,
+          worldData: isLoading ? worldCachedData! : bloc.worldData!,
         ),
         const CustomHeadingWidget(title: 'Most Affected Countries'),
         MostAffectedWidget(
-          countriesData: isLoading ? countriesCachedData! : bloc.countriesData,
+          countriesData: isLoading ? countriesCachedData! : bloc.countriesData!,
         ),
         const CustomHeadingWidget(title: 'Statistics...'),
         _buildPieChartPannel(
@@ -231,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                         vertical: 5.0,
                         horizontal: 10.0,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -266,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   CustomRaisedButton(
-                                    title: 'India\'s Stats',
+                                    title: "India's Stats",
                                     onPressed: () => Navigator.of(context).push(
                                       CupertinoPageRoute(
                                         builder: (context) {

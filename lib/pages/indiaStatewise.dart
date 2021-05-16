@@ -138,7 +138,7 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
       hintColor: Colors.white70,
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
     );

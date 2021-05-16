@@ -17,7 +17,7 @@ class FAQsPage extends StatelessWidget {
               maxLines: 2,
               minFontSize: 12.0,
               maxFontSize: 16.0,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
               overflow: TextOverflow.ellipsis,

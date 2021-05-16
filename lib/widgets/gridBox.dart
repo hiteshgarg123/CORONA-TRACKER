@@ -19,7 +19,7 @@ class GridBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       color: boxColor,
       height: 90,
       width: width / 2,
@@ -36,7 +36,7 @@ class GridBox extends StatelessWidget {
               fontSize: 16.0,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5.0,
           ),
           Text(
