@@ -12,11 +12,15 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 [![GitHub stars](https://img.shields.io/github/stars/hiteshgarg123/CORONA-TRACKER?style=social)](https://github.com/hiteshgarg123/CORONA-TRACKER/)
 [![GitHub followers](https://img.shields.io/github/followers/hiteshgarg123.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/hiteshgarg123?tab=followers)
 
-## Getting Started 🚀
+## Getting Started <img src="https://img.icons8.com/dusk/25/000000/rocket--v1.png"/>
 
 - Clone the repo `git clone https://github.com/hiteshgarg123/CORONA-TRACKER`
 - Install the dependicies `flutter pub get`
 - Run it `flutter run`
+
+## Want to try the app ? <img src="https://img.icons8.com/officel/25/000000/download--v2.png"/>
+
+- [Download](https://drive.google.com/file/d/1O6-HRgUntKqSgKZN3u0UipnJXCYioRIA/view?usp=sharing)
 
 ## Features 💡
 
@@ -99,7 +103,7 @@ url_launcher: ^6.0.3
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
 | <img src="screenshots/dark_theme/4.png" width="400"> | <img src="screenshots/dark_theme/5.png" width="400"> | <img src="screenshots/dark_theme/6.png" width="400"> |
 
-## Pull Requests
+## Pull Requests <img src="https://img.icons8.com/office/25/000000/pull-request.png"/>
 
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
 
@@ -108,11 +112,17 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 3.  Pull requests _must_ be made against `master` branch for this particular repository.
 4.  Have fun!
 
-### Created & Maintained By
+### Created & Maintained By <img src="https://img.icons8.com/doodle/25/000000/maintenance.png"/>
 
 [Hitesh Garg](https://github.com/hiteshgarg123) ([@hiteshgarg285](https://www.twitter.com/hiteshgarg285)) ([Instagram](https://www.instagram.com/hiteshgarg2855))
 
-## Getting Started
+### Credits
+
+- [Icons8](https://icons8.com/) : For README icons.
+- [Flaticon](https://www.flaticon.com/) : For App Icon.
+- [Freepik](https://www.freepik.com/) : For In-App illustration.
+
+## Getting Started with Flutter
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
