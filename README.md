@@ -20,7 +20,7 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 
 ## Features 💡
 
-- Based on BLoC Architecture.
+- Based on BLoC & Provider Architecture.
 - Null Safe Code-base.
 - Shows Worldwide as well as Country-wise stats.
 - Dedicated pages for India's stats.

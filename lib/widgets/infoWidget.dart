@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InfoWidget extends StatelessWidget {
+  const InfoWidget();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,8 +51,8 @@ class InfoWidget extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            launch('https://pmnrf.gov.in/en/online-donation');
+          onTap: () async {
+            await launch('https://pmnrf.gov.in/en/online-donation');
           },
           child: Container(
             decoration: BoxDecoration(
@@ -99,8 +100,8 @@ class InfoWidget extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            launch(
+          onTap: () async {
+            await launch(
                 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters');
           },
           child: Container(

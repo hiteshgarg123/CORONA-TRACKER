@@ -1,11 +1,10 @@
-import 'package:covid_19_tracker/blocs/common_bloc.dart';
 import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/models/indiaData.dart';
 import 'package:covid_19_tracker/models/statewiseData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
-import 'package:covid_19_tracker/notifiers/theme_notifier.dart';
 import 'package:covid_19_tracker/pages/homePage.dart';
+import 'package:covid_19_tracker/providers/theme_provider.dart';
 import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:covid_19_tracker/utils/theme/dark_theme_preference.dart';
 import 'package:covid_19_tracker/utils/theme/app_theme.dart';
@@ -33,8 +32,8 @@ Future<void> main() async {
   SharedPreferences.getInstance().then((pref) {
     final isDarkMode = pref.getBool(DarkThemePreference.themeStatus) ?? false;
     runApp(
-      ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(
+      ChangeNotifierProvider<ThemeProvider>(
+        create: (_) => ThemeProvider(
           isDarkMode ? AppTheme.darkTheme() : AppTheme.lightTheme(),
         ),
         child: MyApp(),
@@ -46,18 +45,15 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<CommonBloc>(
-      create: (_) => CommonBloc(),
-      child: Consumer<ThemeNotifier>(
-        builder: (_, notifier, __) {
-          return MaterialApp(
-            theme: notifier.getTheme(),
-            debugShowCheckedModeBanner: false,
-            title: 'COVID-19 Tracker',
-            home: HomePage(),
-          );
-        },
-      ),
+    return Consumer<ThemeProvider>(
+      builder: (_, notifier, __) {
+        return MaterialApp(
+          theme: notifier.getTheme(),
+          debugShowCheckedModeBanner: false,
+          title: 'COVID-19 Tracker',
+          home: HomePage.create(),
+        );
+      },
     );
   }
 }

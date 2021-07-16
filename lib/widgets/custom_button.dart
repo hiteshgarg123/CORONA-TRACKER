@@ -15,9 +15,9 @@ class CustomRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 7.0,
-          vertical: 7.0,
+        padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.02,
+          vertical: MediaQuery.of(context).size.width * 0.015,
         ),
         primary: Theme.of(context).buttonColor,
         shape: RoundedRectangleBorder(

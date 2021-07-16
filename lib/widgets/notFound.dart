@@ -21,9 +21,10 @@ class NotFound extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.75,
           ),
           Padding(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.06),
             child: Text(
               title,
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline5,
             ),
           ),
