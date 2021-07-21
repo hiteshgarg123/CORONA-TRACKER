@@ -15,6 +15,7 @@ class MostAffectedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      itemCount: 5,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
@@ -41,29 +42,26 @@ class MostAffectedWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: AutoSizeText(
                   countriesData.countriesData[index].country,
                   maxLines: 1,
                   minFontSize: 12.0,
-                  maxFontSize: 17.0,
+                  maxFontSize: 16.0,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
               Expanded(
-                flex: 8,
+                flex: 9,
                 child: AutoSizeText(
-                  'No. of cases: ${NumberFormatter.formatString(countriesData.countriesData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countriesData.countriesData[index].deaths)}',
+                  'Total Case: ${NumberFormatter.formatString(countriesData.countriesData[index].cases)} ,  Deaths: ${NumberFormatter.formatString(countriesData.countriesData[index].deaths)}',
                   maxLines: 1,
-                  minFontSize: 12.0,
+                  minFontSize: 11.0,
                   maxFontSize: 17.0,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,
@@ -74,7 +72,6 @@ class MostAffectedWidget extends StatelessWidget {
           ),
         );
       },
-      itemCount: 5,
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +21,12 @@ class CustomHeadingWidget extends StatelessWidget {
       child: AutoSizeText(
         title,
         maxLines: 1,
-        minFontSize: 18.0,
-        style: Theme.of(context).textTheme.headline1,
+        minFontSize: 22.0,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          color: Theme.of(context).textTheme.headline1?.color,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

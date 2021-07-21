@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/models/countryData.dart';
 import 'package:covid_19_tracker/widgets/countryCard.dart';
@@ -30,8 +31,12 @@ class CountryWiseStats extends StatelessWidget {
             },
           ),
         ],
-        title: const Text(
+        title: const AutoSizeText(
           'COUNTRY-WISE STATS',
+          maxLines: 1,
+          textAlign: TextAlign.left,
+          minFontSize: 12,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: ListView.builder(

@@ -3,6 +3,7 @@ import 'package:covid_19_tracker/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class FAQsPage extends StatelessWidget {
+  const FAQsPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

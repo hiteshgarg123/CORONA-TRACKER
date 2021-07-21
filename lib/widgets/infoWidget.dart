@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/pages/faqsPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class InfoWidget extends StatelessWidget {
             Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (context) => FAQsPage(),
+                builder: (context) => const FAQsPage(),
               ),
             );
           },
@@ -34,12 +35,12 @@ class InfoWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const <Widget>[
-                Text(
+                AutoSizeText(
                   'FAQS',
+                  minFontSize: 16,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
                   ),
                 ),
                 Icon(
@@ -72,20 +73,23 @@ class InfoWidget extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: const <Widget>[
-                    Text(
+                    AutoSizeText(
                       'DONATE ',
+                      minFontSize: 16.0,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        // fontSize: 18,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       '(open PMNRF website)',
+                      minFontSize: 15.0,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
                         letterSpacing: 1.1,
                       ),
                     ),
@@ -122,20 +126,22 @@ class InfoWidget extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: const <Widget>[
-                    Text(
+                    AutoSizeText(
                       'MYTH BUSTERS ',
+                      minFontSize: 16.0,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       '(rumors busted)',
+                      minFontSize: 15.0,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
                         letterSpacing: 1.1,
                       ),
                     ),

@@ -85,7 +85,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text('COVID-19 TRACKER'),
+        title: const AutoSizeText(
+          'COVID-19 TRACKER',
+          maxLines: 1,
+          minFontSize: 12,
+          overflow: TextOverflow.ellipsis,
+        ),
         elevation: 2.0,
         actions: [
           Padding(
@@ -134,67 +139,59 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5.0,
-                        horizontal: 10.0,
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Expanded(
-                              flex: 4,
-                              child: AutoSizeText(
-                                'Worldwide',
-                                maxLines: 1,
-                                minFontSize: 18.0,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Expanded(
+                          flex: 9,
+                          child: CustomHeadingWidget(title: "Worldwide"),
+                        ),
+                        Expanded(
+                          flex: 16,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5.0,
+                              horizontal: 10.0,
                             ),
-                            Expanded(
-                              flex: 7,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  CustomRaisedButton(
-                                      title: 'Regional',
-                                      onPressed: () {
-                                        if (worldDataProvider.countriesData !=
-                                            null) {
-                                          Navigator.of(context).push(
-                                            CupertinoPageRoute(
-                                              builder: (_) {
-                                                return CountryWiseStats(
-                                                  countriesData:
-                                                      worldDataProvider
-                                                          .countriesData!,
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        }
-                                      }),
-                                  const SizedBox(
-                                    width: 4.0,
-                                  ),
-                                  CustomRaisedButton(
-                                    title: "India's Stats",
-                                    onPressed: () => Navigator.of(context).push(
-                                      CupertinoPageRoute(
-                                        builder: (_) {
-                                          return IndiaStats.create();
-                                        },
-                                      ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                CustomRaisedButton(
+                                  title: 'Regional',
+                                  onPressed: () {
+                                    if (worldDataProvider.countriesData !=
+                                        null) {
+                                      Navigator.of(context).push(
+                                        CupertinoPageRoute(
+                                          builder: (_) {
+                                            return CountryWiseStats(
+                                              countriesData: worldDataProvider
+                                                  .countriesData!,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 4.0,
+                                ),
+                                CustomRaisedButton(
+                                  title: "India's Stats",
+                                  onPressed: () => Navigator.of(context).push(
+                                    CupertinoPageRoute(
+                                      builder: (_) {
+                                        return IndiaStats.create();
+                                      },
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                     Consumer<WorldDataProvider>(
                       builder: (_, worldDataProvider, __) {
@@ -248,6 +245,7 @@ class _HomePageState extends State<HomePage> {
                           'WE STAND TOGETHER TO FIGHT WITH THIS',
                           maxLines: 1,
                           minFontSize: 12,
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ),

@@ -17,12 +17,9 @@ class GridBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return Container(
       margin: const EdgeInsets.all(4),
       color: boxColor,
-      height: 90,
-      width: width / 2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -33,18 +30,17 @@ class GridBox extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,
-              fontSize: 16.0,
             ),
           ),
           const SizedBox(
             height: 5.0,
           ),
-          Text(
+          AutoSizeText(
             count,
+            minFontSize: 16.0,
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,
-              fontSize: 16.0,
             ),
           ),
         ],

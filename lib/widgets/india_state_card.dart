@@ -35,36 +35,31 @@ class StateCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Container(
-                padding: const EdgeInsets.fromLTRB(
-                  20,
-                  15,
-                  15,
-                  15,
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 15,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      width: 170,
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: AutoSizeText(
-                        '${stateData.state}',
-                        minFontSize: 15,
-                        maxFontSize: 22.0,
-                        maxLines: 1,
-                        style: const TextStyle(
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    AutoSizeText(
+                      '${stateData.state}',
+                      minFontSize: 16,
+                      maxFontSize: 22.0,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        // fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     AutoSizeText(
                       'CONFIRMED : ${NumberFormatter.formatString(stateData.confirmed)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 15.0,
                       style: const TextStyle(
-                        fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ),
@@ -72,9 +67,8 @@ class StateCard extends StatelessWidget {
                     AutoSizeText(
                       'ACTIVE : ${NumberFormatter.formatString(stateData.active)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 15.0,
                       style: const TextStyle(
-                        fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
@@ -82,9 +76,8 @@ class StateCard extends StatelessWidget {
                     AutoSizeText(
                       'RECOVERED : ${NumberFormatter.formatString(stateData.recovered)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 15.0,
                       style: const TextStyle(
-                        fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
@@ -92,9 +85,8 @@ class StateCard extends StatelessWidget {
                     AutoSizeText(
                       'DEATHS : ${NumberFormatter.formatString(stateData.deaths)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 15.0,
                       style: const TextStyle(
-                        fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                       ),

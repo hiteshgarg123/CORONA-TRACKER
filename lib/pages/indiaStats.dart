@@ -124,21 +124,20 @@ class _IndiaStatsState extends State<IndiaStats> {
                 height: 5.0,
               ),
               const InfoWidget(),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                height: 20.0,
-                alignment: Alignment.bottomCenter,
-                child: AutoSizeText(
-                  'WE STAND TOGETHER TO FIGHT WITH THIS',
-                  maxLines: 1,
-                  minFontSize: 12.0,
-                  style: Theme.of(context).textTheme.headline3,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10.0,
                 ),
-              ),
-              const SizedBox(
-                height: 10.0,
+                child: Center(
+                  child: AutoSizeText(
+                    'WE STAND TOGETHER TO FIGHT WITH THIS',
+                    maxLines: 1,
+                    minFontSize: 12,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ),
               ),
             ],
           ),

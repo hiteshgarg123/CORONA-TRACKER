@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class NotFound extends StatelessWidget {
@@ -15,17 +16,23 @@ class NotFound extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/images/not_found.png',
-            height: MediaQuery.of(context).size.width * 0.75,
-            width: MediaQuery.of(context).size.width * 0.75,
+          Flexible(
+            child: Image.asset(
+              'assets/images/not_found.png',
+              height: MediaQuery.of(context).size.width * 0.7,
+              width: MediaQuery.of(context).size.width * 0.7,
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.06),
-            child: Text(
+            child: AutoSizeText(
               title,
+              minFontSize: 18,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline5,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.headline5?.color,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

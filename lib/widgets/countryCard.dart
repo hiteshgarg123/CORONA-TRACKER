@@ -77,9 +77,8 @@ class CountryCard extends StatelessWidget {
                     AutoSizeText(
                       'CONFIRMED : ${NumberFormatter.formatString(countryData.cases)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 14.0,
                       style: const TextStyle(
-                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ),
@@ -87,9 +86,8 @@ class CountryCard extends StatelessWidget {
                     AutoSizeText(
                       '[+${NumberFormatter.formatString(countryData.todayCases)}]',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 14.0,
                       style: const TextStyle(
-                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ),
@@ -97,9 +95,8 @@ class CountryCard extends StatelessWidget {
                     AutoSizeText(
                       'ACTIVE : ${NumberFormatter.formatString(countryData.active)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 14.0,
                       style: const TextStyle(
-                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
@@ -107,9 +104,8 @@ class CountryCard extends StatelessWidget {
                     AutoSizeText(
                       'RECOVERED : ${NumberFormatter.formatString(countryData.recovered)}',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 14.0,
                       style: const TextStyle(
-                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
@@ -117,9 +113,8 @@ class CountryCard extends StatelessWidget {
                     AutoSizeText(
                       'DEATHS : ${NumberFormatter.formatString(countryData.deaths)} [+${NumberFormatter.formatString(countryData.todayDeaths)}]',
                       maxLines: 1,
-                      minFontSize: 12.0,
+                      minFontSize: 14.0,
                       style: const TextStyle(
-                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                       ),

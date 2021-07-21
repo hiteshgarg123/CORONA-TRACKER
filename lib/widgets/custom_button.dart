@@ -16,20 +16,25 @@ class CustomRaisedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.02,
-          vertical: MediaQuery.of(context).size.width * 0.015,
+          horizontal: MediaQuery.of(context).size.width * 0.015,
+          vertical: MediaQuery.of(context).size.width * 0.02,
         ),
         primary: Theme.of(context).buttonColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(18.0),
         ),
       ),
       onPressed: onPressed,
       child: AutoSizeText(
         title,
         maxLines: 1,
-        minFontSize: 14.0,
-        style: Theme.of(context).textTheme.headline2,
+        minFontSize: 18.0,
+        maxFontSize: 22.0,
+        style: TextStyle(
+          color: Theme.of(context).textTheme.headline2?.color,
+          fontWeight: FontWeight.bold,
+        ),
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
