@@ -43,7 +43,6 @@ class IndiaStatewise extends StatelessWidget {
           itemBuilder: (context, index) {
             return StateCard(
               stateData: indiaData.stateData[index + 1],
-              height: height,
               showPieChartAnimation: true,
             );
           },
@@ -67,7 +66,10 @@ class Search extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          suggestionList = indiaData.stateData;
+          if (query.isEmpty) {
+            Navigator.of(context).pop();
+          }
+          suggestionList = indiaData.stateData.sublist(1);
           query = '';
         },
       )
@@ -94,7 +96,6 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return StateCard(
           stateData: suggestionList[index],
-          height: height,
           showPieChartAnimation: false,
         );
       },
@@ -124,7 +125,6 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return StateCard(
           stateData: suggestionList[index],
-          height: height,
           showPieChartAnimation: false,
         );
       },

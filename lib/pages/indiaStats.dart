@@ -37,7 +37,9 @@ class _IndiaStatsState extends State<IndiaStats> {
     super.initState();
     indiaDataProvider = Provider.of<IndiaDataProvider>(context, listen: false);
     indiaDataProvider.getCachedData();
-    indiaDataProvider.updateData();
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      indiaDataProvider.updateData();
+    });
   }
 
   @override
@@ -90,10 +92,13 @@ class _IndiaStatsState extends State<IndiaStats> {
                 builder: (_, indiaDataProvider, __) {
                   switch (indiaDataProvider.dataState) {
                     case DataLoadState.idle:
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        child: CustomProgressIndicator(),
-                      );
+                      if (indiaDataProvider.indiaData == null) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: CustomProgressIndicator(),
+                        );
+                      }
+                      return _buildContents(indiaDataProvider.indiaData!);
                     case DataLoadState.loadingFromServer:
                       return SizedBox(
                         height: MediaQuery.of(context).size.height * 0.5,
@@ -207,17 +212,16 @@ class _IndiaStatsState extends State<IndiaStats> {
             right: 10.0,
             bottom: 10.0,
           ),
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(10.0, 10.0, 15.0, 10.0),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.width * 0.6,
             child: PieChartWidget(
-              total: double.tryParse(indiaData.stateData[0].confirmed)!,
-              active: double.tryParse(indiaData.stateData[0].active)!,
-              recovered: double.tryParse(indiaData.stateData[0].recovered)!,
-              deaths: double.tryParse(indiaData.stateData[0].deaths)!,
-              totalColor: Colors.red[400]!,
-              activeColor: Colors.blue[400]!,
-              recoveredColor: Colors.green[300]!,
-              deathsColor: Colors.grey[400]!,
+              total: int.tryParse(indiaData.stateData[0].confirmed)!,
+              active: int.tryParse(indiaData.stateData[0].active)!,
+              recovered: int.tryParse(indiaData.stateData[0].recovered)!,
+              deaths: int.tryParse(indiaData.stateData[0].deaths)!,
+              activeColor: Colors.red.shade500,
+              recoveredColor: Colors.blue.shade800,
+              deathsColor: Colors.grey.shade300,
             ),
           ),
         ),

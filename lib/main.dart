@@ -29,31 +29,30 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  SharedPreferences.getInstance().then((pref) {
-    final isDarkMode = pref.getBool(DarkThemePreference.themeStatus) ?? false;
-    runApp(
-      ChangeNotifierProvider<ThemeProvider>(
-        create: (_) => ThemeProvider(
-          isDarkMode ? AppTheme.darkTheme() : AppTheme.lightTheme(),
-        ),
-        child: MyApp(),
-      ),
-    );
-  });
+  final _prefs = await SharedPreferences.getInstance();
+  final _isDarkMode = _prefs.getBool(DarkThemePreference.themeStatus) ?? false;
+  runApp(CoronaTracker(_isDarkMode));
 }
 
-class MyApp extends StatelessWidget {
+class CoronaTracker extends StatelessWidget {
+  final bool _isDarkMode;
+  const CoronaTracker(this._isDarkMode);
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (_, notifier, __) {
-        return MaterialApp(
-          theme: notifier.getTheme(),
-          debugShowCheckedModeBanner: false,
-          title: 'COVID-19 Tracker',
-          home: HomePage.create(),
-        );
-      },
+    return ChangeNotifierProvider<ThemeProvider>(
+      create: (_) => ThemeProvider(
+        _isDarkMode ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+      ),
+      child: Consumer<ThemeProvider>(
+        builder: (_, themeProvider, __) {
+          return MaterialApp(
+            theme: themeProvider.getTheme(),
+            debugShowCheckedModeBanner: false,
+            title: 'COVID-19 Tracker',
+            home: HomePage.create(),
+          );
+        },
+      ),
     );
   }
 }

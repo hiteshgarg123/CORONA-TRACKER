@@ -20,9 +20,9 @@ dependencies:
   http: ^0.13.2
   intl: ^0.17.0
   liquid_pull_to_refresh: ^3.0.0
-  pie_chart: ^5.0.0
   provider: ^5.0.0
   shared_preferences: ^2.0.6
+  syncfusion_flutter_charts: ^19.2.48
   url_launcher: ^6.0.9
 
 dev_dependencies:

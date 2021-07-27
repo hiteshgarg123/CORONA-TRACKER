@@ -1,65 +1,109 @@
+import 'package:covid_19_tracker/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PieChartWidget extends StatelessWidget {
-  final double total;
-  final double active;
-  final double recovered;
-  final double deaths;
-
-  final Color totalColor;
+  final int total;
+  final int active;
+  final int recovered;
+  final int deaths;
   final Color activeColor;
   final Color recoveredColor;
   final Color deathsColor;
-
-  final int duration;
-
+  final double durationInMil;
   final bool showLegends;
-
+  final bool showDataLabels;
   const PieChartWidget({
     Key? key,
     required this.total,
     required this.active,
     required this.recovered,
     required this.deaths,
-    required this.totalColor,
     required this.activeColor,
     required this.recoveredColor,
     required this.deathsColor,
     this.showLegends = true,
-    this.duration = 800,
+    this.durationInMil = 1500,
+    this.showDataLabels = true,
   }) : super(key: key);
+
+  List<PieSeries<PieChartDataMapper, String>> _getDefaultPieSeries() {
+    final List<PieChartDataMapper> pieData = <PieChartDataMapper>[
+      PieChartDataMapper(
+        xVal: 'ACTIVE',
+        yVal: active,
+      ),
+      PieChartDataMapper(
+        xVal: 'RECOVERED',
+        yVal: recovered,
+      ),
+      PieChartDataMapper(
+        xVal: 'DEATHS',
+        yVal: deaths,
+      ),
+    ];
+    return <PieSeries<PieChartDataMapper, String>>[
+      PieSeries<PieChartDataMapper, String>(
+        animationDuration: durationInMil,
+        dataSource: pieData,
+        xValueMapper: (PieChartDataMapper data, _) => data.xVal,
+        yValueMapper: (PieChartDataMapper data, _) => data.yVal,
+        dataLabelMapper: (PieChartDataMapper data, _) => data.xVal,
+        radius: '80%',
+        dataLabelSettings: DataLabelSettings(
+          isVisible: showDataLabels,
+          //To never hide the chart labels
+          labelIntersectAction: LabelIntersectAction.none,
+          showCumulativeValues: true,
+          labelPosition: ChartDataLabelPosition.outside,
+          connectorLineSettings: const ConnectorLineSettings(
+            type: ConnectorType.curve,
+          ),
+          textStyle: const TextStyle(
+            color: primaryBlack,
+            fontSize: 12,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PieChart(
-      dataMap: {
-        "TOTAL": total,
-        "RECOVERED": recovered,
-        "ACTIVE": active,
-        "DEATHS": deaths,
-      },
-      colorList: [
-        totalColor,
-        recoveredColor,
+    return SfCircularChart(
+      palette: <Color>[
         activeColor,
+        recoveredColor,
         deathsColor,
       ],
-      chartType: ChartType.disc,
-      legendOptions: LegendOptions(
-        legendTextStyle: TextStyle(
-          color: Theme.of(context).textTheme.headline4?.color,
-          fontWeight: Theme.of(context).textTheme.headline4?.fontWeight,
+      tooltipBehavior: TooltipBehavior(
+        enable: true,
+        tooltipPosition: TooltipPosition.pointer,
+        duration: 1500,
+      ),
+      legend: Legend(
+        isVisible: showLegends,
+        isResponsive: true,
+        toggleSeriesVisibility: false,
+        overflowMode: LegendItemOverflowMode.wrap,
+        textStyle: const TextStyle(
+          color: primaryBlack,
+          fontWeight: FontWeight.w600,
         ),
-        showLegends: showLegends,
-        legendPosition: LegendPosition.right,
       ),
-      animationDuration: Duration(milliseconds: duration),
-      chartValuesOptions: const ChartValuesOptions(
-        showChartValueBackground: false,
-        decimalPlaces: 0,
-        showChartValuesInPercentage: true,
-      ),
+      series: _getDefaultPieSeries(),
     );
   }
+}
+
+class PieChartDataMapper {
+  final String xVal;
+  final int yVal;
+
+  const PieChartDataMapper({
+    required this.xVal,
+    required this.yVal,
+  });
 }

@@ -51,8 +51,8 @@ A Flutter project to provide Real-time statistics of Novel Corona virus.
 - [x] Top banner cutting in some devices [FIXED].
 - [x] Pie Charts cutting from right side in some devices [FIXED].
 - [x] Date and Numbers formatting.
+- [x] Top buttons `Regional` and `India Stats` not fitting on screen in some devices.
 - [ ] Last Refreshed/Updated.
-- [ ] Top buttons `Regional` and `India Stats` not fitting on screen in some devices.
 
 ## Dependencies ✨
 
