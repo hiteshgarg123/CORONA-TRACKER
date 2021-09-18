@@ -27,13 +27,11 @@ class IndiaDataProvider extends ChangeNotifier {
         dataState = DataLoadState.loadingFromServer;
       } else {
         dataState = DataLoadState.updatingFromServer;
-        await Fluttertoast.cancel();
         await Fluttertoast.showToast(msg: "Updating data...");
       }
       final response = await http.get(
-        Uri.parse('https://api.covid19india.org/data.json'),
+        Uri.parse('https://data.covid19india.org/data.json  '),
       );
-
       if (response.statusCode == HttpStatus.ok) {
         final _indiaData = (json.decode(response.body))['statewise'] as List;
         indiaData = IndiaData.fromJson(_indiaData);
@@ -44,7 +42,6 @@ class IndiaDataProvider extends ChangeNotifier {
       notifyListeners();
     } on SocketException catch (_) {
       dataState = DataLoadState.noInternet;
-      await Fluttertoast.cancel();
       await Fluttertoast.showToast(msg: "No Internet");
       notifyListeners();
     } catch (e) {

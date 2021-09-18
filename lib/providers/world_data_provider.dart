@@ -32,7 +32,6 @@ class WorldDataProvider extends ChangeNotifier {
         dataState = DataLoadState.loadingFromServer;
       } else {
         dataState = DataLoadState.updatingFromServer;
-        await Fluttertoast.cancel();
         await Fluttertoast.showToast(msg: "Updating data...");
       }
       final worldDataResponse = await http.get(
@@ -58,7 +57,6 @@ class WorldDataProvider extends ChangeNotifier {
       notifyListeners();
     } on SocketException catch (_) {
       dataState = DataLoadState.noInternet;
-      await Fluttertoast.cancel();
       await Fluttertoast.showToast(msg: "No Internet");
       notifyListeners();
     } catch (e) {
