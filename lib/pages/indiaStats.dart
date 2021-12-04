@@ -60,30 +60,32 @@ class _IndiaStatsState extends State<IndiaStats> {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(bottom: 5.0),
-                height: MediaQuery.of(context).size.height * 0.07,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                  vertical: 2.0,
-                ),
-                color: Colors.blue[200],
-                child: Consumer<IndiaDataProvider>(
-                    builder: (_, indiaDataProvider, __) {
-                  return AutoSizeText(
-                    'Last Updated: ${indiaDataProvider.indiaData!.stateData[0].lastupdatedtime}',
-                    maxLines: 3,
-                    minFontSize: 12.0,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+              Consumer<IndiaDataProvider>(builder: (_, indiaDataProvider, __) {
+                if (indiaDataProvider.indiaData != null) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 5.0),
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 2.0,
+                    ),
+                    color: Colors.blue[200],
+                    child: AutoSizeText(
+                      'Last Updated: ${indiaDataProvider.indiaData!.stateData[0].lastupdatedtime}',
+                      maxLines: 3,
+                      minFontSize: 12.0,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.grey[900],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   );
-                }),
-              ),
+                }
+                return const SizedBox.shrink();
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

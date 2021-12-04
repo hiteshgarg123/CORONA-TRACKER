@@ -36,7 +36,7 @@ class IndiaDataProvider extends ChangeNotifier {
         final _indiaData = (json.decode(response.body))['statewise'] as List;
         indiaData = IndiaData.fromJson(_indiaData);
         await indiaDataBox.clear();
-        await indiaDataBox.add(indiaData!);
+        // await indiaDataBox.add(indiaData!);
         dataState = DataLoadState.success;
       }
       notifyListeners();
