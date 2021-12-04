@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covid_19_tracker/pages/faqsPage.dart';
+import 'package:covid_19_tracker/utils/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,7 +23,7 @@ class InfoWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             padding: const EdgeInsets.symmetric(
               vertical: 12.0,
@@ -53,12 +54,12 @@ class InfoWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () async {
-            await launch('https://pmnrf.gov.in/en/online-donation');
+            await launch(StaticData.donationUrl);
           },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             padding: const EdgeInsets.symmetric(
               vertical: 12.0,
@@ -105,13 +106,12 @@ class InfoWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () async {
-            await launch(
-                'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters');
+            await launch(StaticData.mythBustersUrl);
           },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             padding: const EdgeInsets.symmetric(
               vertical: 12.0,

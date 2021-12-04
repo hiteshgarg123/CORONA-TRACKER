@@ -1,7 +1,11 @@
 class StaticData {
+  static const baseUrl = 'https://corona.lmao.ninja/v3/covid-19';
+  static const donationUrl = 'https://pmnrf.gov.in/en/online-donation';
+  static const mythBustersUrl =
+      'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters';
+
   static const quote =
       "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.";
-
   static const commonQuestions = [
     {
       "question": "What is COVID-19?",

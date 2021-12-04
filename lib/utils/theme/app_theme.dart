@@ -6,19 +6,25 @@ class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
       primaryColor: primaryBlack,
-      accentColor: primaryBlack,
+      colorScheme: ColorScheme.fromSwatch(
+        accentColor: primaryBlack,
+        brightness: Brightness.light,
+        backgroundColor: primaryBlack,
+      ),
       fontFamily: 'Circular',
       backgroundColor: const Color(0xffF1F5FB),
       indicatorColor: const Color(0xffCBDCF8),
-      buttonColor: primaryBlack,
+      //buttonColor: primaryBlack,
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: primaryBlack,
+      ),
       textSelectionTheme: const TextSelectionThemeData(
         selectionColor: Colors.black,
       ),
       cardColor: Colors.white,
       canvasColor: Colors.grey[50],
-      brightness: Brightness.light,
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: primaryBlack,
       ),
@@ -75,19 +81,25 @@ class AppTheme {
   static ThemeData darkTheme() {
     return ThemeData(
       primaryColor: primaryBlack,
-      accentColor: const Color(0xff4285F4),
+      colorScheme: ColorScheme.fromSwatch(
+        brightness: Brightness.dark,
+        accentColor: const Color(0xff4285F4),
+        backgroundColor: Colors.orange[100],
+      ),
       backgroundColor: const Color(0xff0E1D36),
       fontFamily: 'Circular',
       indicatorColor: const Color(0xff0E1D36),
-      buttonColor: Colors.orange[100],
+      //buttonColor: Colors.orange[100],
       highlightColor: Colors.grey[700],
       disabledColor: Colors.grey,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: primaryBlack,
+      ),
       textSelectionTheme: const TextSelectionThemeData(
         selectionColor: Colors.white,
       ),
       cardColor: const Color(0xFF151515),
       canvasColor: const Color(0xff0E1D36),
-      brightness: Brightness.dark,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: Colors.orange[100],
       ),

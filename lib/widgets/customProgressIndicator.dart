@@ -18,7 +18,7 @@ class CustomProgressIndicator extends StatelessWidget {
           height: 25.0,
         ),
         SpinKitCircle(
-          color: Theme.of(context).buttonColor,
+          color: Theme.of(context).colorScheme.background,
           size: MediaQuery.of(context).size.width * 0.12,
         ),
       ],

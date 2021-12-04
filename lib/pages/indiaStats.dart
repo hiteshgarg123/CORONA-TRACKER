@@ -55,11 +55,35 @@ class _IndiaStatsState extends State<IndiaStats> {
         showChildOpacityTransition: false,
         height: 60.0,
         animSpeedFactor: 5.0,
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(bottom: 5.0),
+                height: MediaQuery.of(context).size.height * 0.07,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 2.0,
+                ),
+                color: Colors.blue[200],
+                child: Consumer<IndiaDataProvider>(
+                    builder: (_, indiaDataProvider, __) {
+                  return AutoSizeText(
+                    'Last Updated: ${indiaDataProvider.indiaData!.stateData[0].lastupdatedtime}',
+                    maxLines: 3,
+                    minFontSize: 12.0,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  );
+                }),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

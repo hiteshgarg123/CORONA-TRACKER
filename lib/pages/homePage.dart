@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const AutoSizeText(
           'COVID-19 TRACKER',
           maxLines: 1,
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
         onRefresh: () => worldDataProvider.updateData(),
         height: 60.0,
         animSpeedFactor: 5.0,
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
         child: WillPopScope(
           onWillPop: () => onWillPop(context),
           child: SingleChildScrollView(

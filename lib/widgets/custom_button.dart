@@ -19,7 +19,7 @@ class CustomRaisedButton extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width * 0.015,
           vertical: MediaQuery.of(context).size.width * 0.02,
         ),
-        primary: Theme.of(context).buttonColor,
+        primary: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),

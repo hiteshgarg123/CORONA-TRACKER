@@ -30,7 +30,7 @@ class IndiaDataProvider extends ChangeNotifier {
         await Fluttertoast.showToast(msg: "Updating data...");
       }
       final response = await http.get(
-        Uri.parse('https://data.covid19india.org/data.json  '),
+        Uri.parse('https://data.covid19india.org/data.json'),
       );
       if (response.statusCode == HttpStatus.ok) {
         final _indiaData = (json.decode(response.body))['statewise'] as List;

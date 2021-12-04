@@ -90,9 +90,9 @@ class StateCard extends StatelessWidget {
                       maxLines: 1,
                       minFontSize: 16.0,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.grey,
+                        color: Colors.grey[600],
                       ),
                     ),
                   ],

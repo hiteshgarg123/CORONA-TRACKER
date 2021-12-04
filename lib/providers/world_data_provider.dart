@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:covid_19_tracker/models/countriesData.dart';
 import 'package:covid_19_tracker/models/worldData.dart';
+import 'package:covid_19_tracker/utils/constants/constants.dart';
 import 'package:covid_19_tracker/utils/constants/hive_boxes.dart';
 import 'package:covid_19_tracker/utils/enums/data_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,10 +36,10 @@ class WorldDataProvider extends ChangeNotifier {
         await Fluttertoast.showToast(msg: "Updating data...");
       }
       final worldDataResponse = await http.get(
-        Uri.parse('https://corona.lmao.ninja/v3/covid-19/all'),
+        Uri.parse('${StaticData.baseUrl}/all'),
       );
       final countriesDataResponse = await http.get(
-        Uri.parse('https://corona.lmao.ninja/v3/covid-19/countries?sort=cases'),
+        Uri.parse('${StaticData.baseUrl}/countries?sort=cases'),
       );
       if (worldDataResponse.statusCode == HttpStatus.ok &&
           countriesDataResponse.statusCode == HttpStatus.ok) {
